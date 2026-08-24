@@ -24,6 +24,7 @@ const publicDatasetXml = {
 };
 const framework = read('framework.html');
 const css = read('vitality-blue.css');
+const pages = ['index.html', 'datasets.html', 'framework.html', 'leaderboard.html', 'owned.html'].map(read).join('\n');
 
 const combinedDatasetXml = Object.values(publicDatasetXml).join('\n');
 const countMatches = (value, pattern) => (value.match(pattern) || []).length;
@@ -40,6 +41,15 @@ function assertTableShape(xml, sheetId, totalRows, columns) {
   assert.equal(countMatches(table, /<tr(?:\s|>)/g), totalRows, sheetId + ' total row count');
   assert.equal(countMatches(head, /<th(?:\s|>)/g), columns, sheetId + ' column count');
 }
+
+assert.doesNotMatch(pages, /图灵\s*2\.0/);
+assert.doesNotMatch(pages, /大模型情感智能/);
+assert.match(pages, /通灵/);
+assert.match(pages, /大模型共情智能/);
+assert.match(read('index.html'), /songyu@dezhipu\.com/);
+assert.match(read('framework.html'), /songyu@dezhipu\.com/);
+assert.match(read('gate.js'), /本站已启用访问保护/);
+assert.match(read('styles.css'), /\.mei-layout[\s\S]*?minmax\(/);
 
 assert.match(app, /var activeKey = views\[key\] \? key : 'overview';/);
 assert.match(app, /function renderRadar\(viewKey, alt\)/);
@@ -99,5 +109,16 @@ assert.match(framework, /href="datasets\.html\?dimension=affective"/);
 assert.match(framework, /href="datasets\.html\?dimension=cognitive"/);
 assert.match(framework, /href="datasets\.html\?dimension=concern"/);
 assert.match(framework, /href="datasets\.html\?dimension=safety"/);
+assert.match(framework, /MEI-EMPATHY-M/);
+assert.match(framework, /感知线索/);
+assert.match(framework, /理解处境/);
+assert.match(framework, /形成回应/);
+assert.match(framework, /守住边界/);
+assert.match(framework, /限制与责任/);
+
+assert.match(read('leaderboard.html'), /综合结果/);
+assert.doesNotMatch(read('leaderboard.html'), /非官方总排名/);
+assert.match(read('owned.html'), /通灵/);
+assert.match(read('owned.html'), /共情智能/);
 
 console.log('PASS: UI fixes and all public dataset synchronization checks are present');

@@ -1,5 +1,5 @@
 /* ============================================================
-   图灵 2.0 — Vitality Blue Theme
+   通灵 — Vitality Blue Theme
    vitality-blue.css  (Demo2 复建版 · 2026-08)
    ============================================================ */
 
@@ -489,7 +489,80 @@
   transition: opacity .18s ease;
 }
 
-.radar-wrap.is-switching .radar-image {
+.radar-chart {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f8fbff;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity .18s ease;
+}
+
+.results-radar-wrap .radar-chart {
+  max-width: 900px;
+}
+
+.radar-live-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 900 / 720;
+}
+
+.radar-scale-label {
+  fill: #8aa0b8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+}
+
+.radar-live-axis-label {
+  fill: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.radar-live-legend-label {
+  fill: #405a75;
+  font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+  font-size: 13px;
+}
+
+.radar-series polygon {
+  transition: opacity .18s ease;
+}
+
+.radar-live-svg[data-entering="true"] .radar-grid {
+  opacity: 0;
+  transform: scale(.94);
+  transform-origin: 50% 54%;
+}
+
+.radar-live-svg[data-entering="true"] .radar-series {
+  opacity: 0;
+  transform: scale(.82);
+  transform-origin: 50% 54%;
+}
+
+.radar-grid,
+.radar-series {
+  transition: opacity .34s ease, transform .34s ease;
+}
+
+.radar-grid,
+.radar-series {
+  transform-box: fill-box;
+}
+
+.radar-series:hover polygon {
+  fill-opacity: .15;
+}
+
+.radar-wrap.is-switching .radar-image,
+.radar-wrap.is-switching .radar-chart {
   opacity: .28;
 }
 

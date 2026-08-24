@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>图灵 2.0 — 大模型情感智能测评平台</title>
+  <title>通灵 — 大模型共情智能测评平台</title>
   <meta name="description" content="覆盖情感共情、认知共情、共情关怀、安全交互四方向的开放研究性评测展示。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <script src="gate.js"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="vitality-blue.css" />
-  <link rel="stylesheet" href="animations.css" />
+  <link rel="stylesheet" href="styles.css?v=20260819-radar" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260819-radar2" />
+  <link rel="stylesheet" href="animations.css?v=20260819-brand" />
 </head>
 <body>
 
@@ -38,7 +38,7 @@
           <circle cx="36.8" cy="30" r="1.8" fill="#1677FF"/>
         </svg>
         <span class="brand-word">
-          <span>图灵 <b>2.0</b></span>
+          <span>通灵</span>
           <small>EMOTIONAL INTELLIGENCE AI</small>
         </span>
       </a>
@@ -89,8 +89,8 @@
         <div class="hero-left">
           <span class="hero-eyebrow fade-in-up">EMOTIONAL INTELLIGENCE AI · OPEN RESEARCH BENCHMARK · 2026</span>
           <h1 class="hero-title fade-in-up fade-in-up-delay-1">
-            图灵 2.0<br />
-            <span class="accent-blue">大模型情感智能</span><br />
+            通灵<br />
+            <span class="accent-blue">大模型共情智能</span><br />
             测评平台
           </h1>
           <p class="hero-desc fade-in-up fade-in-up-delay-2">
@@ -207,7 +207,6 @@
           <span class="hero-metric-label">展示模型</span>
         </div>
       </div>
-      <span class="hero-metric-update">研究性聚合展示 · 0–1 尺度</span>
     </div>
   </section>
 
@@ -218,7 +217,7 @@
         <span class="section-label">EVALUATION FRAMEWORK</span>
         <h2 class="section-title">四大核心能力领域</h2>
         <p class="section-desc" style="margin-top:16px;">
-          四个方向共同描述模型从感知情绪到安全回应的关键能力，不展示权重分配。
+          借鉴人类的共情过程，从四个方向评测大模型的共情智能。        
         </p>
       </div>
 
@@ -297,14 +296,13 @@
         <span class="section-label">MEI-EMPATHY-M · EMPIRICAL VIEW</span>
         <h2 class="section-title">四维实证评测视图</h2>
         <p class="section-desc" style="margin-top:16px;">
-          使用四维聚合结果与分维任务清单展示模型能力结构，结果仅用于研究性比较与复核。
+          使用四维综合测评与细分任务测评展示模型能力结构。
         </p>
       </div>
 
       <div class="composite-score-card reveal" style="margin-bottom:28px;">
         <div class="composite-score-head">
           <h3>综合评分（0–1）</h3>
-          <span>四维聚合展示（0–1），非跨任务官方总排名</span>
         </div>
         <div class="composite-score-grid">
           <div><b>Gemini 3.1 Pro</b><span>0.5172</span></div>
@@ -361,9 +359,8 @@
           </div>
           <div class="radar-title" id="radar-title">共情能力雷达图</div>
           <div class="radar-sub" id="radar-sub">n = 9 / 7 / 6 / 10</div>
-          <img id="radar-image" class="radar-image" src="assets/empathy-overview-radar.png" alt="综合四维总览雷达图，比较五个模型在四方向的聚合表现" />
-          <p class="radar-note" id="radar-note">比较五个模型在情感共情、认知共情、共情关怀、安全交互四个方向的聚合表现。</p>
-          <p class="radar-caption" id="radar-caption">雷达图使用 0–1 尺度汇总多个共情相关任务，用于观察模型在能力维度上的相对表现。图中 n 表示该维度纳入聚合的细分任务数。雷达图为聚合展示，不是官方总分，也不能替代单任务原始指标；不同任务的指标、模态、样本量和评测方法可能不同。</p>
+          <div id="radar-chart" class="radar-chart" role="img" aria-label="综合四维总览雷达图，比较五个模型在四方向的综合表现"></div>
+          <p class="radar-note" id="radar-note">比较五个模型在情感共情、认知共情、共情关怀、安全交互四个方向的综合表现。</p>
         </div>
       </div>
 
@@ -377,7 +374,6 @@
         <span class="chip">…</span>
       </div>
 
-      <p class="lb-demo-note reveal" style="margin-top:22px;">四维聚合结果用于研究性比较，不构成官方总排名、安全认证、采购建议或高风险场景部署保证。</p>
     </div>
   </section>
 
@@ -388,7 +384,7 @@
         <div class="reveal">
           <span class="section-label">LEADERBOARD</span>
           <h2 class="section-title">模型榜单</h2>
-          <p class="section-desc" style="margin-top:16px;">展示综合与四方向结果，分数均为 0–1 聚合展示（保留 4 位小数）。</p>
+          <p class="section-desc" style="margin-top:16px;">展示综合与四方向结果，分数均为 0–1 综合展示。</p>
         </div>
         <a href="leaderboard.html" class="btn-link reveal">查看完整榜单 →</a>
       </div>
@@ -439,7 +435,7 @@
         <span class="section-label">PLATFORM GOALS</span>
         <h2 class="section-title" style="font-size:clamp(26px,3vw,38px);">平台目标</h2>
         <p class="section-desc" style="margin:16px auto 0;max-width:900px;">
-          图灵 2.0 大模型共情智能评测平台承载德智普面向未来 AGI 的战略愿景，借鉴人类共情智能理论，创新构建覆盖情感感知、心理理解、共情关怀与安全交互的全方位评测体系。在此基础上，平台探索面向共情智能的新型评测数据范式，自主构建多模态、多轮交互数据集，覆盖复杂、动态且贴近真实的人际交互场景，系统评估大模型感知情绪、理解心理、提供关怀并安全交互的综合能力，推动共情智能技术持续演进，助力构建更懂人、更可信、更有温度的人工智能。
+          通灵大模型共情智能评测平台承载德智普面向未来 AGI 的战略愿景，借鉴人类共情智能理论，创新构建覆盖情感感知、心理理解、共情关怀与安全交互的全方位评测体系。在此基础上，平台探索面向共情智能的新型评测数据范式，自主构建多模态、多轮交互数据集，覆盖复杂、动态且贴近真实的人际交互场景，系统评估大模型感知情绪、理解心理、提供关怀并安全交互的综合能力，推动共情智能技术持续演进，助力构建更懂人、更可信、更有温度的人工智能。
         </p>
       </div>
       <div class="goal-flow reveal">
@@ -449,11 +445,11 @@
         </div>
         <div class="goal-node">
           <div class="goal-node-icon">STEP 2</div>
-          <div class="goal-node-text">数据范式</div>
+          <div class="goal-node-text">任务范式</div>
         </div>
         <div class="goal-node">
           <div class="goal-node-icon">STEP 3</div>
-          <div class="goal-node-text">能力评测</div>
+          <div class="goal-node-text">自研模型</div>
         </div>
         <div class="goal-node">
           <div class="goal-node-icon">STEP 4</div>
@@ -468,7 +464,7 @@
     <div class="section-shell">
       <h2 class="cta-title reveal">提交你的模型评测结果</h2>
       <p class="cta-desc reveal">
-        按统一字段提交模型、任务、数据子集、输入模态、样本量、评测日期、指标与异常记录，进入复核流程。
+        按统一格式提交模型、任务、数据子集、输入模态、样本量、评测日期、指标与异常记录等。
       </p>
       <div class="cta-actions reveal">
         <button class="btn btn-primary" data-dialog-open>了解提交要求 ↗</button>
@@ -502,11 +498,11 @@
               <circle cx="36.8" cy="30" r="1.8" fill="#64B5FF"/>
             </svg>
             <span class="brand-word">
-              <span>图灵 <b>2.0</b></span>
+              <span>通灵</span>
               <small>EMOTIONAL INTELLIGENCE AI</small>
             </span>
           </a>
-          <p>大模型共情智能开放测评平台——聚焦情感共情、认知共情、共情关怀与安全交互。</p>
+          <p>大模型共情智能测评平台——聚焦情感共情、认知共情、共情关怀与安全交互。</p>
           <p class="footer-tagline">开放 · 透明 · 可复现</p>
         </div>
 
@@ -530,13 +526,12 @@
         <div class="footer-col">
           <h4>联系与提交</h4>
           <a href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">GitHub 讨论 ↗</a>
-          <span class="footer-static">benchmark@example.com</span>
-          <span class="footer-static">Demo 演示用途 · 数据持续复核</span>
+          <span class="footer-static">songyu@dezhipu.com</span>
         </div>
       </div>
 
       <div class="footer-bottom">
-        © <span data-year>2026</span> Turing 2.0 Contributors · 大模型情感智能开放测评平台
+        © <span data-year>2026</span> 通灵 Contributors · 大模型共情智能开放测评平台
       </div>
     </div>
   </footer>
@@ -568,11 +563,11 @@
       </div>
 
       <a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">前往 GitHub 提交 ↗</a>
-      <p class="dialog-demo-note">Demo 演示用途，数据持续复核；正式发布前联系邮箱需替换。</p>
     </div>
   </dialog>
 
-  <script src="app.js"></script>
+  <script src="leaderboard.js?v=20260819-radar2"></script>
+  <script src="app.js?v=20260819-radar2"></script>
   <link rel="stylesheet" href="feedback-module/feedback-module.css" />
   <script src="feedback-module/feedback-module.js?v=20260810-deletefix"></script>
   <script src="comments.js"></script>

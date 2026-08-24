@@ -1,5 +1,5 @@
 /* ============================================================
-   图灵 2.0 — Core Design System
+   通灵 — Core Design System
    styles.css  (Demo2 复建版 · 2026-08)
    ============================================================ */
 
@@ -852,8 +852,8 @@ code {
 /* ---------- 16. MEI-Empathy-M 四维 ---------- */
 .mei-layout {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr) minmax(480px, 520px);
+  gap: 32px;
   align-items: stretch;
 }
 

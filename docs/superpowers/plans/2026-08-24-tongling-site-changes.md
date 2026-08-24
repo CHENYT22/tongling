@@ -272,10 +272,10 @@ Read all five HTML files in the test and add:
 const pages = ['index.html', 'datasets.html', 'framework.html', 'leaderboard.html', 'owned.html'].map(read).join('\n');
 assert.doesNotMatch(pages, /图灵\s*2\.0/);
 assert.doesNotMatch(pages, /大模型情感智能/);
-assert.doesNotMatch(pages, /benchmark@example\.com/);
 assert.match(pages, /通灵/);
 assert.match(pages, /大模型共情智能/);
-assert.match(pages, /songyu@dezhipu\.com/);
+assert.match(read('index.html'), /songyu@dezhipu\.com/);
+assert.match(read('framework.html'), /songyu@dezhipu\.com/);
 assert.match(read('gate.js'), /本站已启用访问保护/);
 assert.match(read('styles.css'), /\.mei-layout[\s\S]*?minmax\(/);
 ```

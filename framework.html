@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>测评框架 — 图灵 2.0</title>
-  <meta name="description" content="图灵 2.0 测评框架：数据组织、评测执行、指标分析与平台使用方式。" />
+  <title>测评框架 — 通灵</title>
+  <meta name="description" content="通灵测评框架：数据组织、评测执行、指标分析与平台使用方式。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <script src="gate.js"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="vitality-blue.css" />
-  <link rel="stylesheet" href="animations.css" />
+  <link rel="stylesheet" href="styles.css?v=20260819-brand" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260819-radar2" />
+  <link rel="stylesheet" href="animations.css?v=20260819-brand" />
+  <link rel="stylesheet" href="framework-page.css?v=20260820-framework5" />
 </head>
 <body>
 
@@ -38,7 +39,7 @@
           <circle cx="36.8" cy="30" r="1.8" fill="#1677FF"/>
         </svg>
         <span class="brand-word">
-          <span>图灵 <b>2.0</b></span>
+          <span>通灵</span>
           <small>EMOTIONAL INTELLIGENCE AI</small>
         </span>
       </a>
@@ -80,168 +81,167 @@
     <a href="#" data-dialog-open>提交测评结果 ↗</a>
   </div>
 
-  <!-- ============ SUBPAGE HERO ============ -->
-  <section class="subpage-hero">
+  <!-- ============ FRAMEWORK HERO ============ -->
+  <section class="subpage-hero framework-hero">
     <div class="section-shell">
       <div class="subpage-hero-left">
-        <span class="section-label">EVALUATION FRAMEWORK</span>
-        <h1 class="section-title" style="margin-top:14px;">测评框架</h1>
-        <p class="section-desc" style="margin-top:18px;">
-          页面主线聚焦如何组织数据、如何进行评测、如何计算指标并分析结果，以及平台与工具如何使用。
-        </p>
+        <span class="section-label">EVALUATION FRAMEWORK · MEI-EMPATHY-M</span>
+        <h1 class="section-title" style="margin-top:14px;">数据与任务标准化</h1>
+        <p class="section-desc framework-hero-lead" style="margin-top:18px;">通灵把分散的共情、情绪、社会推理与安全数据，整理为可复用的标准资源和任务视图，再以统一配置运行模型、记录指标和复核结果。</p>
+        <div class="framework-hero-tags" aria-label="框架关键词"><span>标准化</span><span>可追溯</span><span>按任务评分</span><span>多模态</span></div>
       </div>
-      <div class="subpage-hero-right">
-        <div>
-          <div class="stat-big">4</div>
-          <div class="stat-sub">核心能力领域</div>
-        </div>
-        <div>
-          <div class="stat-big">7</div>
-          <div class="stat-sub">流程关键节点</div>
-        </div>
+      <div class="framework-hero-stats" aria-label="框架统计">
+        <div class="framework-stat"><strong>4</strong><span>能力维度</span></div>
+        <div class="framework-stat"><strong>30</strong><span>数据来源</span></div>
+        <div class="framework-stat"><strong>42</strong><span>任务变体</span></div>
+        <div class="framework-stat"><strong>214</strong><span>指标记录</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 四大核心能力领域 ============ -->
+  <!-- ============ FRAMEWORK LOGIC ============ -->
+  <section class="framework-section section-space framework-intro-band">
+    <div class="section-shell">
+      <div class="framework-intro-grid">
+        <div class="reveal"><span class="section-label">CAPABILITY MODEL</span><h2 class="section-title">四维能力结构</h2></div>
+        <div class="framework-intro-copy reveal"><p>情感共情发现线索，认知共情理解原因与需求，共情关怀形成支持性回应，安全交互约束边界、事实与风险。</p></div>
+      </div>
+      <div class="empathy-chain reveal" aria-label="共情能力链路">
+        <div class="chain-node chain-affective"><b>01</b><span>感知线索</span><small>看见、听见、读到情绪</small></div><i aria-hidden="true">→</i>
+        <div class="chain-node chain-cognitive"><b>02</b><span>理解处境</span><small>推断原因、意图与需求</small></div><i aria-hidden="true">→</i>
+        <div class="chain-node chain-concern"><b>03</b><span>形成回应</span><small>选择支持策略与表达方式</small></div><i aria-hidden="true">→</i>
+        <div class="chain-node chain-safety"><b>04</b><span>守住边界</span><small>识别风险、拒绝越界与伤害</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CORE CAPABILITIES ============ -->
   <section class="framework-section section-space">
     <div class="section-shell">
       <div class="section-header reveal">
-        <span class="section-label">CORE CAPABILITIES</span>
-        <h2 class="section-title">四大核心能力领域</h2>
-        <p class="section-desc" style="margin-top:16px;">四个方向共同描述模型从感知到安全回应的能力链路，不设置固定权重。</p>
+        <span class="section-label">FOUR CAPABILITY DIMENSIONS</span>
+        <h2 class="section-title">四维能力模型</h2>
+        <p class="section-desc" style="margin-top:16px;max-width:820px;">每个维度都由多个数据来源和任务变体组成，按任务定义、输入模态和指标口径分别评估。</p>
       </div>
-
-      <div class="framework-grid">
-        <a class="card card-hover reveal framework-card-link" href="datasets.html?dimension=affective" aria-label="查看情感共情公共数据集">
-          <span class="card-num">01</span>
-          <h3 class="card-title">情感共情</h3>
-          <p class="card-desc">测评模型是否具备类似人类情感共情中的情绪敏感性、情绪线索识别和多模态情绪感知能力。</p>
+      <div class="framework-capability-grid">
+        <a class="framework-capability-card tone-affective reveal" href="datasets.html?dimension=affective" aria-label="查看情感共情公共数据集">
+          <div class="capability-card-top"><span class="capability-index">01</span><span class="capability-en">AFFECTIVE</span></div>
+          <h3>情感共情</h3><p class="capability-question">模型看见、听见或读到情绪了吗？</p>
+          <p>关注情绪类别、强度、极性、变化、微表情、伪装情绪与跨模态冲突等线索。</p>
+          <p class="capability-datasets"><span>代表数据集</span> MER2024 · CAS(ME)³ · MDPE · EPITOME</p>
         </a>
-        <a class="card card-hover reveal framework-card-link" href="datasets.html?dimension=cognitive" aria-label="查看认知共情公共数据集">
-          <span class="card-num">02</span>
-          <h3 class="card-title">认知共情</h3>
-          <p class="card-desc">测评模型能否理解人类为什么会有这种情绪，以及用户隐含的心理状态、意图、需求和处境。</p>
+        <a class="framework-capability-card tone-cognitive reveal" href="datasets.html?dimension=cognitive" aria-label="查看认知共情公共数据集">
+          <div class="capability-card-top"><span class="capability-index">02</span><span class="capability-en">COGNITIVE</span></div>
+          <h3>认知共情</h3><p class="capability-question">模型理解对方为什么这样感受、真正需要什么了吗？</p>
+          <p>关注情绪原因、隐含需求、观点采择、关系情境、认知扭曲与社会规范推理。</p>
+          <p class="capability-datasets"><span>代表数据集</span> CICERO · DialogRE · PsyQA · EmoBench</p>
         </a>
-        <a class="card card-hover reveal framework-card-link" href="datasets.html?dimension=concern" aria-label="查看共情关怀公共数据集">
-          <span class="card-num">03</span>
-          <h3 class="card-title">共情关怀</h3>
-          <p class="card-desc">测评模型能否把情绪感知和理解转化为关怀、支持、安抚、引导和关系修复等输出。</p>
+        <a class="framework-capability-card tone-concern reveal" href="datasets.html?dimension=concern" aria-label="查看共情关怀公共数据集">
+          <div class="capability-card-top"><span class="capability-index">03</span><span class="capability-en">CONCERN</span></div>
+          <h3>共情关怀</h3><p class="capability-question">模型能把理解转化为恰当而有帮助的回应吗？</p>
+          <p>关注支持策略、积极重构、语气与角色适配、关系修复和多模态回应一致性。</p>
+          <p class="capability-datasets"><span>代表数据集</span> ESConv · ProsocialDialog · AvaMERG · SpeechCraft</p>
         </a>
-        <a class="card card-hover reveal framework-card-link" href="datasets.html?dimension=safety" aria-label="查看安全交互公共数据集">
-          <span class="card-num">04</span>
-          <h3 class="card-title">安全交互</h3>
-          <p class="card-desc">测评模型在高风险、脆弱、依赖、危机或不确定情境中，能否保持安全、边界、非操控的原则。</p>
+        <a class="framework-capability-card tone-safety reveal" href="datasets.html?dimension=safety" aria-label="查看安全交互公共数据集">
+          <div class="capability-card-top"><span class="capability-index">04</span><span class="capability-en">SAFE &amp; ACCOUNTABLE</span></div>
+          <h3>安全交互</h3><p class="capability-question">在高风险场景中，模型能否不迎合、不越界、不造成伤害？</p>
+          <p>关注危机、操纵、依赖、拒答、隐私、专业边界、幻觉与冲突降级能力。</p>
+          <p class="capability-datasets"><span>代表数据集</span> SORRY-Bench · INTIMA · PrivacyLens · AHaBench</p>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ============ 数据组织与评测流程 ============ -->
+  <!-- ============ DATA ARCHITECTURE ============ -->
   <section class="framework-section section-space">
     <div class="section-shell">
       <div class="section-header reveal">
-        <span class="section-label">DATA ORGANIZATION &amp; EVALUATION PROCESS</span>
-        <h2 class="section-title">数据如何组织与评测如何执行</h2>
-        <p class="section-desc" style="margin-top:16px;max-width:100%;">
-          标准化资源是对原始数据的统一整理层（文本、音频、图像、视频及索引）；任务视图是可直接评测的任务切片（任务定义、划分和目标输出）。
-        </p>
+        <span class="section-label">DATA ARCHITECTURE</span>
+        <h2 class="section-title">数据层与任务层</h2>
+        <p class="section-desc" style="margin-top:16px;max-width:900px;">数据层负责把不同来源的文本、音频、图像和视频整理为可复用资源；任务层在资源之上声明输入、目标、标签、切分和评分方式。两层通过 sample_id、manifest 和任务配置关联，同一份数据可以服务多个任务，同一套任务也可以复用不同数据来源。</p>
       </div>
-
-      <div class="pipeline reveal">
-        <span class="pipeline-node">数据来源</span><span class="pipeline-arrow">→</span>
-        <span class="pipeline-node">标准化资源</span><span class="pipeline-arrow">→</span>
-        <span class="pipeline-node">任务视图</span><span class="pipeline-arrow">→</span>
-        <span class="pipeline-node">模态匹配</span><span class="pipeline-arrow">→</span>
-        <span class="pipeline-node">模型作答</span><span class="pipeline-arrow">→</span>
-        <span class="pipeline-node">任务评分</span><span class="pipeline-arrow">→</span>
-        <span class="pipeline-node">结果记录</span>
+      <div class="architecture-overview reveal" aria-label="标准化架构">
+        <div class="architecture-overview-item"><span>DATA LAYER</span><b>数据层</b><p>来源登记、许可信息、媒体资源、样本索引与标准化清单。</p><code>dataset_meta · manifest · resources</code></div>
+        <div class="architecture-overview-connector" aria-hidden="true">→</div>
+        <div class="architecture-overview-item is-task"><span>TASK LAYER</span><b>任务层</b><p>输入字段、目标类型、标签空间、数据切分与 evaluator。</p><code>task_meta · split · evaluator</code></div>
+        <div class="architecture-overview-connector" aria-hidden="true">→</div>
+        <div class="architecture-overview-item is-result"><span>RESULT LAYER</span><b>结果层</b><p>模型输出、指标、运行配置与可追溯结果快照。</p><code>predictions · metrics · snapshot</code></div>
       </div>
+      <div class="architecture-tabs reveal" data-architecture-tabs role="tablist" aria-label="数据层级">
+        <button class="architecture-tab active" type="button" role="tab" aria-selected="true" data-arch-tab="source">数据层 · 来源</button>
+        <button class="architecture-tab" type="button" role="tab" aria-selected="false" data-arch-tab="resource">数据层 · 资源</button>
+        <button class="architecture-tab" type="button" role="tab" aria-selected="false" data-arch-tab="task">任务层 · 定义</button>
+        <button class="architecture-tab" type="button" role="tab" aria-selected="false" data-arch-tab="result">结果层 · 快照</button>
+      </div>
+      <div class="architecture-panel reveal" id="architecture-panel" data-arch-panel="source">
+        <div class="architecture-panel-main"><span class="architecture-kicker">LAYER 01</span><h3 id="architecture-title">来源登记</h3><p id="architecture-copy">不同论文与研究社区的数据在语言、标签、切分和模态上差异很大。第一步只确认来源、许可、样本划分与可用模态，不强行改写原始语义。</p></div>
+        <pre class="architecture-code" id="architecture-code"><code>raw_dataset/
+  source_notes.md
+  license.txt
+  text / audio / image / video</code></pre>
+      </div>
+      <div class="architecture-guard reveal"><span>接口约束</span><b>数据层负责适配</b><i>·</i><b>任务层负责定义</b><i>·</i><b>评测层负责执行</b><i>·</i><b>结果层负责追溯</b></div>
+    </div>
+  </section>
 
-      <div class="process-steps" style="margin-top:24px;">
-        <div class="process-step reveal"><div class="process-step-num">01</div><div class="process-step-title">准备数据</div><p>确认数据许可、来源与样本划分；记录数据子集、样本量和可复核来源。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">02</div><div class="process-step-title">选择任务与模态</div><p>按任务定义选择输入模态；区分 text、audio、image/frames、video 和 multimodal。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">03</div><div class="process-step-title">模型作答</div><p>记录模型版本、推理配置、评测日期和异常样本；单样本失败不默认记 0。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">04</div><div class="process-step-title">任务评分</div><p>根据任务类型选用匹配指标，并明确指标方向（越高越好或越低越好）。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">05</div><div class="process-step-title">发布与复核</div><p>结果至少包含模型、任务、子集、模态、主指标、样本量和评委信息；缺关键字段进入待复核。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">06</div><div class="process-step-title">更新快照</div><p>每次补跑、纠错或模型更新，均需生成新快照并说明新增、替换和撤下记录。</p></div>
+  <!-- ============ EVALUATION WORKFLOW ============ -->
+  <section class="framework-section section-space">
+    <div class="section-shell">
+      <div class="section-header reveal"><span class="section-label">EVALUATION WORKFLOW</span><h2 class="section-title">评测流程</h2></div>
+      <div class="workflow-strip reveal" aria-label="评测流程"><span>数据来源</span><b>→</b><span>标准化资源</span><b>→</b><span>任务视图</span><b>→</b><span>模态匹配</span><b>→</b><span>模型作答</span><b>→</b><span>任务评分</span><b>→</b><span>结果记录</span></div>
+      <div class="workflow-grid">
+        <article class="workflow-card reveal"><div class="workflow-no">01</div><h3>数据准备</h3><p>确认许可、来源、样本划分和可复核信息；默认优先使用 test，缺失时记录 subset 降级原因。</p><span class="workflow-meta">dataset_meta · manifest</span></article>
+        <article class="workflow-card reveal"><div class="workflow-no">02</div><h3>任务路由</h3><p>读取输入、目标和 label space，再按模型能力与样本可用模态完成任务路由。</p><span class="workflow-meta">text · image/frames · audio · video</span></article>
+        <article class="workflow-card reveal"><div class="workflow-no">03</div><h3>模型运行</h3><p>固定模型版本、采样参数、提示版本、并发与超时；单样本失败单独记录。</p><span class="workflow-meta">run_config · prompt metadata</span></article>
+        <article class="workflow-card reveal"><div class="workflow-no">04</div><h3>指标计算</h3><p>由 evaluator 解析输出并计算主指标、辅助指标或模型评委分，明确指标方向与覆盖率。</p><span class="workflow-meta">metrics.json · metrics.txt</span></article>
+        <article class="workflow-card reveal"><div class="workflow-no">05</div><h3>质量复核</h3><p>检查样本量、失败数、模态、任务和评委信息；缺关键字段的记录进入待复核。</p><span class="workflow-meta">validity · comparability</span></article>
+        <article class="workflow-card reveal"><div class="workflow-no">06</div><h3>结果发布</h3><p>补跑、纠错或模型更新后生成新快照，说明新增、替换、撤下和版本变化。</p><span class="workflow-meta">predictions · snapshot</span></article>
       </div>
     </div>
   </section>
 
-  <!-- ============ 评分与可比性规则 ============ -->
-  <section class="framework-section section-space">
+  <!-- ============ METRICS ============ -->
+  <section class="framework-section section-space framework-metrics-band">
     <div class="section-shell">
-      <div class="section-header reveal">
-        <span class="section-label">SCORING &amp; COMPARABILITY</span>
-        <h2 class="section-title">评分与计算规则</h2>
+      <div class="section-header reveal"><span class="section-label">METRICS &amp; COMPARABILITY</span><h2 class="section-title">指标与可比性</h2><p class="section-desc" style="margin-top:16px;max-width:900px;">分类、回归、抽取、生成和安全判断使用不同指标。通灵以任务为最小解释单元，在同一口径内进行横向比较。</p></div>
+      <div class="metric-method-grid">
+        <article class="metric-method-card reveal"><span class="metric-method-icon">01</span><h3>分类与判断</h3><p>情绪、风险或选择题等离散任务。</p><b>Accuracy · F1 · WAF</b><small>类别不均衡时优先查看 macro-F1 / UF1 / UAR。</small></article>
+        <article class="metric-method-card reveal"><span class="metric-method-icon">02</span><h3>回归与强度</h3><p>情绪强度、连续分值和一致性判断。</p><b>Pearson ↑ · MAE ↓</b><small>相关性和误差表达的是两种不同含义。</small></article>
+        <article class="metric-method-card reveal"><span class="metric-method-icon">03</span><h3>抽取与生成</h3><p>关系、理由片段或参考式回应。</p><b>micro-F1 · BLEU · ROUGE-L</b><small>文本重叠不等于真实共情质量。</small></article>
+        <article class="metric-method-card reveal"><span class="metric-method-icon">04</span><h3>安全与模型评委</h3><p>支持性、拒答、泄露和依赖风险。</p><b>refusal-rate · leakage-rate</b><small>模型评委需披露版本、覆盖率与效度限制。</small></article>
       </div>
-
-      <div class="data-table-wrap reveal">
-        <table class="data-table">
-          <thead>
-            <tr><th style="width:220px;">任务类型</th><th>常用指标</th><th style="width:170px;">指标方向</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="table-name">分类 / 多标签</td><td>Accuracy、weighted-F1、macro-F1、set-F1</td><td>越高越好</td></tr>
-            <tr><td class="table-name">回归</td><td>Pearson、CCC、MAE</td><td>Pearson/CCC 越高越好；MAE 越低越好</td></tr>
-            <tr><td class="table-name">选择题 / 偏好判断</td><td>Accuracy、WAF</td><td>越高越好</td></tr>
-            <tr><td class="table-name">结构化抽取</td><td>micro-F1、token-F1、tuple-F1</td><td>越高越好</td></tr>
-            <tr><td class="table-name">参考式生成</td><td>BLEU、ROUGE、BERTScore</td><td>越高越好</td></tr>
-            <tr><td class="table-name">风险与误差类</td><td>leakage_rate、fulfillment_rate、MAE</td><td>越低越好（需反向）</td></tr>
-          </tbody>
-        </table>
+      <div class="formula-board reveal">
+        <div class="formula-step"><span>01</span><b>归一化</b><code>0–1：原值　百分制：score / 100　0–7：score / 7</code></div>
+        <div class="formula-step"><span>02</span><b>统一方向</b><code>越低越好 → 1 - score　或　(max - x) / (max - min)</code></div>
+        <div class="formula-step"><span>03</span><b>维度综合</b><code>同一维度 = 可用细分任务的算术平均；缺失值不按 0 参与</code></div>
       </div>
-
-      <div class="data-table-wrap reveal" style="margin-top:22px;">
-        <table class="data-table">
-          <thead>
-            <tr><th style="width:220px;">归一化规则</th><th>计算说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="table-name">0–1 指标</td><td>直接使用原值。</td></tr>
-            <tr><td class="table-name">百分制指标</td><td>按 <code>score / 100</code> 归一化。</td></tr>
-            <tr><td class="table-name">0–7 量表</td><td>按 <code>score / 7</code> 归一化。</td></tr>
-            <tr><td class="table-name">其他量纲</td><td>使用 min-max：<code>(x - min) / (max - min)</code>。</td></tr>
-            <tr><td class="table-name">越低越好指标</td><td>先归一化后反向：<code>1 - score</code>，或 min-max 反向形式 <code>(max - x) / (max - min)</code>。</td></tr>
-            <tr><td class="table-name">维度聚合</td><td>同一能力维度按可用细分任务的算术平均计算；缺失值不按 0 参与。</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="section-desc reveal" style="margin-top:20px;max-width:100%;">
-        排名边界：仅在同一任务、同一主指标和同一评测变体内排名；不同模态、不同子集、不同模型评委口径不可直接混排为单一官方总榜。
-      </p>
+      <div class="comparability-note reveal"><strong>排名边界</strong><span>只在同一任务、主指标、子集、输入模态和评测变体内比较。不同条件的结果不合并成单一官方总榜。</span></div>
     </div>
   </section>
 
-  <!-- ============ 数据覆盖 ============ -->
-  <section class="framework-section section-space">
+  <!-- ============ COVERAGE ============ -->
+  <section class="framework-section section-space framework-coverage-band">
     <div class="section-shell">
-      <div class="section-header reveal">
-        <span class="section-label">DATA COVERAGE</span>
-        <h2 class="section-title">数据集与任务覆盖概览</h2>
+      <div class="section-header reveal"><span class="section-label">COVERAGE SNAPSHOT</span><h2 class="section-title">覆盖概览</h2></div>
+      <div class="coverage-grid reveal">
+        <div class="coverage-card"><strong>30</strong><span>标准化数据来源</span><p>覆盖情绪、社会推理、共情回应与安全交互。</p></div>
+        <div class="coverage-card"><strong>39</strong><span>原始结果组</span><p>保留任务、模型、配置与评测日期等上下文。</p></div>
+        <div class="coverage-card"><strong>42</strong><span>网站任务变体</span><p>以任务定义、输入模态和目标输出为展示单位。</p></div>
+        <div class="coverage-card"><strong>214</strong><span>模型×任务指标记录</span><p>雷达图用于概览，精确值回到单任务结果。</p></div>
       </div>
-      <div class="metrics-bar reveal" style="justify-content:space-between;gap:20px;">
-        <div class="metric-item"><span class="metric-num">30</span><span class="metric-label">数据来源</span></div>
-        <div class="metric-item"><span class="metric-num">42</span><span class="metric-label">网站可引用任务变体</span></div>
-        <div class="metric-item"><span class="metric-num">214</span><span class="metric-label">模型×任务指标记录</span></div>
-      </div>
-      <p class="section-desc reveal" style="margin-top:16px;max-width:100%;">
-        页面仅展示结构化概览与评测口径，不公开原始样本、敏感对话或可识别个人信息。
-      </p>
     </div>
   </section>
 
   <!-- ============ 结果报告与雷达图 ============ -->
-  <section class="section-space">
+  <section class="section-space framework-results-section">
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">RESULTS &amp; FINDINGS</span>
-        <h2 class="section-title">结果报告与雷达图分析</h2>
+        <h2 class="section-title">结果报告</h2>
+        <p class="section-desc" style="margin-top:16px;max-width:900px;">五张雷达图展示归一化后的相对形状；精确结论需要同时查看任务、样本量、模态、评委和评测时间。</p>
       </div>
 
-      <div class="radar-wrap reveal" data-radar-switcher>
+      <div class="radar-wrap results-radar-wrap reveal" data-radar-switcher>
         <div class="radar-tabs">
           <button class="radar-tab active" data-view="overview">综合四维总览</button>
           <button class="radar-tab" data-view="affective">情感共情</button>
@@ -251,67 +251,73 @@
         </div>
         <div class="radar-title" id="radar-title">共情能力雷达图</div>
         <div class="radar-sub" id="radar-sub">n = 9 / 7 / 6 / 10</div>
-        <img id="radar-image" class="radar-image" src="assets/empathy-overview-radar.png" alt="综合四维总览雷达图，比较五个模型在四方向的聚合表现" />
-        <p class="radar-note" id="radar-note">比较五个模型在情感共情、认知共情、共情关怀、安全交互四个方向的聚合表现。</p>
-        <p class="radar-caption" id="radar-caption">雷达图使用 0–1 尺度汇总多个共情相关任务，用于观察模型在能力维度上的相对表现。图中 n 表示该维度纳入聚合的细分任务数。雷达图为聚合展示，不是官方总分，也不能替代单任务原始指标；不同任务的指标、模态、样本量和评测方法可能不同。</p>
+        <div id="radar-chart" class="radar-chart" role="img" aria-label="综合四维总览雷达图，比较五个模型在四个方向的综合表现"></div>
+        <p class="radar-note" id="radar-note">比较五个模型在情感共情、认知共情、共情关怀、安全交互四个方向的综合表现。</p>
+        <p class="radar-caption" id="radar-caption">统一到 0–1 尺度，展示任务综合后的能力结构；精确值回到单任务结果。</p>
+        <div class="radar-insight" id="radar-insight" aria-live="polite">
+          <div class="radar-insight-heading"><span>READOUT</span><b>综合解读</b></div>
+          <ul id="radar-insight-list"><li>五个模型呈现不同能力形状，没有单一模型可以代表完整共情能力。</li><li>四个维度纳入的任务数量不同，雷达面积不能直接解释为能力总量。</li><li>Gemini 3.1 Pro 在前三个维度的综合结果相对更高，安全交互需要回到具体任务判断。</li></ul>
+        </div>
       </div>
-
-      <div class="data-table-wrap reveal" style="margin-top:22px;">
-        <table class="data-table">
-          <thead>
-            <tr><th style="width:210px;">图表</th><th>图表分析</th><th>分析结论</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="table-name">综合四维总览</td><td>四轴雷达图比较五个模型在情感共情、认知共情、共情关怀、安全交互上的聚合表现。</td><td>没有单一模型在所有维度全面领先，雷达面积不等于综合能力总量。</td></tr>
-            <tr><td class="table-name">情感共情（9项）</td><td>九轴雷达图比较情绪类别、强度、极性、微表情、伪装情绪、跨模态冲突等能力。</td><td>微表情与伪装情绪任务整体更难，模型间差异明显；输入模态会影响结果解释。</td></tr>
-            <tr><td class="table-name">认知共情（7项）</td><td>七轴雷达图比较情绪原因、隐含需求、观点采择、复杂情绪与关系情境理解。</td><td>认知理解能力呈结构化分化，单一高分不能代表所有推理轴领先。</td></tr>
-            <tr><td class="table-name">共情关怀（6项）</td><td>六轴雷达图比较支持策略、语气角色适配、多模态回应、安抚重评与关系修复。</td><td>理解与关怀输出并不等价，多模态回应一致性仍有提升空间。</td></tr>
-            <tr><td class="table-name">安全交互（10项）</td><td>十轴雷达图比较危机识别与回应、依赖控制、隐私边界、幻觉与偏见风险能力。</td><td>安全能力是多维取舍，不能由单一“安全分”替代临床或高风险部署判断。</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <blockquote class="lb-demo-note reveal" style="margin-top:20px;">
-        本图展示的是特定数据、模型版本、输入模态和评测规则下的研究性结果。它不代表模型具有意识或人类情感，不构成临床建议、安全认证、采购建议或高风险场景部署保证。雷达图为聚合画像，精确结果和方法限制请以完整报告及评测源文件为准。
-      </blockquote>
+      <div class="results-principles reveal"><div><b>共情是一组能力，不是一个分数</b><span>情绪感知、心理推理、支持回应和安全边界各有不同侧重。</span></div><div><b>多模态信息会改变结果</b><span>视频、音频和图像带来文本中没有的线索，横向比较需标明实际输入。</span></div><div><b>综合图必须回到原始结果</b><span>任何结论都应能追溯到任务指标、样本量、模态和评测日期。</span></div></div>
     </div>
   </section>
 
-  <!-- ============ 工具申请与审核 ============ -->
-  <section class="framework-section section-space">
+  <!-- ============ TOOL WORKFLOW ============ -->
+  <section class="framework-section section-space framework-tool-band">
     <div class="section-shell">
-      <div class="section-header reveal">
-        <span class="section-label">TOOL ACCESS WORKFLOW</span>
-        <h2 class="section-title">工具和脚本申请</h2>
+      <div class="section-header reveal"><span class="section-label">PLATFORM TOOLKIT</span><h2 class="section-title">平台工具</h2><p class="section-desc" style="margin-top:16px;max-width:900px;">通灵将数据准备、任务定义、模型运行和结果分析拆成可组合工具；每个工具共享统一的元数据、配置和输出目录。</p></div>
+
+      <div class="tool-composition-grid">
+        <article class="tool-composition-card reveal"><span class="tool-composition-index">01</span><h3>数据准备工具</h3><p>登记来源、许可、模态与切分，生成标准化资源和 manifest。</p><code>list-datasets · prepare</code></article>
+        <article class="tool-composition-card reveal"><span class="tool-composition-index">02</span><h3>任务定义工具</h3><p>声明输入字段、目标类型、标签空间、提示模板和 evaluator。</p><code>task_meta · split · evaluator</code></article>
+        <article class="tool-composition-card reveal"><span class="tool-composition-index">03</span><h3>评测执行工具</h3><p>统一模型适配、采样参数、并发、超时与失败重试，保存运行配置。</p><code>bench run · run_config</code></article>
+        <article class="tool-composition-card reveal"><span class="tool-composition-index">04</span><h3>指标结果工具</h3><p>解析输出、计算指标、汇总维度并生成可追溯结果快照。</p><code>metrics · predictions · snapshot</code></article>
       </div>
 
-      <div class="process-steps" style="grid-template-columns:repeat(2, 1fr);">
-        <div class="process-step reveal"><div class="process-step-num">01</div><div class="process-step-title">提交用途说明</div><p>通过公开邮箱提交申请主体、用途、任务范围、数据合规和发布计划。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">02</div><div class="process-step-title">用途与风险审核</div><p>项目方审核商业使用、高风险场景、第三方服务与安全边界后，决定是否提供脚本包。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">03</div><div class="process-step-title">发放对应版本</div><p>审核通过后发送脚本包、版本说明和适用文档；后续更新与结果提交沿同渠道管理。</p></div>
-        <div class="process-step reveal"><div class="process-step-num">04</div><div class="process-step-title">使用者责任</div><p>申请方自行保管凭据与敏感样本，不得将结果包装为临床能力、安全认证或部署保证。</p></div>
+      <div class="quickstart-section reveal">
+        <div class="quickstart-heading"><span class="section-label">QUICK START</span><h3>快速使用</h3><p>先用小规模样本验证数据、任务和模型连接，再扩大运行范围。</p></div>
+        <div class="quickstart-steps">
+          <article><span>01</span><b>同步环境</b><p>安装项目依赖和全部可选组件，确认命令可用。</p><code>uv sync --all-extras</code></article>
+          <article><span>02</span><b>确认数据</b><p>查看可用数据来源，选择数据集、任务与目标模态。</p><code>turing2-data list-datasets</code></article>
+          <article><span>03</span><b>准备资源</b><p>生成标准化 manifest 与任务所需资源；先用 limit 验证流程。</p><code>turing2-data prepare</code></article>
+          <article><span>04</span><b>运行与复核</b><p>读取运行配置执行评测，再检查指标、输出和失败记录。</p><code>turing2-bench run</code></article>
+        </div>
+        <div class="tool-console">
+          <div class="tool-console-head"><span>FIVE-MINUTE START</span><b>准备、运行、查看结果</b></div>
+          <div class="tool-console-grid">
+            <pre><code><em># 1. 安装与查看数据来源</em>
+uv sync --all-extras
+turing2-data list-datasets
+
+<em># 2. 标准化一个数据集</em>
+turing2-data prepare \
+  --dataset mer2024 \
+  --task mer-semi \
+  --limit 100
+
+<em># 3. 运行小规模验证</em>
+turing2-bench run \
+  --config run.mer-semi-smoke.yaml</code></pre>
+            <div class="tool-output"><span class="output-label">RESULTS ROOT</span><div class="output-tree"><b>results/</b><span>├─ metrics/</span><span>│  ├─ metrics.json</span><span>│  └─ metrics.txt</span><span>├─ predictions/</span><span>│  └─ outputs.jsonl</span><span>└─ run_config/</span></div><p>可读指标、结构化指标、模型输出、解析结果、失败信息和运行配置分别保存，便于复核与重跑。</p></div>
+          </div>
+        </div>
       </div>
 
-      <div class="data-table-wrap reveal" style="margin-top:24px;">
-        <table class="data-table">
-          <thead>
-            <tr><th style="width:240px;">五分钟上手命令</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>uv sync</code></td><td>安装基础依赖与数据标准化能力。</td></tr>
-            <tr><td><code>uv sync --all-extras</code></td><td>安装全部可选能力（api/local/media/psyqa）。</td></tr>
-            <tr><td><code>turing2-data list-datasets</code></td><td>查看当前版本支持的数据来源。</td></tr>
-            <tr><td><code>turing2-data prepare ...</code></td><td>将原始数据整理为标准资源与任务视图。</td></tr>
-            <tr><td><code>turing2-bench run --config ...</code></td><td>执行评测并输出结果。</td></tr>
-          </tbody>
-        </table>
+      <div class="tool-subsection reveal"><span class="section-label">ACCESS WORKFLOW</span><h3>工具申请与交付</h3></div>
+      <div class="tool-access-grid">
+        <article class="tool-access-card reveal"><span class="tool-step">01</span><h3>用途说明</h3><p>说明申请主体、研究或业务用途、所需任务、数据计划和发布方式。</p></article>
+        <article class="tool-access-card reveal"><span class="tool-step">02</span><h3>用途审核</h3><p>核对商业使用、第三方服务、高风险场景和数据合规要求。</p></article>
+        <article class="tool-access-card reveal"><span class="tool-step">03</span><h3>版本交付</h3><p>审核通过后发送脚本包、版本说明、配置模板和适用文档。</p></article>
+        <article class="tool-access-card reveal"><span class="tool-step">04</span><h3>运行反馈</h3><p>保存运行配置、结果快照和异常信息，后续更新沿同一渠道管理。</p></article>
       </div>
-
-      <div class="lb-demo-note reveal" style="margin-top:20px;">
-        工具输出目录示例：<b>metrics/</b>（可读与结构化指标）与 <b>predictions/</b>（模型输出、解析结果、失败信息）。<br />
-        脚本申请邮箱：<b>songyu@dezhipu.com</b>
-      </div>
+      <div class="tool-responsibility reveal"><b>运行要求</b><span>先核对数据许可、模型服务条款、任务配置和输出目录；运行记录应与模型版本、输入模态、样本量和评测时间一并保存。</span><strong>songyu@dezhipu.com</strong></div>
     </div>
+  </section>
+
+  <!-- ============ LIMITATIONS ============ -->
+  <section class="framework-section section-space framework-limitations-band">
+    <div class="section-shell"><div class="section-header reveal"><span class="section-label">LIMITATIONS &amp; RESPONSIBILITY</span><h2 class="section-title">限制与责任</h2><p class="section-desc" style="margin-top:16px;max-width:900px;">公开结果服务于研究、选型和模型治理，使用时应结合任务条件、数据范围与评测配置。</p></div><div class="limitation-grid"><details class="limitation-item reveal" open><summary>输入条件差异</summary><p>多模态模型可能直接接收视频、音频或图像，部分模型在同一任务中只能接收文本。结果同时反映模型能力与输入信息量差异。</p></details><details class="limitation-item reveal"><summary>运行稳定性</summary><p>多数结果为单次运行，没有统一的多 seed、方差估计或置信区间；在线模型也可能静默更新。</p></details><details class="limitation-item reveal"><summary>复现范围</summary><p>“已支持”表示任务可以纳入通灵框架，不代表已经完全复现原论文的 split、预处理、模型评委或运行条件。</p></details><details class="limitation-item reveal"><summary>评委效度</summary><p>模型评委可能存在同源偏好、版本变化和失败覆盖率问题，相关结果应标注评委并视为本项目口径下的横向比较。</p></details><details class="limitation-item reveal"><summary>语言与文化覆盖</summary><p>中文情感数据与英文安全数据的结论不能无条件跨语言迁移，数据许可与引用要求也需逐项核验。</p></details><details class="limitation-item reveal"><summary>敏感主题处理</summary><p>涉及危机、自伤、操纵、隐私和越权请求的内容只用于研究性评测，不公开展示真实身份、危险输出或未经授权的媒体样本。</p></details></div></div>
   </section>
 
   <!-- ============ FOOTER ============ -->
@@ -339,7 +345,7 @@
               <circle cx="36.8" cy="30" r="1.8" fill="#64B5FF"/>
             </svg>
             <span class="brand-word">
-              <span>图灵 <b>2.0</b></span>
+              <span>通灵</span>
               <small>EMOTIONAL INTELLIGENCE AI</small>
             </span>
           </a>
@@ -368,12 +374,12 @@
           <h4>联系与提交</h4>
           <a href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">GitHub 讨论 ↗</a>
           <span class="footer-static">songyu@dezhipu.com</span>
-          <span class="footer-static">Demo 演示用途 · 数据持续复核</span>
+          <span class="footer-static">研究性展示 · 数据持续复核</span>
         </div>
       </div>
 
       <div class="footer-bottom">
-        © <span data-year>2026</span> Turing 2.0 Contributors · 大模型情感智能开放测评平台
+        © <span data-year>2026</span> 通灵 · 大模型共情智能开放测评平台
       </div>
     </div>
   </footer>
@@ -405,11 +411,12 @@
       </div>
 
       <a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">前往 GitHub 提交 ↗</a>
-      <p class="dialog-demo-note">Demo 演示用途，数据持续复核；正式发布前联系邮箱需替换。</p>
+      <p class="dialog-demo-note">研究性展示，数据持续复核。</p>
     </div>
   </dialog>
 
-  <script src="subpages.js"></script>
+  <script src="leaderboard.js?v=20260819-radar2"></script>
+  <script src="subpages.js?v=20260820-framework2"></script>
   <link rel="stylesheet" href="feedback-module/feedback-module.css" />
   <script src="feedback-module/feedback-module.js?v=20260810-deletefix"></script>
   <script src="comments.js"></script>

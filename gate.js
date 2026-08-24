@@ -75,7 +75,7 @@
     '<div class="turing-gate-panel" role="dialog" aria-modal="true" aria-labelledby="turing-gate-title">' +
     '  <div class="turing-gate-kicker">PRIVATE ACCESS</div>' +
     '  <h1 class="turing-gate-title" id="turing-gate-title">请输入访问密码</h1>' +
-    '  <p class="turing-gate-desc">该演示站点已启用访问保护。输入密码后，本次会话内切换页面无需重复输入。</p>' +
+    '  <p class="turing-gate-desc">本站已启用访问保护。输入密码后，本次会话内切换页面无需重复输入。</p>' +
     '  <input class="turing-gate-input" type="password" placeholder="输入密码" autocomplete="current-password" />' +
     '  <div class="turing-gate-actions">' +
     '    <button class="turing-gate-btn secondary" type="button">清空</button>' +
