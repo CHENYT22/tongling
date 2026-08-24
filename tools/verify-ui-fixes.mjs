@@ -5,6 +5,12 @@ import { fileURLToPath } from 'node:url';
 const root = new URL('../', import.meta.url);
 const read = (file) => readFileSync(new URL(file, root), 'utf8');
 
+const catalog = JSON.parse(read('public-datasets-data/catalog.json'));
+assert.equal(catalog.totalEntries, 193);
+assert.equal(catalog.totalTasks, 33);
+assert.equal(catalog.totalSections, 1930);
+assert.equal(catalog.categories.length, 4);
+
 const app = read('app.js');
 const leaderboard = read('leaderboard.js');
 const publicDatasets = read('public-datasets.js');
