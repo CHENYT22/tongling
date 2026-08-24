@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>公共数据集 — 图灵 2.0</title>
+  <title>公共数据集 — 通灵</title>
   <meta name="description" content="覆盖 4 个大类、33 个细分任务的 193 个可验证评测条目，连接数据、任务、指标与测评能力。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <script src="gate.js"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="vitality-blue.css" />
-  <link rel="stylesheet" href="animations.css" />
+  <link rel="stylesheet" href="styles.css?v=20260819-brand" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260819-brand" />
+  <link rel="stylesheet" href="animations.css?v=20260819-brand" />
+  <link rel="stylesheet" href="datasets-integrated.css?v=20260824-sheets" />
 </head>
 <body>
 
@@ -38,7 +39,7 @@
           <circle cx="36.8" cy="30" r="1.8" fill="#1677FF"/>
         </svg>
         <span class="brand-word">
-          <span>图灵 <b>2.0</b></span>
+          <span>通灵</span>
           <small>EMOTIONAL INTELLIGENCE AI</small>
         </span>
       </a>
@@ -80,77 +81,73 @@
     <a href="#" data-dialog-open>提交测评结果 ↗</a>
   </div>
 
-  <!-- ============ 数据集浏览器（浅色区） ============ -->
-  <section class="framework-section dataset-page-light" style="padding-top:64px;padding-bottom:96px;min-height:100vh;">
-    <div class="section-shell">
-
-      <div class="section-header-row" style="margin-bottom:8px;">
-        <div>
+  <main class="dataset-page" id="top">
+    <section class="hero" id="overview">
+      <div class="section-shell hero-grid">
+        <div class="hero-copy">
           <span class="section-label">PUBLIC DATASETS</span>
-          <h1 class="section-title" style="margin-top:14px;">公共数据集</h1>
-          <p class="section-desc" style="margin-top:18px;">覆盖 <b>4</b> 个大类、<b>33</b> 个细分任务的 <b>193</b> 个可验证评测条目，连接数据、任务、指标与测评能力。</p>
+          <h1>公共数据集</h1>
+          <p class="hero-lead">覆盖 4 个大类、33 个细分任务的 193 个可验证评测条目，连接数据、任务、指标与大模型共情智能测评能力。</p>
+          <div class="hero-facts" aria-label="数据集概览">
+            <div><strong id="entry-total">193</strong><span>评测条目</span></div>
+            <div><strong id="task-total">33</strong><span>细分任务</span></div>
+            <div><strong>10</strong><span>信息维度</span></div>
+          </div>
         </div>
-        <div class="empathy-pie-card" aria-label="四类能力占比">
-          <div class="pie-wrap">
-            <div class="empathy-pie" role="img" aria-label="情感共情 53，认知共情 62，共情关怀 43，安全交互 35"></div>
-            <div class="pie-total">100%</div>
+        <div class="distribution" aria-label="四类能力分布">
+          <div class="donut-wrap">
+            <div class="category-donut" id="category-donut"></div>
+            <div class="donut-center"><b>100%</b><span>能力覆盖</span></div>
           </div>
-          <div class="pie-legend" aria-label="占比图例">
-            <div class="pie-item"><span class="pie-dot dot-affective"></span><span>情感共情</span><b>53</b></div>
-            <div class="pie-item"><span class="pie-dot dot-cognitive"></span><span>认知共情</span><b>62</b></div>
-            <div class="pie-item"><span class="pie-dot dot-care"></span><span>共情关怀</span><b>43</b></div>
-            <div class="pie-item"><span class="pie-dot dot-safe"></span><span>安全交互</span><b>35</b></div>
-          </div>
+          <div class="donut-legend" id="category-legend"></div>
         </div>
       </div>
+    </section>
 
-      <p style="font-size:12.5px;color:var(--muted);margin-top:20px;line-height:1.7;">
-        统计口径：同一数据集若出现在不同细分任务中，按不同评测条目分别计数。<br />
-        数据来源：图灵2.0-大模型共情智能评测数据集，更新时间 07月27日。
-      </p>
-      <p style="font-size:12px;color:var(--muted);margin-top:10px;line-height:1.7;">
-        图片状态：待补充飞书原图（按文档导航详情页逐项替换并记录来源链接）。
-      </p>
-
-      <!-- 浏览器面板 -->
-      <div class="browser-panel">
-        <div class="browser-toolbar dataset-toolbar">
-          <div class="search-box">
-            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-            <input type="search" id="dataset-search" class="search-input"
-              placeholder="搜索数据集、任务、模态、机构、指标或关键词…" aria-label="搜索数据集" />
-          </div>
-          <label class="dataset-filter">
-            <span>所属方向</span>
-            <select id="dataset-direction" aria-label="所属方向"></select>
-          </label>
-          <label class="dataset-filter">
-            <span>细分任务</span>
-            <select id="dataset-subtask" aria-label="细分任务"></select>
-          </label>
-          <label class="dataset-filter">
-            <span>排序</span>
-            <select id="dataset-sort" aria-label="排序">
-              <option value="document">文档顺序</option>
-              <option value="year-desc">年份由新到旧</option>
-              <option value="name">名称 A–Z</option>
-            </select>
-          </label>
-          <button class="dataset-clear" id="dataset-clear" type="button" aria-label="清空筛选" title="清空筛选">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </button>
+    <section class="category-section" id="categories">
+      <div class="section-shell">
+        <div class="section-heading">
+          <div><span class="section-label">CAPABILITY MAP</span><h2>四类能力</h2></div>
+          <p>选择能力类别后，细分任务与数据集列表会同步收敛。</p>
         </div>
-
-        <div class="result-row">
-          <div class="result-count" id="result-count"></div>
-          <span class="result-hint">点击条目查看完整资料</span>
-        </div>
-
-        <div class="entry-list" id="entry-list"></div>
+        <div class="category-stats" id="category-stats" aria-live="polite"></div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section class="task-section" id="tasks">
+      <div class="section-shell">
+        <div class="section-heading">
+          <div><span class="section-label">TASK MAP</span><h2>细分任务</h2></div>
+          <p id="task-description">按任务查看对应评测条目。</p>
+        </div>
+        <div class="task-groups" id="task-groups" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="browser-section" id="browser">
+      <div class="section-shell">
+        <div class="section-heading browser-heading">
+          <div><span class="section-label">DATASET BROWSER</span><h2>数据集浏览器</h2></div>
+          <p>每条数据集均按统一的 10 项内容架构展示，可检索、筛选并展开阅读全文。</p>
+        </div>
+        <div class="browser-panel">
+          <div class="browser-toolbar">
+            <label class="search-box" for="dataset-search">
+              <span class="search-symbol" aria-hidden="true"></span>
+              <input id="dataset-search" type="search" placeholder="搜索数据集、任务、模态、机构、指标或关键词..." autocomplete="off" />
+              <kbd>/</kbd>
+            </label>
+            <label class="select-control"><span>细分任务</span><select id="task-filter" aria-label="按细分任务筛选"><option value="">全部细分任务</option></select></label>
+            <label class="select-control sort-control"><span>排序</span><select id="sort-order" aria-label="数据集排序"><option value="document">文档顺序</option><option value="name">名称排序</option></select></label>
+            <button class="clear-button" id="clear-filters" type="button" title="清除筛选" aria-label="清除全部筛选">×</button>
+          </div>
+          <div class="active-filter-row" id="active-filter-row" aria-live="polite"></div>
+          <div class="result-row"><span id="result-count">正在载入...</span><span class="view-hint">点击条目查看完整资料</span></div>
+          <div class="entry-list" id="entry-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer class="site-footer">
@@ -177,7 +174,7 @@
               <circle cx="36.8" cy="30" r="1.8" fill="#64B5FF"/>
             </svg>
             <span class="brand-word">
-              <span>图灵 <b>2.0</b></span>
+              <span>通灵</span>
               <small>EMOTIONAL INTELLIGENCE AI</small>
             </span>
           </a>
@@ -206,12 +203,11 @@
           <h4>联系与提交</h4>
           <a href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">GitHub 讨论 ↗</a>
           <span class="footer-static">benchmark@example.com</span>
-          <span class="footer-static">Demo 演示用途 · 数据持续复核</span>
         </div>
       </div>
 
       <div class="footer-bottom">
-        © <span data-year>2026</span> Turing 2.0 Contributors · 大模型情感智能开放测评平台
+        © <span data-year>2026</span> 通灵 Contributors · 大模型共情智能开放测评平台
       </div>
     </div>
   </footer>
@@ -243,13 +239,11 @@
       </div>
 
       <a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">前往 GitHub 提交 ↗</a>
-      <p class="dialog-demo-note">Demo 演示用途，数据持续复核；正式发布前联系邮箱需替换。</p>
     </div>
   </dialog>
 
-  <script src="data.js"></script>
   <script src="subpages.js"></script>
-  <script src="datasets.js"></script>
+  <script src="public-datasets.js?v=20260824-sources"></script>
   <link rel="stylesheet" href="feedback-module/feedback-module.css" />
   <script src="feedback-module/feedback-module.js?v=20260810-deletefix"></script>
   <script src="comments.js"></script>
