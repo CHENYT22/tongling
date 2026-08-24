@@ -1,5 +1,5 @@
 /* ============================================================
-   图灵 2.0 — Main App Logic (index.html)
+   通灵 — Main App Logic (index.html)
    app.js  (Demo2 复建版 · 2026-08)
    ============================================================ */
 
@@ -223,64 +223,230 @@
 
     var tabs = qsa('.radar-tab', wrap);
     var cards = qsa('[data-radar-view]');
-    var img = qs('#radar-image', wrap);
+    var chart = qs('#radar-chart', wrap);
     var title = qs('#radar-title', wrap);
     var sub = qs('#radar-sub', wrap);
     var note = qs('#radar-note', wrap);
-    if (!tabs.length || !img || !title || !sub || !note) return;
-
-    var fallback = document.createElement('div');
-    fallback.className = 'radar-fallback';
-    fallback.setAttribute('role', 'status');
-    fallback.setAttribute('aria-live', 'polite');
-    fallback.textContent = '雷达图资源加载失败，请检查 assets 目录中的 PNG 文件是否完整。';
-    fallback.hidden = true;
-    img.insertAdjacentElement('afterend', fallback);
+    var leaderboardViews = window.TURING_LEADERBOARD_VIEWS || {};
+    if (!tabs.length || !chart || !title || !sub || !note) return;
 
     var views = {
       overview: {
         title: '共情能力雷达图',
         sub: 'n = 9 / 7 / 6 / 10',
         note: '比较五个模型在情感共情、认知共情、共情关怀、安全交互四个方向的聚合表现。',
-        src: 'assets/empathy-overview-radar.png',
-        alt: '综合四维总览雷达图，比较五个模型在四方向的聚合表现'
+        alt: '综合四维总览雷达图，比较五个模型在四个方向的聚合表现'
       },
       affective: {
         title: '情感共情 Affective Empathy',
         sub: 'n = 9',
         note: '关注模型能否从文本、表情、语音、图像和视频线索中识别情绪类别、强度、极性、变化与跨模态冲突。',
-        src: 'assets/affective-empathy-radar.png',
         alt: '情感共情雷达图，展示五个模型在九类情感共情任务上的聚合表现'
       },
       cognitive: {
         title: '认知共情 Cognitive Empathy',
         sub: 'n = 7',
         note: '关注模型能否理解用户为什么产生某种情绪，并推断其意图、需求、心理状态和社会关系。',
-        src: 'assets/cognitive-empathy-radar.png',
         alt: '认知共情雷达图，展示五个模型在七类认知共情任务上的聚合表现'
       },
       concern: {
         title: '共情关怀 Empathic Concern',
         sub: 'n = 6',
         note: '关注模型能否把对情绪和处境的理解转化为支持性、适度、具体且符合关系情境的回应。',
-        src: 'assets/empathic-concern-radar.png',
         alt: '共情关怀雷达图，展示五个模型在六类共情关怀任务上的聚合表现'
       },
       safe: {
         title: '安全交互 Safe / Accountable Interaction',
         sub: 'n = 10',
         note: '关注模型在危机、操纵、隐私、依赖、专业边界和不确定性等高风险情境中的识别与回应能力。',
-        src: 'assets/safe-interaction-radar.png',
         alt: '安全交互雷达图，展示五个模型在十类安全交互任务上的聚合表现'
       }
     };
 
-    var switchingId = 0;
+    var modelOrder = ['Claude Opus 4.6', 'DeepSeek v4 Flash', 'Gemini 3.1 Pro', 'GPT-5.5', 'MiMo v2.5'];
+    var modelColors = {
+      'Claude Opus 4.6': '#7c3aed',
+      'DeepSeek v4 Flash': '#2563eb',
+      'Gemini 3.1 Pro': '#16a34a',
+      'GPT-5.5': '#dc2626',
+      'MiMo v2.5': '#d97706'
+    };
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+
+    function svgElement(tag, attrs, text) {
+      var element = document.createElementNS(SVG_NS, tag);
+      Object.keys(attrs || {}).forEach(function (key) {
+        element.setAttribute(key, attrs[key]);
+      });
+      if (text != null) element.textContent = text;
+      return element;
+    }
+
+    function point(cx, cy, radius, angle) {
+      return [cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius];
+    }
+
+    function polygonPoints(count, radius, cx, cy) {
+      var points = [];
+      for (var i = 0; i < count; i += 1) {
+        points.push(point(cx, cy, radius, -Math.PI / 2 + i * Math.PI * 2 / count).join(','));
+      }
+      return points.join(' ');
+    }
+
+    function axisLabel(label) {
+      return String(label || '').replace(/（n=\d+）/g, '');
+    }
+
+    function labelLines(label, compact) {
+      var maxChars = 10;
+      if (label.length <= maxChars) return [label];
+
+      var lines = [];
+      var remaining = label;
+      while (remaining.length > maxChars) {
+        var breakAt = maxChars;
+        for (var offset = 0; offset <= 3; offset += 1) {
+          var left = maxChars - offset;
+          var right = maxChars + offset;
+          if (/[、/与和，,]/.test(remaining.charAt(left))) { breakAt = left + 1; break; }
+          if (/[、/与和，,]/.test(remaining.charAt(right))) { breakAt = right + 1; break; }
+        }
+        lines.push(remaining.slice(0, breakAt));
+        remaining = remaining.slice(breakAt);
+      }
+      if (remaining) lines.push(remaining);
+      return lines;
+    }
+
+    function appendAxisLabel(parent, label, x, y, anchor, compact) {
+      var lines = labelLines(label, compact);
+      var text = svgElement('text', {
+        x: x,
+        y: y - (lines.length - 1) * 9,
+        'text-anchor': anchor,
+        'dominant-baseline': 'middle',
+        class: 'radar-live-axis-label'
+      });
+      lines.forEach(function (line, index) {
+        text.appendChild(svgElement('tspan', { x: x, dy: index ? '18' : '0' }, line));
+      });
+      parent.appendChild(text);
+    }
+
+    function chartData(viewKey) {
+      var source = leaderboardViews[viewKey === 'overview' ? 'overall' : viewKey];
+      if (!source) return null;
+      var columns = source.columns.filter(function (column) {
+        return column.key !== 'rank' && column.key !== 'model' && column.key !== 'average';
+      });
+      return {
+        axes: columns.map(function (column) { return { key: column.key, label: axisLabel(column.label) }; }),
+        rows: source.rows.slice().sort(function (a, b) {
+          return modelOrder.indexOf(a.model) - modelOrder.indexOf(b.model);
+        })
+      };
+    }
+
+    function renderRadar(viewKey, alt) {
+      var data = chartData(viewKey);
+      if (!data || !data.axes.length) {
+        chart.textContent = '榜单数据暂不可用';
+        return;
+      }
+
+      var width = 900;
+      var height = 720;
+      var cx = 450;
+      var cy = 390;
+      var radius = data.axes.length > 8 ? 180 : 205;
+      var svg = svgElement('svg', {
+        viewBox: '0 0 ' + width + ' ' + height,
+        class: 'radar-live-svg',
+        'data-entering': 'true',
+        'aria-hidden': 'true'
+      });
+      var grid = svgElement('g', { class: 'radar-grid' });
+
+      for (var level = 1; level <= 5; level += 1) {
+        grid.appendChild(svgElement('polygon', {
+          points: polygonPoints(data.axes.length, radius * level / 5, cx, cy),
+          fill: level === 5 ? '#f8fbff' : 'none',
+          stroke: level === 5 ? '#bfd3ea' : '#d9e5f5',
+          'stroke-width': level === 5 ? '1.25' : '1'
+        }));
+        grid.appendChild(svgElement('text', {
+          x: cx + 5,
+          y: cy - radius * level / 5 + 11,
+          class: 'radar-scale-label'
+        }, (level / 5).toFixed(1)));
+      }
+
+      data.axes.forEach(function (axis, index) {
+        var angle = -Math.PI / 2 + index * Math.PI * 2 / data.axes.length;
+        var end = point(cx, cy, radius, angle);
+        var labelDistance = data.axes.length > 8 ? 112 : (data.axes.length === 7 ? 78 : 86);
+        var labelPoint = point(cx, cy, radius + labelDistance, angle);
+        var anchor = Math.abs(Math.cos(angle)) < 0.2 ? 'middle' : (Math.cos(angle) > 0 ? 'start' : 'end');
+        grid.appendChild(svgElement('line', {
+          x1: cx, y1: cy, x2: end[0], y2: end[1], stroke: '#d9e5f5', 'stroke-width': '1'
+        }));
+        appendAxisLabel(grid, axis.label, labelPoint[0], labelPoint[1], anchor, data.axes.length > 8);
+      });
+      svg.appendChild(grid);
+
+      data.rows.forEach(function (row, rowIndex) {
+        var color = modelColors[row.model] || '#1677ff';
+        var points = data.axes.map(function (axis, index) {
+          var value = typeof row[axis.key] === 'number' ? row[axis.key] : 0;
+          var angle = -Math.PI / 2 + index * Math.PI * 2 / data.axes.length;
+          return point(cx, cy, radius * Math.max(0, Math.min(1, value)), angle);
+        });
+        var series = svgElement('g', { class: 'radar-series', 'data-model': row.model });
+        series.appendChild(svgElement('polygon', {
+          points: points.map(function (p) { return p.join(','); }).join(' '),
+          fill: color,
+          'fill-opacity': '0.07',
+          stroke: color,
+          'stroke-width': '2'
+        }));
+        points.forEach(function (p, index) {
+          var axis = data.axes[index];
+          var value = typeof row[axis.key] === 'number' ? row[axis.key] : null;
+          var dot = svgElement('circle', {
+            cx: p[0], cy: p[1], r: '3.2', fill: '#fff', stroke: color, 'stroke-width': '2'
+          });
+          dot.appendChild(svgElement('title', {}, row.model + ' · ' + axis.label + '：' + (value == null ? '—' : value.toFixed(4))));
+          series.appendChild(dot);
+        });
+        svg.appendChild(series);
+      });
+
+      var legend = svgElement('g', { class: 'radar-live-legend' });
+      var legendPositions = [[60, 32], [330, 32], [610, 32], [195, 64], [480, 64]];
+      data.rows.forEach(function (row, index) {
+        var x = legendPositions[index][0];
+        var y = legendPositions[index][1];
+        legend.appendChild(svgElement('line', {
+          x1: x, y1: y, x2: x + 24, y2: y, stroke: modelColors[row.model] || '#1677ff', 'stroke-width': '3'
+        }));
+        legend.appendChild(svgElement('circle', {
+          cx: x + 12, cy: y, r: '3.2', fill: '#fff', stroke: modelColors[row.model] || '#1677ff', 'stroke-width': '2'
+        }));
+        legend.appendChild(svgElement('text', { x: x + 33, y: y + 4, class: 'radar-live-legend-label' }, row.model));
+      });
+      svg.appendChild(legend);
+
+      chart.replaceChildren(svg);
+      chart.setAttribute('aria-label', alt);
+      requestAnimationFrame(function () {
+        svg.removeAttribute('data-entering');
+      });
+    }
 
     function setView(key) {
       var activeKey = views[key] ? key : 'overview';
       var v = views[activeKey];
-      var requestId = ++switchingId;
       tabs.forEach(function (t) {
         var isActive = t.getAttribute('data-view') === activeKey;
         t.classList.toggle('active', isActive);
@@ -293,36 +459,11 @@
       });
 
       wrap.classList.add('is-switching');
-      fallback.hidden = true;
-      img.hidden = false;
-
-      var nextImage = new Image();
-      nextImage.onload = function () {
-        if (requestId !== switchingId) return;
-
-        img.src = v.src;
-        img.alt = v.alt;
-        title.textContent = v.title;
-        sub.textContent = v.sub;
-        note.textContent = v.note;
-
-        requestAnimationFrame(function () {
-          if (requestId === switchingId) wrap.classList.remove('is-switching');
-        });
-      };
-
-      nextImage.onerror = function () {
-        if (requestId !== switchingId) return;
-
-        title.textContent = v.title;
-        sub.textContent = v.sub;
-        note.textContent = v.note;
-        img.hidden = true;
-        fallback.hidden = false;
-        wrap.classList.remove('is-switching');
-      };
-
-      nextImage.src = v.src;
+      title.textContent = v.title;
+      sub.textContent = v.sub;
+      note.textContent = v.note;
+      renderRadar(activeKey, v.alt);
+      requestAnimationFrame(function () { wrap.classList.remove('is-switching'); });
     }
 
     function focusView(key) {

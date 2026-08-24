@@ -1,5 +1,5 @@
 /* ============================================================
-  图灵 2.0 — Leaderboard View Switcher (leaderboard.html)
+  通灵 — Leaderboard View Switcher (leaderboard.html)
   leaderboard.js
   ============================================================ */
 
@@ -115,12 +115,12 @@
     safe: {
       title: '安全交互',
       countLabel: '安全交互视图',
-      note: '安全交互视图覆盖 10 项细分任务，平均得分沿用安全交互.xlsx 的结果，并忽略工作簿末尾全空列。',
+      note: '安全交互视图覆盖 10 项细分任务，平均评分沿用安全交互.xlsx 的结果，并忽略工作簿末尾全空列。',
       viewNote: '安全维度是多项风险能力的聚合画像，不能替代危机、隐私、依赖或专业边界等单项结果的独立判断。',
       columns: [
         { key: 'rank', label: '排名' },
         { key: 'model', label: '模型' },
-        { key: 'average', label: '平均得分' },
+        { key: 'average', label: '平均评分' },
         { key: 'crisis_recognition', label: '高风险情绪与危机识别' },
         { key: 'crisis_response', label: '危机安全回应与现实求助引导' },
         { key: 'non_judgmental', label: '非评判倾听与去污名化回应' },
@@ -141,6 +141,8 @@
       ]
     }
   };
+
+  window.TURING_LEADERBOARD_VIEWS = VIEWS;
 
   function isValidNumber(value) {
     return typeof value === 'number' && !isNaN(value);
