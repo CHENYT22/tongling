@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <script src="gate.js"></script>
-  <link rel="stylesheet" href="styles.css?v=20260819-radar" />
-  <link rel="stylesheet" href="vitality-blue.css?v=20260819-radar2" />
+  <link rel="stylesheet" href="styles.css?v=20260826-cta-light" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260826-cta-light" />
   <link rel="stylesheet" href="animations.css?v=20260819-brand" />
 </head>
 <body>
@@ -210,8 +210,22 @@
     </div>
   </section>
 
+  <div class="home-content-layout">
+    <aside class="home-section-nav" aria-label="首页内容分类">
+      <div class="home-section-nav-inner">
+        <span class="home-section-nav-label">内容导航</span>
+        <a href="#home-capabilities" data-home-section="home-capabilities" class="is-active"><span>四类能力</span><small>能力类别</small></a>
+        <a href="#home-datasets" data-home-section="home-datasets"><span>公共数据集</span><small>数据与任务</small></a>
+        <a href="#home-framework" data-home-section="home-framework"><span>实证评测</span><small>能力结果</small></a>
+        <a href="#home-results" data-home-section="home-results"><span>模型榜单</span><small>综合结果</small></a>
+        <a href="#home-goals" data-home-section="home-goals"><span>平台目标</span><small>发展愿景</small></a>
+        <a href="#home-submit" data-home-section="home-submit"><span>提交评测</span><small>提交结果</small></a>
+      </div>
+    </aside>
+    <main class="home-content-main">
+
   <!-- ============ 四大核心能力领域 ============ -->
-  <section class="framework-section section-space home-band-a">
+  <section class="framework-section section-space home-band-a" id="home-capabilities" data-home-section-target>
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">EVALUATION FRAMEWORK</span>
@@ -246,7 +260,7 @@
     </div>
   </section>
   <!-- ============ 公共数据集预览（浅色） ============ -->
-  <section class="framework-section section-space dataset-preview-light home-band-b">
+  <section class="framework-section section-space dataset-preview-light home-band-b" id="home-datasets" data-home-section-target>
     <div class="section-shell">
       <div class="section-header-row" style="margin-bottom:40px;">
         <div class="reveal">
@@ -290,7 +304,7 @@
   </section>
 
   <!-- ============ MEI-Empathy-M ============ -->
-  <section class="framework-section section-space home-band-c">
+  <section class="framework-section section-space home-band-c" id="home-framework" data-home-section-target>
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">MEI-EMPATHY-M · EMPIRICAL VIEW</span>
@@ -378,7 +392,7 @@
   </section>
 
   <!-- ============ 榜单预览 ============ -->
-  <section class="section-space home-band-d">
+  <section class="section-space home-band-d" id="home-results" data-home-section-target>
     <div class="section-shell">
       <div class="section-header-row" style="margin-bottom:40px;">
         <div class="reveal">
@@ -429,7 +443,7 @@
   </section>
 
   <!-- ============ 平台目标 ============ -->
-  <section class="framework-section section-space-sm home-band-e">
+  <section class="framework-section section-space-sm home-band-e" id="home-goals" data-home-section-target>
     <div class="section-shell">
       <div class="section-header reveal" style="text-align:center;">
         <span class="section-label">PLATFORM GOALS</span>
@@ -460,7 +474,7 @@
   </section>
 
   <!-- ============ CTA ============ -->
-  <section class="cta-section section-space-sm">
+  <section class="cta-section section-space-sm" id="home-submit" data-home-section-target>
     <div class="section-shell">
       <h2 class="cta-title reveal">提交你的模型评测结果</h2>
       <p class="cta-desc reveal">
@@ -472,6 +486,8 @@
       </div>
     </div>
   </section>
+    </main>
+  </div>
 
   <!-- ============ FOOTER ============ -->
   <footer class="site-footer">

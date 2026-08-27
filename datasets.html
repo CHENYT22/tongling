@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="styles.css?v=20260819-brand" />
   <link rel="stylesheet" href="vitality-blue.css?v=20260819-brand" />
   <link rel="stylesheet" href="animations.css?v=20260819-brand" />
-  <link rel="stylesheet" href="datasets-integrated.css?v=20260824-sheets" />
+  <link rel="stylesheet" href="datasets-integrated.css?v=20260827-donut-replay2" />
 </head>
 <body>
 
@@ -95,41 +95,44 @@
           </div>
         </div>
         <div class="distribution" aria-label="四类能力分布">
-          <div class="donut-wrap">
-            <div class="category-donut" id="category-donut"></div>
-            <div class="donut-center"><b>100%</b><span>能力覆盖</span></div>
-          </div>
+          <button type="button" class="donut-wrap" aria-label="能力覆盖100%，点击重播圆环动画" title="点击重播动画">
+            <span class="category-donut" id="category-donut"></span>
+            <span class="donut-center"><b>100%</b><span>能力覆盖</span></span>
+          </button>
           <div class="donut-legend" id="category-legend"></div>
         </div>
       </div>
     </section>
 
-    <section class="category-section" id="categories">
-      <div class="section-shell">
-        <div class="section-heading">
-          <div><span class="section-label">CAPABILITY MAP</span><h2>四类能力</h2></div>
-          <p>选择能力类别后，细分任务与数据集列表会同步收敛。</p>
-        </div>
-        <div class="category-stats" id="category-stats" aria-live="polite"></div>
-      </div>
-    </section>
+    <section class="dataset-workspace-section" id="categories">
+      <div class="section-shell dataset-workspace">
+        <aside class="dataset-sidebar" id="dataset-sidebar" aria-label="公共数据集分类导航">
+          <div class="dataset-sidebar-heading">
+            <span class="section-label">DATA NAVIGATION</span>
+            <h2>数据导航</h2>
+            <p>先选择能力类别，再查看对应细分任务。</p>
+          </div>
+          <button class="dataset-overview-button is-active" id="dataset-overview-button" type="button" aria-pressed="true">
+            <span><b>数据总览</b><small>查看全部公开评测条目</small></span>
+            <strong>193</strong>
+          </button>
+          <div class="dataset-nav-label">四类能力</div>
+          <div class="category-stats" id="category-stats" aria-live="polite"></div>
+          <div class="dataset-sidebar-tasks" id="tasks">
+            <div class="dataset-nav-label">细分任务</div>
+            <p id="task-description">选择能力类别后查看细分任务。</p>
+            <div class="task-groups" id="task-groups" aria-live="polite"></div>
+          </div>
+        </aside>
 
-    <section class="task-section" id="tasks">
-      <div class="section-shell">
-        <div class="section-heading">
-          <div><span class="section-label">TASK MAP</span><h2>细分任务</h2></div>
-          <p id="task-description">按任务查看对应评测条目。</p>
-        </div>
-        <div class="task-groups" id="task-groups" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section class="browser-section" id="browser">
-      <div class="section-shell">
-        <div class="section-heading browser-heading">
-          <div><span class="section-label">DATASET BROWSER</span><h2>数据集浏览器</h2></div>
-          <p>每条数据集均按统一的 10 项内容架构展示，可检索、筛选并展开阅读全文。</p>
-        </div>
+        <section class="dataset-results" id="browser" aria-labelledby="dataset-results-title">
+          <div class="dataset-results-heading">
+            <div>
+              <span class="dataset-breadcrumb" id="dataset-breadcrumb">数据总览</span>
+              <h2 id="dataset-results-title">全部数据集</h2>
+            </div>
+            <p>每条数据集均按统一的 10 项内容架构展示，可检索、筛选并展开阅读全文。</p>
+          </div>
         <div class="browser-panel">
           <div class="browser-toolbar">
             <label class="search-box" for="dataset-search">
@@ -137,14 +140,21 @@
               <input id="dataset-search" type="search" placeholder="搜索数据集、任务、模态、机构、指标或关键词..." autocomplete="off" />
               <kbd>/</kbd>
             </label>
-            <label class="select-control"><span>细分任务</span><select id="task-filter" aria-label="按细分任务筛选"><option value="">全部细分任务</option></select></label>
-            <label class="select-control sort-control"><span>排序</span><select id="sort-order" aria-label="数据集排序"><option value="document">文档顺序</option><option value="name">名称排序</option></select></label>
+            <div class="select-control custom-select-control"><span>细分任务</span><select id="task-filter" aria-label="按细分任务筛选"><option value="">全部细分任务</option></select></div>
+            <div class="select-control sort-control custom-select-control"><span>排序</span><select id="sort-order" aria-label="数据集排序"><option value="document">文档顺序</option><option value="name">名称排序</option></select></div>
             <button class="clear-button" id="clear-filters" type="button" title="清除筛选" aria-label="清除全部筛选">×</button>
           </div>
           <div class="active-filter-row" id="active-filter-row" aria-live="polite"></div>
           <div class="result-row"><span id="result-count">正在载入...</span><span class="view-hint">点击条目查看完整资料</span></div>
-          <div class="entry-list" id="entry-list"></div>
+          <div class="entry-list-shell">
+            <div class="entry-list" id="entry-list"></div>
+            <section class="dataset-detail-layer" id="dataset-detail-layer" aria-label="数据集详情" hidden>
+              <button class="dataset-detail-close" id="dataset-detail-close" type="button" aria-label="关闭数据集详情">×</button>
+              <div class="dataset-detail-content" id="dataset-detail-content"></div>
+            </section>
+          </div>
         </div>
+        </section>
       </div>
     </section>
   </main>
@@ -243,7 +253,7 @@
   </dialog>
 
   <script src="subpages.js"></script>
-  <script src="public-datasets.js?v=20260824-sources"></script>
+  <script src="public-datasets.js?v=20260827-donut-replay2"></script>
   <link rel="stylesheet" href="feedback-module/feedback-module.css" />
   <script src="feedback-module/feedback-module.js?v=20260810-deletefix"></script>
   <script src="comments.js"></script>
