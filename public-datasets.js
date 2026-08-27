@@ -21,11 +21,8 @@
     task: "",
     query: "",
     sort: "document",
-    openId: "",
-    detailTrigger: null
+    openId: ""
   };
-
-  const customSelects = new WeakMap();
 
   const qs = (selector, root) => (root || document).querySelector(selector);
 
@@ -389,9 +386,7 @@
       stops.push(category.color + " " + cursor.toFixed(2) + "% " + next.toFixed(2) + "%");
       cursor = next;
     });
-    const donut = qs("#category-donut");
-    donut.style.background = "conic-gradient(" + stops.join(",") + ")";
-    revealCategoryDonut(donut);
+    qs("#category-donut").style.background = "conic-gradient(" + stops.join(",") + ")";
 
     const legend = qs("#category-legend");
     legend.replaceChildren();
@@ -404,47 +399,30 @@
     });
   }
 
-  function revealCategoryDonut(donut) {
-    if (!donut || donut.dataset.revealed === "true") return;
-    donut.dataset.revealed = "true";
-    const distribution = donut.closest(".distribution");
-    function replayCategoryDonut() {
-      donut.classList.remove("is-revealing");
-      if (distribution) distribution.classList.remove("donut-is-revealing");
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      void donut.offsetWidth;
-      donut.classList.add("is-revealing");
-      if (distribution) distribution.classList.add("donut-is-revealing");
-    }
-    donut.closest(".donut-wrap").addEventListener("click", replayCategoryDonut);
-    requestAnimationFrame(replayCategoryDonut);
-  }
-
   function setCategory(categoryId) {
-    closeEntryDetail(false);
     state.category = categoryId;
     if (state.task) {
       const category = categoryById(categoryId);
       if (category && !category.tasks.some(function (task) { return task.name === state.task; })) state.task = "";
     }
-    renderDatasetNavigation();
+    renderCategoryCards();
+    renderTaskMap();
     populateTaskFilter();
     renderActiveFilters();
-    const hasEntries = renderEntries();
+    renderEntries();
     syncCategoryToUrl(false);
-    resetDatasetListScroll(hasEntries);
   }
 
   function categoryCard(category, count, taskCount, description) {
-    const selected = state.category === category.id;
+    const selected = state.category === (category ? category.id : "");
     const button = create("button", "category-card" + (selected ? " is-active" : ""));
     button.type = "button";
-    button.dataset.category = category.id;
-    button.style.setProperty("--accent", category.color);
+    button.dataset.category = category ? category.id : "";
+    button.style.setProperty("--accent", category ? category.color : "#1677ff");
     const top = create("div", "category-card-top");
     const identity = create("div", "category-identity");
     const dot = create("i", "category-dot");
-    identity.append(dot, create("span", "", category.name));
+    identity.append(dot, create("span", "", category ? category.name : "全部数据"));
     top.append(identity, create("strong", "", count));
     button.append(top, create("p", "", description), create("small", "", taskCount + " 个细分任务"));
     button.setAttribute("aria-pressed", selected ? "true" : "false");
@@ -455,184 +433,28 @@
   function renderCategoryCards() {
     const container = qs("#category-stats");
     container.replaceChildren();
+    container.appendChild(categoryCard(null, state.catalog.totalEntries, state.catalog.totalTasks, "浏览四类能力的全部公开评测条目。"));
     state.catalog.categories.forEach(function (category) {
       container.appendChild(categoryCard(category, category.count, category.taskCount, category.description));
     });
   }
 
-  function updateOverviewButton() {
-    const button = qs("#dataset-overview-button");
-    const active = !state.category && !state.task;
-    button.classList.toggle("is-active", active);
-    button.setAttribute("aria-pressed", active ? "true" : "false");
-  }
-
-  function renderDatasetNavigation() {
-    updateOverviewButton();
-    renderCategoryCards();
-    renderTaskMap();
-  }
-
-  function focusResultsOnCompactScreens() {
-    if (window.matchMedia("(max-width: 900px)").matches) {
-      qs("#browser").scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-        block: "start"
-      });
-    }
-  }
-
   function selectTask(categoryId, taskName) {
     state.category = categoryId || state.category;
     state.task = taskName;
-    renderDatasetNavigation();
+    renderCategoryCards();
+    renderTaskMap();
     populateTaskFilter();
     renderActiveFilters();
     renderEntries();
     syncCategoryToUrl(false);
-    focusResultsOnCompactScreens();
-  }
-
-  function closeCustomSelect(select, restoreFocus) {
-    const api = customSelects.get(select);
-    if (!api) return;
-    api.control.classList.remove("is-open");
-    api.trigger.setAttribute("aria-expanded", "false");
-    api.menu.hidden = true;
-    if (restoreFocus) api.trigger.focus();
-  }
-
-  function closeOtherCustomSelects(current) {
-    document.querySelectorAll(".custom-select-control.is-open").forEach(function (control) {
-      const select = qs("select", control);
-      if (select && select !== current) closeCustomSelect(select, false);
-    });
-  }
-
-  function focusCustomOption(api, direction) {
-    const options = Array.from(api.menu.querySelectorAll(".custom-select-option"));
-    if (!options.length) return;
-    const focused = document.activeElement;
-    const current = Math.max(0, options.indexOf(focused));
-    const next = direction === "last"
-      ? options.length - 1
-      : direction === "first"
-        ? 0
-        : (current + direction + options.length) % options.length;
-    options[next].focus();
-  }
-
-  function refreshCustomSelect(select) {
-    const api = customSelects.get(select);
-    if (!api) return;
-    const selected = select.options[select.selectedIndex] || select.options[0];
-    api.value.textContent = selected ? selected.textContent : "请选择";
-    api.menu.replaceChildren();
-
-    function appendOption(option, parent) {
-      const button = create("button", "custom-select-option", option.textContent);
-      button.type = "button";
-      button.setAttribute("role", "option");
-      button.dataset.value = option.value;
-      button.setAttribute("aria-selected", option.selected ? "true" : "false");
-      button.disabled = option.disabled;
-      button.addEventListener("click", function () {
-        select.value = option.value;
-        select.dispatchEvent(new Event("change", { bubbles: true }));
-        refreshCustomSelect(select);
-        closeCustomSelect(select, true);
-      });
-      button.addEventListener("keydown", function (event) {
-        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-          event.preventDefault();
-          focusCustomOption(api, event.key === "ArrowDown" ? 1 : -1);
-        } else if (event.key === "Home" || event.key === "End") {
-          event.preventDefault();
-          focusCustomOption(api, event.key === "Home" ? "first" : "last");
-        } else if (event.key === "Escape") {
-          event.preventDefault();
-          closeCustomSelect(select, true);
-        }
-      });
-      parent.appendChild(button);
-    }
-
-    Array.from(select.children).forEach(function (node) {
-      if (node.tagName === "OPTGROUP") {
-        const group = create("div", "custom-select-group");
-        group.setAttribute("role", "group");
-        group.setAttribute("aria-label", node.label);
-        group.appendChild(create("div", "custom-select-group-label", node.label));
-        Array.from(node.children).forEach(function (option) { appendOption(option, group); });
-        api.menu.appendChild(group);
-      } else if (node.tagName === "OPTION") {
-        appendOption(node, api.menu);
-      }
-    });
-  }
-
-  function initCustomSelect(select) {
-    if (!select || customSelects.has(select)) return;
-    const control = select.closest(".custom-select-control");
-    if (!control) return;
-
-    select.classList.add("custom-select-native");
-    const trigger = create("button", "custom-select-trigger");
-    trigger.type = "button";
-    trigger.setAttribute("aria-haspopup", "listbox");
-    trigger.setAttribute("aria-expanded", "false");
-    trigger.setAttribute("aria-label", select.getAttribute("aria-label") || "选择选项");
-    const value = create("span", "custom-select-value");
-    trigger.appendChild(value);
-
-    const menu = create("div", "custom-select-menu");
-    menu.id = select.id + "-menu";
-    menu.setAttribute("role", "listbox");
-    menu.setAttribute("aria-label", select.getAttribute("aria-label") || "选择选项");
-    menu.hidden = true;
-    trigger.setAttribute("aria-controls", menu.id);
-    control.append(trigger, menu);
-
-    const api = { control: control, trigger: trigger, value: value, menu: menu };
-    customSelects.set(select, api);
-    refreshCustomSelect(select);
-
-    trigger.addEventListener("click", function () {
-      const opening = !control.classList.contains("is-open");
-      closeOtherCustomSelects(select);
-      if (!opening) {
-        closeCustomSelect(select, false);
-        return;
-      }
-      control.classList.add("is-open");
-      trigger.setAttribute("aria-expanded", "true");
-      menu.hidden = false;
-    });
-    trigger.addEventListener("keydown", function (event) {
-      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-        event.preventDefault();
-        closeOtherCustomSelects(select);
-        control.classList.add("is-open");
-        trigger.setAttribute("aria-expanded", "true");
-        menu.hidden = false;
-        requestAnimationFrame(function () {
-          const selectedOption = qs('.custom-select-option[aria-selected="true"]', menu);
-          if (selectedOption) selectedOption.focus();
-          else focusCustomOption(api, event.key === "ArrowDown" ? "first" : "last");
-        });
-      } else if (event.key === "Escape") {
-        closeCustomSelect(select, false);
-      }
-    });
-    document.addEventListener("pointerdown", function (event) {
-      if (!control.contains(event.target)) closeCustomSelect(select, false);
-    });
+    qs("#browser").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function renderTaskMap() {
     const container = qs("#task-groups");
     container.replaceChildren();
-    const categories = state.category ? [categoryById(state.category)] : [];
+    const categories = state.category ? [categoryById(state.category)] : state.catalog.categories;
 
     categories.filter(Boolean).forEach(function (category) {
       const group = create("section", "task-group");
@@ -660,7 +482,7 @@
     const description = qs("#task-description");
     if (state.task) description.textContent = "当前任务：" + state.task;
     else if (state.category) description.textContent = "当前展示 " + categoryById(state.category).name + " 的全部细分任务。";
-    else description.textContent = "选择上方能力类别后查看对应细分任务。";
+    else description.textContent = "33 个细分任务按四类能力分组，可直接进入对应数据列表。";
   }
 
   function populateTaskFilter() {
@@ -676,7 +498,6 @@
       select.appendChild(group);
     });
     select.value = current;
-    refreshCustomSelect(select);
   }
 
   function renderActiveFilters() {
@@ -715,6 +536,12 @@
   }
 
   function buildEntryDetail(entry, body) {
+    const detailHead = create("div", "entry-detail-head");
+    const copy = create("div");
+    copy.append(create("span", "detail-eyebrow", entry.category.name + " · " + entry.task), create("h3", "", entry.name));
+    detailHead.appendChild(copy);
+    if (entry.links.length) detailHead.appendChild(create("span", "resource-count", entry.links.length + " 个外部资源"));
+
     const layout = create("div", "entry-detail-layout");
     const navigation = create("nav", "section-navigation");
     navigation.setAttribute("aria-label", entry.name + "内容目录");
@@ -739,56 +566,16 @@
     });
 
     layout.append(navigation, panel);
-    body.appendChild(layout);
+    body.append(detailHead, layout);
     if (entry.sections.length) activate(0);
   }
 
-  function closeEntryDetail(restoreFocus) {
-    const layer = qs("#dataset-detail-layer");
-    const content = qs("#dataset-detail-content");
-    if (!layer || layer.hidden) return;
-    layer.hidden = true;
-    if (content) content.replaceChildren();
+  function closeOpenEntries(except) {
     Array.from(document.querySelectorAll(".entry-card.is-open")).forEach(function (card) {
+      if (card === except) return;
       card.classList.remove("is-open");
       const button = qs(".entry-head", card);
       if (button) button.setAttribute("aria-expanded", "false");
-    });
-    state.openId = "";
-    if (restoreFocus && state.detailTrigger && state.detailTrigger.isConnected) state.detailTrigger.focus();
-    state.detailTrigger = null;
-  }
-
-  function positionEntryDetailLayer(head, layer) {
-    const shell = qs(".entry-list-shell");
-    if (!shell) return;
-    const shellRect = shell.getBoundingClientRect();
-    const headRect = head.getBoundingClientRect();
-    const top = Math.max(12, Math.round(headRect.bottom - shellRect.top + 10));
-    layer.style.setProperty("--detail-layer-top", top + "px");
-  }
-
-  function openEntryDetail(entry, card, head) {
-    closeEntryDetail(false);
-    const layer = qs("#dataset-detail-layer");
-    const content = qs("#dataset-detail-content");
-    if (!layer || !content) return;
-    card.classList.add("is-open");
-    head.setAttribute("aria-expanded", "true");
-    state.openId = entry.id;
-    state.detailTrigger = head;
-    buildEntryDetail(entry, content);
-    positionEntryDetailLayer(head, layer);
-    layer.hidden = false;
-    layer.scrollTop = 0;
-  }
-
-  function resetDatasetListScroll(hasEntries) {
-    if (!hasEntries) return;
-    const list = qs("#entry-list");
-    if (!list) return;
-    requestAnimationFrame(function () {
-      list.scrollTop = 0;
     });
   }
 
@@ -808,16 +595,24 @@
     categoryTag.style.setProperty("--tag-color", entry.category.color);
     tags.append(categoryTag, create("span", "entry-tag", entry.task));
     if (entry.year && entry.year.length < 20) tags.appendChild(create("span", "entry-tag subtle-tag", entry.year));
-    if (entry.links.length) tags.appendChild(create("span", "entry-tag resource-tag", entry.links.length + " 个外部资源"));
     const chevron = create("span", "entry-chevron");
     chevron.setAttribute("aria-hidden", "true");
     head.append(index, title, tags, chevron);
 
+    const body = create("div", "entry-body");
     head.addEventListener("click", function () {
-      openEntryDetail(entry, card, head);
+      const opening = !card.classList.contains("is-open");
+      closeOpenEntries(card);
+      card.classList.toggle("is-open", opening);
+      head.setAttribute("aria-expanded", opening ? "true" : "false");
+      state.openId = opening ? entry.id : "";
+      if (opening && !body.dataset.rendered) {
+        buildEntryDetail(entry, body);
+        body.dataset.rendered = "true";
+      }
     });
 
-    card.appendChild(head);
+    card.append(head, body);
     return card;
   }
 
@@ -825,34 +620,23 @@
     const entries = filteredEntries();
     const list = qs("#entry-list");
     list.replaceChildren();
-    updateResultsHeader(entries);
+    qs("#result-count").textContent = "显示 " + entries.length + " / " + state.catalog.totalEntries + " 条评测条目";
 
     if (!entries.length) {
       const empty = create("div", "no-results");
       empty.append(create("b", "", "未找到匹配的数据集"), create("span", "", "调整关键词或清除筛选后重试。"));
       list.appendChild(empty);
-      return false;
+      return;
     }
 
     const fragment = document.createDocumentFragment();
     entries.forEach(function (entry) { fragment.appendChild(buildEntryCard(entry)); });
     list.appendChild(fragment);
-    return true;
-  }
-
-  function updateResultsHeader(entries) {
-    const category = state.category ? categoryById(state.category) : null;
-    const title = state.task || (category ? category.name + "数据集" : "全部数据集");
-    const path = ["数据总览"];
-    if (category) path.push(category.name);
-    if (state.task) path.push(state.task);
-    qs("#dataset-results-title").textContent = title;
-    qs("#dataset-breadcrumb").textContent = path.join(" / ");
-    qs("#result-count").textContent = "显示 " + entries.length + " / " + state.catalog.totalEntries + " 条评测条目";
   }
 
   function syncAndRender() {
-    renderDatasetNavigation();
+    renderCategoryCards();
+    renderTaskMap();
     populateTaskFilter();
     renderActiveFilters();
     renderEntries();
@@ -860,20 +644,6 @@
 
   function bindControls() {
     const search = qs("#dataset-search");
-    initCustomSelect(qs("#task-filter"));
-    initCustomSelect(qs("#sort-order"));
-    qs("#dataset-detail-close").addEventListener("click", function () { closeEntryDetail(true); });
-    qs("#dataset-overview-button").addEventListener("click", function () {
-      closeEntryDetail(false);
-      state.category = "";
-      state.task = "";
-      renderDatasetNavigation();
-      populateTaskFilter();
-      renderActiveFilters();
-      const hasEntries = renderEntries();
-      syncCategoryToUrl(false);
-      resetDatasetListScroll(hasEntries);
-    });
     search.addEventListener("input", function () {
       state.query = search.value.trim();
       renderActiveFilters();
@@ -904,7 +674,6 @@
       state.sort = "document";
       search.value = "";
       qs("#sort-order").value = "document";
-      refreshCustomSelect(qs("#sort-order"));
       syncAndRender();
       syncCategoryToUrl(false);
     });
@@ -920,8 +689,6 @@
         search.blur();
         renderActiveFilters();
         renderEntries();
-      } else if (event.key === "Escape" && !qs("#dataset-detail-layer").hidden) {
-        closeEntryDetail(true);
       }
     });
 

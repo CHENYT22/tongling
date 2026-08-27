@@ -1572,15 +1572,6 @@
   border-color: var(--blue);
 }
 
-.lb-tab:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.lb-tab:focus-visible {
-  outline: 3px solid rgba(22, 119, 255, .28);
-  outline-offset: 2px;
-}
-
 .lb-version {
   display: inline-flex;
   align-items: center;
@@ -1603,19 +1594,16 @@
 }
 
 .lb-table-wrap {
-  position: relative;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
   overflow-x: auto;
-  background: #ffffff;
 }
 
 .lb-table {
   --lb-sticky-rank-width: 66px;
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   min-width: 860px;
 }
 
@@ -1642,6 +1630,7 @@
   min-width: var(--lb-sticky-rank-width);
   max-width: var(--lb-sticky-rank-width);
   box-sizing: border-box;
+  background: inherit;
 }
 
 .lb-table th:nth-child(2),
@@ -1649,26 +1638,17 @@
   position: sticky;
   left: var(--lb-sticky-rank-width);
   z-index: 1;
-  width: 156px;
-  min-width: 156px;
-  max-width: 156px;
-  box-sizing: border-box;
+  background: inherit;
 }
 
 .lb-table th:first-child,
 .lb-table th:nth-child(2) {
-  z-index: 3;
-  background: #ffffff;
+  z-index: 2;
 }
 
 .lb-table tbody td:first-child,
 .lb-table tbody td:nth-child(2) {
   background: #ffffff;
-}
-
-.lb-table th:nth-child(2),
-.lb-table td:nth-child(2) {
-  border-right: 1px solid var(--line);
 }
 
 .lb-table tbody tr:hover td:first-child,
@@ -1815,19 +1795,23 @@
 
 /* ---------- 12. CTA Section ---------- */
 .cta-section {
-  background: linear-gradient(180deg, #eef6ff 0%, #f8fbff 100%);
-  color: var(--ink);
+  background: linear-gradient(145deg, #061936, #082652);
+  color: var(--white);
   text-align: center;
   position: relative;
   overflow: hidden;
-  border-top: 1px solid #d9e8fa;
 }
 
 .cta-section::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(22, 119, 255, .1), transparent 58%);
+  background-image:
+    linear-gradient(rgba(100, 181, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 181, 255, .05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent);
   pointer-events: none;
 }
 
@@ -1840,13 +1824,13 @@
   font-family: 'Noto Sans SC', sans-serif;
   font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 600;
-  color: var(--ink);
+  color: var(--white);
   margin-bottom: 16px;
 }
 
 .cta-desc {
   font-size: 17px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, .6);
   max-width: 520px;
   margin: 0 auto 32px;
   line-height: 1.7;
@@ -1857,18 +1841,6 @@
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.cta-section .btn-light {
-  background: #ffffff;
-  color: var(--blue);
-  border-color: var(--line);
-}
-
-.cta-section .btn-light:hover {
-  background: #f4f9ff;
-  color: var(--blue);
-  border-color: var(--blue);
 }
 
 /* ---------- 13. Responsive ---------- */
@@ -2067,20 +2039,4 @@
   .entry-summary {
     -webkit-line-clamp: 2;
   }
-}
-
-/* Display-only cards use the same flat information surface as the framework page. */
-.static-info-card {
-  border: 1px solid #d9e6f4;
-  border-radius: 14px;
-  background: #fbfdff;
-  box-shadow: none;
-  cursor: default;
-  transform: none;
-}
-.static-info-card:hover {
-  border-color: #d9e6f4;
-  background: #fbfdff;
-  box-shadow: none;
-  transform: none;
 }
