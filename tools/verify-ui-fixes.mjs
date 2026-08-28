@@ -48,7 +48,11 @@ assert.match(pages, /通灵/);
 assert.match(pages, /大模型共情智能/);
 assert.match(read('index.html'), /songyu@dezhipu\.com/);
 assert.match(read('framework.html'), /songyu@dezhipu\.com/);
-assert.match(read('gate.js'), /本站已启用访问保护/);
+for (const page of ['index.html', 'datasets.html', 'framework.html', 'leaderboard.html', 'owned.html']) {
+  const html = read(page);
+  assert.equal(/<script\b[^>]*\bsrc=["'][^"']*\bgate\.js\b/i.test(html), false, page + ' must open without password verification');
+  assert.equal(/(?:src|href)=["'][^"']*(?:feedback-module\/|\bcomments\.js\b)/i.test(html), false, page + ' must not load the feedback system');
+}
 assert.match(read('styles.css'), /\.mei-layout[\s\S]*?minmax\(/);
 
 assert.match(app, /var activeKey = views\[key\] \? key : 'overview';/);
@@ -72,7 +76,7 @@ assert.match(datasetsHtml, /id="task-filter"/);
 assert.match(datasetsHtml, /id="sort-order"/);
 assert.match(datasetsHtml, /id="clear-filters"/);
 assert.match(datasetsHtml, /193 个可验证评测条目/);
-assert.match(datasetsHtml, /10 项内容架构/);
+assert.match(datasetsHtml, /可检索、筛选并在弹窗中阅读全文。/);
 assert.match(datasetsCss, /\.table-scroll\s*\{[\s\S]*?overflow-x:\s*auto;/);
 assert.match(datasetsCss, /\.source-resource-grid/);
 
