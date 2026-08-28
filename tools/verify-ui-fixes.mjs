@@ -48,7 +48,11 @@ assert.match(pages, /通灵/);
 assert.match(pages, /大模型共情智能/);
 assert.match(read('index.html'), /songyu@dezhipu\.com/);
 assert.match(read('framework.html'), /songyu@dezhipu\.com/);
-assert.match(read('gate.js'), /本站已启用访问保护/);
+for (const page of ['index.html', 'datasets.html', 'framework.html', 'leaderboard.html', 'owned.html']) {
+  const html = read(page);
+  assert.equal(/<script\b[^>]*\bsrc=["'][^"']*\bgate\.js\b/i.test(html), false, page + ' must open without password verification');
+  assert.equal(/(?:src|href)=["'][^"']*(?:feedback-module\/|\bcomments\.js\b)/i.test(html), false, page + ' must not load the feedback system');
+}
 assert.match(read('styles.css'), /\.mei-layout[\s\S]*?minmax\(/);
 
 assert.match(app, /var activeKey = views\[key\] \? key : 'overview';/);
