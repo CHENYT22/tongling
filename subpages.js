@@ -425,34 +425,12 @@
       }
     };
 
-    var progressTimer = 0;
-
-    function cueArchitectureProgress(activeTab) {
-      window.clearTimeout(progressTimer);
-      tabs.forEach(function (tab) {
-        tab.classList.remove('is-sweeping', 'is-next');
-      });
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var activeIndex = tabs.indexOf(activeTab);
-      activeTab.classList.add('is-sweeping');
-      if (activeIndex > -1 && activeIndex < tabs.length - 1) {
-        tabs[activeIndex + 1].classList.add('is-next');
-      }
-      progressTimer = window.setTimeout(function () {
-        tabs.forEach(function (tab) {
-          tab.classList.remove('is-sweeping', 'is-next');
-        });
-      }, 820);
-    }
-
-    function showLayer(key, shouldCue) {
+    function showLayer(key) {
       var layer = layers[key] || layers.source;
-      var activeTab = tabs[0];
       tabs.forEach(function (tab) {
         var active = tab.getAttribute('data-arch-tab') === key;
         tab.classList.toggle('active', active);
         tab.setAttribute('aria-selected', active ? 'true' : 'false');
-        if (active) activeTab = tab;
       });
       panel.setAttribute('data-arch-panel', key);
       var kicker = qs('.architecture-kicker', panel);
@@ -460,90 +438,12 @@
       title.textContent = layer.title;
       copy.textContent = layer.copy;
       code.textContent = layer.code;
-      if (shouldCue) cueArchitectureProgress(activeTab);
     }
 
     tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () { showLayer(tab.getAttribute('data-arch-tab'), true); });
+      tab.addEventListener('click', function () { showLayer(tab.getAttribute('data-arch-tab')); });
     });
-    showLayer('source', false);
-  }
-
-  function initFrameworkAnchors() {
-    var links = qsa('.framework-jump-card');
-    if (!links.length) return;
-    var activeTimer = 0;
-
-    function setActiveLink(activeLink) {
-      links.forEach(function (link) {
-        var active = link === activeLink;
-        link.classList.toggle('is-active', active);
-        link.setAttribute('aria-current', active ? 'location' : 'false');
-      });
-    }
-
-    links.forEach(function (link) {
-      link.addEventListener('click', function (event) {
-        var target = qs(link.getAttribute('href'));
-        if (!target) return;
-        event.preventDefault();
-        window.clearTimeout(activeTimer);
-        qsa('.framework-anchor-target').forEach(function (section) {
-          section.classList.remove('framework-anchor-target');
-        });
-        setActiveLink(link);
-        target.classList.add('framework-anchor-target');
-        target.scrollIntoView({
-          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-          block: 'start'
-        });
-        if (history.replaceState) history.replaceState(null, '', link.getAttribute('href'));
-        activeTimer = window.setTimeout(function () {
-          target.classList.remove('framework-anchor-target');
-        }, 1100);
-      });
-    });
-
-    setActiveLink(links.find(function (link) {
-      return link.getAttribute('href') === window.location.hash;
-    }) || links[0]);
-  }
-
-  function initFrameworkSectionNav() {
-    var links = qsa('[data-framework-section]');
-    var sections = qsa('[data-framework-section-target]');
-    if (!links.length || !sections.length) return;
-
-    function setActive(sectionId) {
-      links.forEach(function (link) {
-        var active = link.getAttribute('data-framework-section') === sectionId;
-        link.classList.toggle('is-active', active);
-        if (active) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    }
-
-    links.forEach(function (link) {
-      link.addEventListener('click', function (event) {
-        var target = document.getElementById(link.getAttribute('data-framework-section'));
-        if (!target) return;
-        event.preventDefault();
-        setActive(target.id);
-        target.scrollIntoView({
-          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-          block: 'start'
-        });
-        if (history.replaceState) history.replaceState(null, '', '#' + target.id);
-      });
-    });
-
-    if (!('IntersectionObserver' in window)) return;
-    var observer = new IntersectionObserver(function (entries) {
-      var visible = entries.filter(function (entry) { return entry.isIntersecting; })
-        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
-      if (visible[0]) setActive(visible[0].target.id);
-    }, { rootMargin: '-22% 0px -58% 0px', threshold: [0, .12, .3] });
-    sections.forEach(function (section) { observer.observe(section); });
+    showLayer('source');
   }
 
   /* ---------- Init ---------- */
@@ -555,8 +455,6 @@
     initYear();
     initArchitectureTabs();
     initRadarSwitcher();
-    initFrameworkAnchors();
-    initFrameworkSectionNav();
   }
 
   if (document.readyState === 'loading') {
