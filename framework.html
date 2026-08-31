@@ -8,12 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260819-brand" />
-  <link rel="stylesheet" href="vitality-blue.css?v=20260819-radar2" />
+  <link rel="stylesheet" href="styles.css?v=20260831-compact-directory1" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260831-table-scroll-fix" />
   <link rel="stylesheet" href="animations.css?v=20260819-brand" />
-  <link rel="stylesheet" href="framework-page.css?v=20260820-framework5" />
+  <link rel="stylesheet" href="framework-page.css?v=20260831-hero-pill-muted1" />
+  <link rel="stylesheet" href="card-system.css?v=20260831-card-system3" />
+  <link rel="stylesheet" href="color-system.css?v=20260831-color-system5" />
 </head>
-<body>
+<body class="framework-page">
 
   <!-- ============ NAV ============ -->
   <header class="site-header">
@@ -81,7 +83,7 @@
   </div>
 
   <!-- ============ FRAMEWORK HERO ============ -->
-  <section class="subpage-hero framework-hero">
+  <section class="subpage-hero framework-hero" id="framework-overview">
     <div class="section-shell">
       <div class="subpage-hero-left">
         <span class="section-label">EVALUATION FRAMEWORK · MEI-EMPATHY-M</span>
@@ -99,7 +101,7 @@
   </section>
 
   <!-- ============ FRAMEWORK LOGIC ============ -->
-  <section class="framework-section section-space framework-intro-band">
+  <section class="framework-section section-space framework-intro-band" id="framework-structure">
     <div class="section-shell">
       <div class="framework-intro-grid">
         <div class="reveal"><span class="section-label">CAPABILITY MODEL</span><h2 class="section-title">四维能力结构</h2></div>
@@ -115,7 +117,7 @@
   </section>
 
   <!-- ============ CORE CAPABILITIES ============ -->
-  <section class="framework-section section-space">
+  <section class="framework-section section-space" id="framework-model">
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">FOUR CAPABILITY DIMENSIONS</span>
@@ -152,7 +154,7 @@
   </section>
 
   <!-- ============ DATA ARCHITECTURE ============ -->
-  <section class="framework-section section-space">
+  <section class="framework-section section-space" id="framework-layers">
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">DATA ARCHITECTURE</span>
@@ -184,7 +186,7 @@
   </section>
 
   <!-- ============ EVALUATION WORKFLOW ============ -->
-  <section class="framework-section section-space">
+  <section class="framework-section section-space" id="framework-workflow">
     <div class="section-shell">
       <div class="section-header reveal"><span class="section-label">EVALUATION WORKFLOW</span><h2 class="section-title">评测流程</h2></div>
       <div class="workflow-strip reveal" aria-label="评测流程"><span>数据来源</span><b>→</b><span>标准化资源</span><b>→</b><span>任务视图</span><b>→</b><span>模态匹配</span><b>→</b><span>模型作答</span><b>→</b><span>任务评分</span><b>→</b><span>结果记录</span></div>
@@ -200,7 +202,7 @@
   </section>
 
   <!-- ============ METRICS ============ -->
-  <section class="framework-section section-space framework-metrics-band">
+  <section class="framework-section section-space framework-metrics-band" id="framework-metrics">
     <div class="section-shell">
       <div class="section-header reveal"><span class="section-label">METRICS &amp; COMPARABILITY</span><h2 class="section-title">指标与可比性</h2><p class="section-desc" style="margin-top:16px;max-width:900px;">分类、回归、抽取、生成和安全判断使用不同指标。通灵以任务为最小解释单元，在同一口径内进行横向比较。</p></div>
       <div class="metric-method-grid">
@@ -219,7 +221,7 @@
   </section>
 
   <!-- ============ COVERAGE ============ -->
-  <section class="framework-section section-space framework-coverage-band">
+  <section class="framework-section section-space framework-coverage-band" id="framework-coverage">
     <div class="section-shell">
       <div class="section-header reveal"><span class="section-label">COVERAGE SNAPSHOT</span><h2 class="section-title">覆盖概览</h2></div>
       <div class="coverage-grid reveal">
@@ -232,7 +234,7 @@
   </section>
 
   <!-- ============ 结果报告与雷达图 ============ -->
-  <section class="section-space framework-results-section">
+  <section class="section-space framework-results-section" id="framework-results">
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">RESULTS &amp; FINDINGS</span>
@@ -263,7 +265,7 @@
   </section>
 
   <!-- ============ TOOL WORKFLOW ============ -->
-  <section class="framework-section section-space framework-tool-band">
+  <section class="framework-section section-space framework-tool-band" id="framework-tools">
     <div class="section-shell">
       <div class="section-header reveal"><span class="section-label">PLATFORM TOOLKIT</span><h2 class="section-title">平台工具</h2><p class="section-desc" style="margin-top:16px;max-width:900px;">通灵将数据准备、任务定义、模型运行和结果分析拆成可组合工具；每个工具共享统一的元数据、配置和输出目录。</p></div>
 
@@ -315,7 +317,7 @@ turing2-bench run \
   </section>
 
   <!-- ============ LIMITATIONS ============ -->
-  <section class="framework-section section-space framework-limitations-band">
+  <section class="framework-section section-space framework-limitations-band" id="framework-limitations">
     <div class="section-shell"><div class="section-header reveal"><span class="section-label">LIMITATIONS &amp; RESPONSIBILITY</span><h2 class="section-title">限制与责任</h2><p class="section-desc" style="margin-top:16px;max-width:900px;">公开结果服务于研究、选型和模型治理，使用时应结合任务条件、数据范围与评测配置。</p></div><div class="limitation-grid"><details class="limitation-item reveal" open><summary>输入条件差异</summary><p>多模态模型可能直接接收视频、音频或图像，部分模型在同一任务中只能接收文本。结果同时反映模型能力与输入信息量差异。</p></details><details class="limitation-item reveal"><summary>运行稳定性</summary><p>多数结果为单次运行，没有统一的多 seed、方差估计或置信区间；在线模型也可能静默更新。</p></details><details class="limitation-item reveal"><summary>复现范围</summary><p>“已支持”表示任务可以纳入通灵框架，不代表已经完全复现原论文的 split、预处理、模型评委或运行条件。</p></details><details class="limitation-item reveal"><summary>评委效度</summary><p>模型评委可能存在同源偏好、版本变化和失败覆盖率问题，相关结果应标注评委并视为本项目口径下的横向比较。</p></details><details class="limitation-item reveal"><summary>语言与文化覆盖</summary><p>中文情感数据与英文安全数据的结论不能无条件跨语言迁移，数据许可与引用要求也需逐项核验。</p></details><details class="limitation-item reveal"><summary>敏感主题处理</summary><p>涉及危机、自伤、操纵、隐私和越权请求的内容只用于研究性评测，不公开展示真实身份、危险输出或未经授权的媒体样本。</p></details></div></div>
   </section>
 
@@ -414,7 +416,8 @@ turing2-bench run \
     </div>
   </dialog>
 
-  <script src="leaderboard.js?v=20260819-radar2"></script>
+  <script src="site-navigation.js?v=20260831-directory2"></script>
+  <script src="leaderboard.js?v=20260831-directory2"></script>
   <script src="subpages.js?v=20260820-framework2"></script>
 </body>
 </html>

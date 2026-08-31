@@ -18,6 +18,16 @@
   --line: #d9e5f5;
   --panel-line: #214d7d;
 
+  --font-hero: 72px;
+  --font-display: 48px;
+  --font-title: 22px;
+  --font-body: 16px;
+  --font-caption: 13px;
+  --line-display: 1.2;
+  --line-title: 1.4;
+  --line-body: 1.7;
+  --line-caption: 1.55;
+
   --nav-h: 78px;
   --nav-max: 1320px;
   --shell-max: 1180px;
@@ -49,10 +59,11 @@ html {
 
 body {
   font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+  font-size: var(--font-body);
   font-weight: 400;
   color: var(--ink);
   background: var(--paper);
-  line-height: 1.6;
+  line-height: var(--line-body);
   overflow-x: hidden;
 }
 
@@ -84,7 +95,7 @@ input {
 
 code {
   font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-  font-size: .88em;
+  font-size: var(--font-body);
   background: rgba(22, 119, 255, .08);
   padding: 1px 6px;
   border-radius: 5px;
@@ -94,7 +105,7 @@ code {
 /* ---------- 3. Typography ---------- */
 .eyebrow {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -103,7 +114,7 @@ code {
 
 .section-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -112,15 +123,19 @@ code {
 
 .section-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: clamp(34px, 4.4vw, 54px);
+  font-size: var(--font-display);
   font-weight: 600;
-  line-height: 1.18;
+  line-height: 1.1;
   color: var(--ink);
-  letter-spacing: -.01em;
+  letter-spacing: -.02em;
+}
+
+.subpage-hero h1.section-title {
+  font-size: var(--font-hero);
 }
 
 .section-desc {
-  font-size: 17px;
+  font-size: var(--font-body);
   color: var(--muted);
   max-width: 620px;
   line-height: 1.7;
@@ -164,22 +179,22 @@ code {
   padding: 0 24px;
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 24px;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-left: 12px;
+  margin-left: auto;
+  gap: 0;
 }
 
 .nav-links a {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 15px;
+  font-size: var(--font-body);
   font-weight: 500;
   color: var(--ink);
-  padding: 8px 16px;
+  padding: 6px 10px;
   border-radius: 8px;
   position: relative;
   transition: color .25s var(--ease), background .25s var(--ease);
@@ -197,19 +212,223 @@ code {
 .nav-links a.active::after {
   content: '';
   position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
   height: 2px;
   background: var(--blue);
   border-radius: 2px;
+}
+
+.nav-directory-item {
+  display: flex;
+  align-items: center;
+}
+
+.nav-directory-item > .nav-directory-page-link {
+  padding-right: 3px;
+}
+
+.nav-directory-item > .nav-directory-page-link.active::after {
+  right: 2px;
+}
+
+.nav-directory-toggle {
+  width: 22px;
+  height: 30px;
+  margin-left: -2px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color .2s var(--ease), background .2s var(--ease);
+}
+
+.nav-directory-toggle:hover,
+.nav-directory-toggle:focus-visible,
+.nav-directory-item.is-open .nav-directory-toggle {
+  color: var(--blue);
+  background: rgba(22, 119, 255, .07);
+}
+
+.nav-directory-toggle svg {
+  width: 10px;
+  height: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .22s var(--ease);
+}
+
+.nav-directory-item.is-open .nav-directory-toggle svg {
+  transform: rotate(180deg);
+}
+
+.site-directory-panel {
+  --directory-width: 600px;
+  --directory-intro: 160px;
+  position: fixed;
+  top: calc(var(--nav-h) + 10px);
+  left: var(--directory-left, 50%);
+  width: min(var(--directory-width), calc(100vw - 48px));
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -10px);
+  transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+}
+
+.site-directory-panel[data-content-size="compact"] {
+  --directory-width: 440px;
+  --directory-intro: 145px;
+}
+
+.site-directory-panel[data-content-size="medium"] {
+  --directory-width: 560px;
+  --directory-intro: 155px;
+}
+
+.site-directory-panel[data-content-size="medium"] .site-directory-groups {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.site-directory-panel[data-content-size="standard"] {
+  --directory-width: 600px;
+  --directory-intro: 160px;
+}
+
+.site-directory-panel[data-content-size="wide"] {
+  --directory-width: 660px;
+  --directory-intro: 165px;
+}
+
+.nav-directory-item.is-open .site-directory-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.site-directory-panel-inner {
+  display: grid;
+  grid-template-columns: var(--directory-intro) minmax(0, 1fr);
+  gap: 20px;
+  padding: 18px;
+  background: rgba(255, 255, 255, .97);
+  border: 1px solid rgba(174, 203, 240, .72);
+  border-radius: 16px;
+  box-shadow: 0 22px 60px rgba(38, 74, 125, .18), 0 2px 8px rgba(38, 74, 125, .06);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.site-directory-overview {
+  padding: 2px 18px 2px 2px;
+  border-right: 1px solid var(--line);
+}
+
+.site-directory-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-size: var(--font-caption);
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.site-directory-overview strong {
+  display: block;
+  color: var(--ink);
+  font-size: var(--font-title);
+  line-height: 1.35;
+}
+
+.site-directory-overview p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: var(--font-caption);
+  line-height: 1.75;
+}
+
+.nav-links .site-directory-enter {
+  display: inline-flex;
+  margin-top: 14px;
+  padding: 0 !important;
+  color: var(--blue) !important;
+  background: transparent !important;
+  font-size: var(--font-caption);
+  font-weight: 700 !important;
+}
+
+.site-directory-enter::after {
+  display: none !important;
+}
+
+.site-directory-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.site-directory-group h2 {
+  margin: 2px 8px 6px;
+  color: var(--muted);
+  font-size: var(--font-caption);
+  font-weight: 500;
+}
+
+.nav-links .site-directory-link {
+  display: block;
+  padding: 7px 8px;
+  color: var(--ink);
+  font-size: var(--font-caption);
+  line-height: 1.4;
+  border-radius: 7px;
+}
+
+.nav-links .site-directory-link::after {
+  display: none;
+}
+
+.nav-links .site-directory-link:hover,
+.nav-links .site-directory-link:focus-visible,
+.nav-links .site-directory-link.is-current {
+  color: var(--blue);
+  background: rgba(22, 119, 255, .075);
+}
+
+[id^="home-"],
+[id^="framework-"],
+[id^="owned-"],
+[id^="leaderboard-"],
+#overview,
+#browser,
+#categories,
+#tasks,
+#entry-list {
+  scroll-margin-top: calc(var(--nav-h) + 28px);
 }
 
 .nav-actions {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+@media (min-width: 901px) {
+  .nav-actions {
+    margin-left: 4px;
+  }
 }
 
 .nav-toggle {
@@ -265,7 +484,7 @@ code {
 
 .brand-word {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 20px;
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--ink);
   display: flex;
@@ -280,7 +499,7 @@ code {
 
 .brand-word small {
   font-family: 'DM Sans', sans-serif;
-  font-size: 9px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .14em;
   color: var(--muted);
@@ -293,7 +512,7 @@ code {
   align-items: center;
   gap: 8px;
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 15px;
+  font-size: var(--font-body);
   font-weight: 500;
   padding: 12px 24px;
   border-radius: var(--radius-sm);
@@ -340,7 +559,7 @@ code {
 
 .btn-link {
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--blue);
   display: inline-flex;
@@ -355,7 +574,7 @@ code {
 
 .btn-nav {
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--blue);
   padding: 9px 18px;
@@ -372,7 +591,7 @@ code {
 
 .lang-toggle {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 600;
   padding: 6px 11px;
   border: 1px solid var(--line);
@@ -438,7 +657,7 @@ code {
 
 .card-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .1em;
   color: var(--blue-light);
@@ -446,7 +665,7 @@ code {
 
 .card-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 24px;
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--ink);
   margin: 12px 0 16px;
@@ -455,7 +674,7 @@ code {
 .card-weight {
   display: inline-block;
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 600;
   color: var(--blue);
   background: rgba(22, 119, 255, .08);
@@ -471,7 +690,7 @@ code {
 }
 
 .card-list li {
-  font-size: 15px;
+  font-size: var(--font-body);
   color: var(--muted);
   padding-left: 20px;
   position: relative;
@@ -489,7 +708,7 @@ code {
 }
 
 .card-desc {
-  font-size: 15px;
+  font-size: var(--font-body);
   color: var(--muted);
   line-height: 1.7;
 }
@@ -499,6 +718,16 @@ code {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --font-hero: 42px;
+    --font-display: 34px;
+    --font-title: 20px;
+    --font-body: 15px;
+    --font-caption: 12px;
+  }
 }
 
 .framework-card-link {
@@ -540,14 +769,14 @@ code {
 
 .metric-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: 32px;
+  font-size: var(--font-display);
   font-weight: 600;
   color: var(--ink);
   line-height: 1;
 }
 
 .metric-label {
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
 }
 
@@ -562,12 +791,12 @@ code {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 15px;
+  font-size: var(--font-body);
 }
 
 .data-table th {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -605,7 +834,7 @@ code {
 
 .table-tag {
   display: inline-block;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 500;
   padding: 3px 10px;
   border-radius: 20px;
@@ -619,7 +848,7 @@ code {
 .arrow-cell {
   text-align: right;
   color: var(--muted);
-  font-size: 18px;
+  font-size: var(--font-title);
 }
 
 /* ---------- 12. Tags / Chips ---------- */
@@ -627,7 +856,7 @@ code {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 500;
   padding: 6px 14px;
   border-radius: 20px;
@@ -643,7 +872,7 @@ code {
 }
 
 .theory-tags .chip {
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-style: italic;
   font-weight: 400;
   opacity: 0.65;
@@ -683,14 +912,14 @@ code {
 
 .stat-big {
   font-family: 'DM Sans', sans-serif;
-  font-size: 48px;
+  font-size: var(--font-display);
   font-weight: 600;
   color: var(--blue);
   line-height: 1;
 }
 
 .stat-sub {
-  font-size: 14px;
+  font-size: var(--font-body);
   color: var(--muted);
   margin-top: 6px;
 }
@@ -698,7 +927,7 @@ code {
 /* ---------- 14. EI-META 七维体系 ---------- */
 .eimeta-formula {
   font-family: 'JetBrains Mono', 'SF Mono', monospace;
-  font-size: clamp(15px, 2vw, 20px);
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--blue);
   background: rgba(22, 119, 255, .05);
@@ -740,7 +969,7 @@ code {
   align-items: center;
   justify-content: center;
   font-family: 'DM Sans', sans-serif;
-  font-size: 22px;
+  font-size: var(--font-title);
   font-weight: 700;
   color: var(--white);
   background: linear-gradient(135deg, var(--blue), var(--blue-light));
@@ -752,14 +981,14 @@ code {
 
 .eimeta-name {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 16px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 8px;
 }
 
 .eimeta-desc {
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   color: var(--muted);
   line-height: 1.6;
   margin-bottom: 12px;
@@ -773,7 +1002,7 @@ code {
 }
 
 .eimeta-keys span {
-  font-size: 11px;
+  font-size: var(--font-caption);
   color: var(--blue);
   background: rgba(22, 119, 255, .07);
   padding: 2px 8px;
@@ -798,7 +1027,7 @@ code {
 
 .process-step-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: 40px;
+  font-size: var(--font-display);
   font-weight: 700;
   color: rgba(22, 119, 255, .15);
   line-height: 1;
@@ -807,14 +1036,14 @@ code {
 
 .process-step-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 19px;
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 10px;
 }
 
 .process-step p {
-  font-size: 14.5px;
+  font-size: var(--font-body);
   color: var(--muted);
   line-height: 1.7;
 }
@@ -833,7 +1062,7 @@ code {
 
 .pipeline-node {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--blue);
   background: rgba(22, 119, 255, .07);
@@ -844,7 +1073,7 @@ code {
 
 .pipeline-arrow {
   color: var(--blue-light);
-  font-size: 16px;
+  font-size: var(--font-body);
   margin: 0 8px;
   flex-shrink: 0;
 }
@@ -891,7 +1120,7 @@ code {
 
 .mei-card-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .1em;
   color: var(--blue-light);
@@ -899,7 +1128,7 @@ code {
 
 .mei-card-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 17px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--ink);
   margin: 8px 0 4px;
@@ -907,13 +1136,13 @@ code {
 
 .mei-card-en {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: var(--muted);
   margin-bottom: 10px;
 }
 
 .mei-card p {
-  font-size: 13.5px;
+  font-size: var(--font-caption);
   color: var(--muted);
   line-height: 1.65;
 }
@@ -935,14 +1164,14 @@ code {
 
 .radar-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 15px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 4px;
 }
 
 .radar-sub {
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: var(--muted);
   margin-bottom: 16px;
 }
@@ -955,14 +1184,14 @@ code {
 
 .radar-axis-label {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 600;
   fill: var(--ink);
 }
 
 .radar-axis-val {
   font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
+  font-size: var(--font-caption);
   fill: var(--blue);
   font-weight: 700;
 }
@@ -998,12 +1227,12 @@ code {
   top: 50%;
   transform: translateY(-50%);
   color: var(--blue-light);
-  font-size: 16px;
+  font-size: var(--font-body);
 }
 
 .goal-node-icon {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .08em;
   color: var(--blue-light);
@@ -1012,7 +1241,7 @@ code {
 
 .goal-node-text {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 15px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--ink);
 }
@@ -1043,13 +1272,13 @@ code {
 
 .footer-brand p {
   margin-top: 16px;
-  font-size: 15px;
+  font-size: var(--font-body);
   color: rgba(255, 255, 255, .6);
   line-height: 1.7;
 }
 
 .footer-brand .footer-tagline {
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--cyan);
   letter-spacing: .08em;
   margin-top: 8px;
@@ -1057,7 +1286,7 @@ code {
 
 .footer-col h4 {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 15px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--white);
   margin-bottom: 16px;
@@ -1065,7 +1294,7 @@ code {
 
 .footer-col a {
   display: block;
-  font-size: 14px;
+  font-size: var(--font-body);
   color: rgba(255, 255, 255, .6);
   padding: 6px 0;
   transition: color .25s var(--ease);
@@ -1077,14 +1306,14 @@ code {
 
 .footer-col span.footer-static {
   display: block;
-  font-size: 14px;
+  font-size: var(--font-body);
   color: rgba(255, 255, 255, .6);
   padding: 6px 0;
 }
 
 .footer-bottom {
   padding-top: 24px;
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .4);
   text-align: center;
 }
@@ -1118,13 +1347,13 @@ dialog::backdrop {
 
 .dialog-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 24px;
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--ink);
 }
 
 .dialog-sub {
-  font-size: 14px;
+  font-size: var(--font-body);
   color: var(--muted);
   margin-top: 6px;
 }
@@ -1139,7 +1368,7 @@ dialog::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: var(--font-title);
   color: var(--muted);
   transition: background .2s var(--ease);
 }
@@ -1169,7 +1398,7 @@ dialog::backdrop {
   background: rgba(22, 119, 255, .1);
   color: var(--blue);
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-body);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -1178,7 +1407,7 @@ dialog::backdrop {
 }
 
 .dialog-step p {
-  font-size: 14.5px;
+  font-size: var(--font-body);
   color: var(--ink);
   padding-top: 4px;
   line-height: 1.6;
@@ -1191,11 +1420,11 @@ dialog::backdrop {
 
 .dialog-step p span {
   color: var(--muted);
-  font-size: 13.5px;
+  font-size: var(--font-caption);
 }
 
 .dialog-demo-note {
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: var(--muted);
   margin-top: 16px;
   padding: 10px 14px;
@@ -1297,7 +1526,7 @@ dialog::backdrop {
   background: #f04452;
   border: 2px solid var(--paper);
   font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
+  font-size: var(--font-caption);
   font-weight: 700;
 }
 
@@ -1323,7 +1552,7 @@ dialog::backdrop {
   border: 2px solid var(--white);
   box-shadow: 0 5px 16px rgba(7, 29, 66, .28);
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 700;
   transition: transform .2s var(--ease), background .2s var(--ease);
 }
@@ -1391,14 +1620,14 @@ dialog::backdrop {
   display: block;
   color: var(--blue);
   font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .12em;
 }
 
 .comment-panel-head h2 {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 17px;
+  font-size: var(--font-body);
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: 0;
@@ -1409,7 +1638,7 @@ dialog::backdrop {
   margin-top: 6px;
   color: var(--muted);
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .08em;
 }
@@ -1438,7 +1667,7 @@ dialog::backdrop {
   display: block;
   margin: 0 0 6px;
   color: var(--ink);
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 600;
 }
 
@@ -1455,7 +1684,7 @@ dialog::backdrop {
   padding: 10px 12px;
   color: var(--ink);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--font-body);
   line-height: 1.55;
   resize: vertical;
   transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
@@ -1488,7 +1717,7 @@ dialog::backdrop {
   justify-content: center;
   gap: 7px;
   padding: 0 13px;
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 600;
 }
 
@@ -1516,7 +1745,7 @@ dialog::backdrop {
   margin-top: 14px;
   text-align: center;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-caption);
 }
 
 .comment-storage-note.error {
@@ -1535,7 +1764,7 @@ dialog::backdrop {
   border: 1px dashed var(--line);
   border-radius: 10px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-caption);
   line-height: 1.6;
   background: #f8fbff;
 }
@@ -1571,32 +1800,32 @@ dialog::backdrop {
 
 .comment-list-top b {
   color: var(--ink);
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 700;
 }
 
 .comment-list-top time {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-caption);
 }
 
 .comment-list-body {
   color: #31455f;
-  font-size: 13px;
+  font-size: var(--font-caption);
   line-height: 1.6;
 }
 
 .comment-list-id {
   color: var(--blue);
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .06em;
 }
 
 .comment-list-meta {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-caption);
 }
 
 .comment-thread {
@@ -1623,7 +1852,7 @@ dialog::backdrop {
   color: var(--white);
   background: var(--ink);
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 700;
 }
 
@@ -1633,14 +1862,14 @@ dialog::backdrop {
   gap: 8px;
 }
 
-.comment-meta b { font-size: 13px; font-weight: 600; }
-.comment-meta time { color: var(--muted); font-size: 11px; }
+.comment-meta b { font-size: var(--font-caption); font-weight: 600; }
+.comment-meta time { color: var(--muted); font-size: var(--font-caption); }
 
 .comment-message-id {
   margin-top: 4px;
   color: var(--blue);
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .06em;
 }
@@ -1648,7 +1877,7 @@ dialog::backdrop {
 .comment-message p {
   margin-top: 5px;
   color: #31455f;
-  font-size: 13.5px;
+  font-size: var(--font-caption);
   line-height: 1.65;
 }
 
@@ -1661,7 +1890,7 @@ dialog::backdrop {
 
 .comment-public-label {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-caption);
 }
 
 .comment-send {
@@ -1697,7 +1926,7 @@ dialog::backdrop {
 .mobile-nav a {
   display: block;
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 16px;
+  font-size: var(--font-body);
   font-weight: 500;
   color: var(--ink);
   padding: 14px 0;
@@ -1712,7 +1941,166 @@ dialog::backdrop {
   color: var(--blue);
 }
 
+.mobile-nav:has(.mobile-directory-group) {
+  max-height: calc(100vh - var(--nav-h));
+  padding-top: 10px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.mobile-directory-group {
+  border-bottom: 1px solid var(--line);
+}
+
+.mobile-directory-group summary {
+  min-height: 56px;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+  font-size: var(--font-body);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-directory-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-directory-chevron {
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform .2s var(--ease);
+}
+
+.mobile-directory-group[open] summary {
+  color: var(--blue);
+}
+
+.mobile-directory-group[open] .mobile-directory-chevron {
+  transform: rotate(225deg) translate(-2px, -2px);
+}
+
+.mobile-directory-links {
+  padding: 0 0 12px 12px;
+}
+
+.mobile-nav .mobile-directory-links a {
+  min-height: 42px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+  font-size: var(--font-caption);
+  font-weight: 500;
+  border: 0;
+  border-radius: 8px;
+}
+
+.mobile-nav .mobile-directory-links a:hover,
+.mobile-nav .mobile-directory-links a:focus-visible,
+.mobile-nav .mobile-directory-links a.active,
+.mobile-nav .mobile-directory-links a.is-current {
+  color: var(--blue);
+  background: rgba(22, 119, 255, .075);
+}
+
+.mobile-nav .mobile-directory-enter {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.mobile-nav .mobile-directory-submit {
+  margin-top: 12px;
+  padding: 14px 16px;
+  color: var(--blue);
+  text-align: center;
+  background: rgba(22, 119, 255, .07);
+  border: 1px solid rgba(22, 119, 255, .18);
+  border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-directory-panel,
+  .nav-directory-toggle svg,
+  .mobile-directory-chevron {
+    transition: none;
+  }
+}
+
 /* ---------- 21. Responsive ---------- */
+/* ---------- 22. Wide desktop composition ---------- */
+@media (min-width: 1600px) {
+  body:not(.dataset-view) {
+    --shell-max: 1480px;
+    --nav-max: 1480px;
+  }
+
+  body:not(.dataset-view) .section-shell {
+    width: min(var(--shell-max), calc(100% - 96px));
+  }
+
+  body:not(.dataset-view) .section-space {
+    padding-top: 132px;
+    padding-bottom: 132px;
+  }
+
+  body:not(.dataset-view) .section-space-sm {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+
+  body:not(.dataset-view) .subpage-hero {
+    display: flex;
+    align-items: center;
+    min-height: 380px;
+    padding-top: 88px;
+    padding-bottom: 72px;
+  }
+
+  body:not(.dataset-view) .subpage-hero .section-shell {
+    align-items: center;
+    gap: 100px;
+  }
+
+  body:not(.dataset-view) .subpage-hero-left {
+    max-width: 980px;
+  }
+
+  body:not(.dataset-view) .subpage-hero-right {
+    gap: 72px;
+    padding-right: 48px;
+  }
+
+  body:not(.dataset-view) .section-header {
+    margin-bottom: 72px;
+  }
+
+  body:not(.dataset-view) .section-header-row {
+    gap: 80px;
+  }
+
+  body:not(.dataset-view) .section-desc {
+    max-width: 720px;
+  }
+
+  body:not(.dataset-view) .card {
+    padding: 36px;
+  }
+
+  body:not(.dataset-view) .framework-grid,
+  body:not(.dataset-view) .grid-2,
+  body:not(.dataset-view) .grid-3 {
+    gap: 32px;
+  }
+}
+
 @media (max-width: 1100px) {
   .eimeta-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -1736,6 +2124,10 @@ dialog::backdrop {
 
   .nav-links {
     display: none;
+  }
+
+  .nav-actions {
+    margin-left: auto;
   }
 
   .nav-toggle {
@@ -1805,7 +2197,7 @@ dialog::backdrop {
   }
 
   .section-title {
-    font-size: 30px;
+    font-size: var(--font-display);
   }
 
   .framework-grid,
@@ -1827,7 +2219,7 @@ dialog::backdrop {
   }
 
   .metric-num {
-    font-size: 24px;
+    font-size: var(--font-title);
   }
 
   .card {
@@ -1866,6 +2258,6 @@ dialog::backdrop {
   }
 
   .stat-big {
-    font-size: 36px;
+    font-size: var(--font-display);
   }
 }

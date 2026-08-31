@@ -212,19 +212,39 @@
     if (viewNoteEl) viewNoteEl.textContent = view.viewNote;
   }
 
+  function viewFromHash() {
+    var key = location.hash.replace('#view-', '');
+    return VIEWS[key] ? key : 'overall';
+  }
+
   function initViewTabs() {
     var tabs = qsa('.lb-tab');
     if (!tabs.length) return;
 
+    function activate(viewKey, updateHash) {
+      var key = VIEWS[viewKey] ? viewKey : 'overall';
+      tabs.forEach(function (tab) {
+        var active = tab.getAttribute('data-view') === key;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      render(key);
+      if (updateHash) history.replaceState(null, '', '#view-' + key);
+    }
+
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
-        tabs.forEach(function (t) { t.classList.remove('active'); });
-        tab.classList.add('active');
-        render(tab.getAttribute('data-view') || 'overall');
+        activate(tab.getAttribute('data-view') || 'overall', true);
       });
     });
 
-    render('overall');
+    activate(viewFromHash(), false);
+    window.addEventListener('hashchange', function () {
+      if (location.hash.indexOf('#view-') !== 0) return;
+      activate(viewFromHash(), false);
+      var results = qs('#leaderboard-results');
+      if (results) results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
   function init() {

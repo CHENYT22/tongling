@@ -46,7 +46,7 @@
 
 .hero-eyebrow {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -66,7 +66,7 @@
 
 .hero-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: clamp(40px, 5.5vw, 78px);
+  font-size: var(--font-hero);
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -.02em;
@@ -74,7 +74,7 @@
 }
 
 .hero-desc {
-  font-size: 18px;
+  font-size: var(--font-body);
   color: var(--muted);
   line-height: 1.75;
   max-width: 520px;
@@ -87,7 +87,7 @@
 }
 
 .theory-label {
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: var(--muted);
   font-weight: 400;
   font-style: italic;
@@ -117,7 +117,7 @@
 
 .va-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
+  font-size: var(--font-caption);
   font-weight: 600;
   fill: var(--muted);
   letter-spacing: .08em;
@@ -126,7 +126,7 @@
 .cap-label {
   position: absolute;
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .08em;
   color: var(--blue);
@@ -137,7 +137,7 @@
 .cap-label .cap-zh {
   display: block;
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 24px;
+  font-size: var(--font-title);
   color: var(--ink);
   font-weight: 600;
   margin-bottom: 3px;
@@ -168,14 +168,14 @@
 
 .index-card-name {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .6);
   margin-bottom: 4px;
 }
 
 .index-card-value {
   font-family: 'DM Sans', sans-serif;
-  font-size: 28px;
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--white);
   line-height: 1;
@@ -186,7 +186,7 @@
 
 .index-card-change {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 600;
   color: #5fe6a0;
 }
@@ -199,7 +199,7 @@
   align-items: center;
   gap: 5px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 9px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .1em;
   color: #ff6b6b;
@@ -245,21 +245,21 @@
 
 .hero-metric-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: 52px;
+  font-size: var(--font-display);
   font-weight: 600;
   color: var(--blue);
   line-height: 1;
 }
 
 .hero-metric-label {
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
   margin-top: 6px;
 }
 
 .hero-metric-update {
   align-self: flex-end;
-  font-size: 11px;
+  font-size: var(--font-caption);
   color: var(--muted);
   opacity: 0.6;
   letter-spacing: .04em;
@@ -389,12 +389,12 @@
 
 .composite-score-head h3 {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 19px;
+  font-size: var(--font-title);
   font-weight: 600;
 }
 
 .composite-score-head span {
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: var(--muted);
 }
 
@@ -413,14 +413,14 @@
 
 .composite-score-grid b {
   display: block;
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: var(--ink);
   margin-bottom: 4px;
 }
 
 .composite-score-grid span {
   font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
+  font-size: var(--font-title);
   color: var(--blue);
   font-weight: 700;
 }
@@ -434,7 +434,7 @@
 }
 
 .mei-task-list li {
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
   line-height: 1.55;
   padding-left: 12px;
@@ -466,7 +466,7 @@
   color: var(--muted);
   border-radius: 999px;
   padding: 6px 12px;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 600;
 }
 
@@ -515,20 +515,20 @@
 .radar-scale-label {
   fill: #8aa0b8;
   font-family: 'DM Sans', sans-serif;
-  font-size: 9px;
+  font-size: var(--font-caption);
 }
 
 .radar-live-axis-label {
   fill: var(--ink);
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 16px;
+  font-size: var(--font-body);
   font-weight: 600;
 }
 
 .radar-live-legend-label {
   fill: #405a75;
   font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
 }
 
 .radar-series polygon {
@@ -574,21 +574,21 @@
   color: #9a5a00;
   border-radius: 10px;
   padding: 10px 12px;
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   line-height: 1.5;
   text-align: left;
 }
 
 .radar-note {
   margin-top: 12px;
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
   line-height: 1.6;
 }
 
 .radar-caption {
   margin-top: 10px;
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: var(--muted);
   line-height: 1.65;
   text-align: left;
@@ -644,7 +644,7 @@
   transform: translate(-50%, -50%);
   z-index: 2;
   font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
+  font-size: var(--font-title);
   font-weight: 700;
   color: var(--white);
   letter-spacing: .02em;
@@ -661,13 +661,13 @@
   grid-template-columns: 10px 1fr auto;
   align-items: center;
   gap: 8px;
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .75);
 }
 
 .pie-item b {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 700;
   color: var(--white);
 }
@@ -710,7 +710,7 @@
 
 .cat-stat-name {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 16px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--white);
   display: flex;
@@ -720,7 +720,7 @@
 
 .cat-stat-count {
   font-family: 'DM Sans', sans-serif;
-  font-size: 30px;
+  font-size: var(--font-display);
   font-weight: 700;
   color: var(--cyan);
 }
@@ -740,7 +740,7 @@
 }
 
 .cat-stat-sub {
-  font-size: 12px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .45);
   margin-top: 10px;
 }
@@ -773,7 +773,7 @@
   gap: 6px;
   flex: 0 0 176px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 500;
 }
 
@@ -837,7 +837,7 @@
   background: transparent;
   border: none;
   outline: none;
-  font-size: 14.5px;
+  font-size: var(--font-body);
   color: var(--white);
 }
 
@@ -855,7 +855,7 @@
 
 .subtask-chip {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   font-weight: 500;
   color: rgba(255, 255, 255, .6);
   background: rgba(255, 255, 255, .05);
@@ -879,14 +879,14 @@
 
 .subtask-chip .chip-n {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: var(--font-caption);
   opacity: .75;
   margin-left: 3px;
 }
 
 .result-count {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--cyan);
   padding: 14px 22px 4px;
 }
@@ -905,7 +905,7 @@
 
 .result-hint {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-caption);
 }
 
 /* ---------- 9. 条目手风琴 ---------- */
@@ -944,7 +944,7 @@
 
 .entry-idx {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 700;
   color: var(--cyan);
   background: rgba(115, 196, 255, .12);
@@ -965,7 +965,7 @@
 
 .entry-name {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 15.5px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--white);
   display: flex;
@@ -976,7 +976,7 @@
 
 .entry-year {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 600;
   color: var(--cyan);
   background: rgba(115, 196, 255, .1);
@@ -985,7 +985,7 @@
 }
 
 .entry-sub {
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .5);
   margin-top: 4px;
   display: flex;
@@ -1003,7 +1003,7 @@
   margin-top: 5px;
   overflow: hidden;
   color: rgba(255, 255, 255, .58);
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   line-height: 1.55;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -1021,7 +1021,7 @@
 
 .ds-tag {
   display: inline-block;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 20px;
@@ -1096,7 +1096,7 @@
 }
 
 .entry-meta-item {
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .75);
   line-height: 1.55;
   word-break: break-all;
@@ -1104,7 +1104,7 @@
 
 .entry-meta-item b {
   display: block;
-  font-size: 11px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .06em;
   color: rgba(255, 255, 255, .4);
@@ -1131,7 +1131,7 @@
 
 .entry-section-label {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   font-weight: 700;
   color: var(--cyan);
   letter-spacing: .04em;
@@ -1150,7 +1150,7 @@
 }
 
 .entry-section-content {
-  font-size: 13.5px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .72);
   line-height: 1.75;
 }
@@ -1194,7 +1194,7 @@
   padding: 48px 20px;
   text-align: center;
   color: rgba(255, 255, 255, .4);
-  font-size: 15px;
+  font-size: var(--font-body);
 }
 
 .dataset-page-light .empathy-pie-card {
@@ -1398,11 +1398,11 @@
 .preview-entry-name {
   font-weight: 600;
   color: var(--white);
-  font-size: 15px;
+  font-size: var(--font-body);
 }
 
 .preview-entry-meta {
-  font-size: 12.5px;
+  font-size: var(--font-caption);
   color: rgba(255, 255, 255, .5);
   margin-left: auto;
   font-family: 'DM Sans', sans-serif;
@@ -1418,7 +1418,7 @@
 }
 
 .owned-card {
-  background: linear-gradient(145deg, #eaf2ff, #f0f6ff);
+  background: linear-gradient(145deg, #f8fbff 0%, #ffffff 100%);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 48px;
@@ -1442,7 +1442,7 @@
   align-items: center;
   gap: 8px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 700;
   letter-spacing: .12em;
   color: var(--blue);
@@ -1453,7 +1453,7 @@
 
 .owned-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 36px;
+  font-size: var(--font-display);
   font-weight: 600;
   color: var(--ink);
   margin: 20px 0 8px;
@@ -1463,13 +1463,13 @@
 
 .owned-subtitle {
   font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
+  font-size: var(--font-body);
   color: var(--muted);
   margin-bottom: 24px;
 }
 
 .owned-desc {
-  font-size: 16px;
+  font-size: var(--font-body);
   color: var(--muted);
   line-height: 1.8;
   max-width: 640px;
@@ -1488,14 +1488,14 @@
 
 .owned-stat-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: 32px;
+  font-size: var(--font-display);
   font-weight: 600;
   color: var(--blue);
   line-height: 1;
 }
 
 .owned-stat-label {
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
   margin-top: 6px;
 }
@@ -1538,13 +1538,13 @@
 
 .lb-current-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 24px;
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--ink);
 }
 
 .lb-current-note {
-  font-size: 14px;
+  font-size: var(--font-body);
   line-height: 1.75;
   color: var(--muted);
   max-width: 920px;
@@ -1552,7 +1552,7 @@
 
 .lb-tab {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-body);
   font-weight: 500;
   color: var(--muted);
   padding: 9px 20px;
@@ -1577,7 +1577,7 @@
   align-items: center;
   gap: 8px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
   margin-bottom: 24px;
   padding: 8px 16px;
@@ -1609,7 +1609,7 @@
 
 .lb-table th {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--font-caption);
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -1646,6 +1646,17 @@
   z-index: 2;
 }
 
+/* 固定表头必须保持不透明，避免横向滚动时后方列文字透出。 */
+.lb-table thead th:first-child,
+.lb-table thead th:nth-child(2) {
+  background: #f4f8ff;
+}
+
+.lb-table th:nth-child(2),
+.lb-table td:nth-child(2) {
+  box-shadow: 1px 0 0 var(--line);
+}
+
 .lb-table tbody td:first-child,
 .lb-table tbody td:nth-child(2) {
   background: #ffffff;
@@ -1659,7 +1670,7 @@
 .lb-table td {
   padding: 16px 20px;
   border-bottom: 1px solid var(--line);
-  font-size: 15px;
+  font-size: var(--font-body);
   color: var(--ink);
 }
 
@@ -1677,7 +1688,7 @@
 
 .lb-rank {
   font-family: 'DM Sans', sans-serif;
-  font-size: 18px;
+  font-size: var(--font-title);
   font-weight: 600;
   width: 56px;
 }
@@ -1689,25 +1700,25 @@
 .lb-model {
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--font-body);
   color: var(--ink);
 }
 
 .lb-vendor {
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
 }
 
 .lb-score {
   font-family: 'DM Sans', sans-serif;
-  font-size: 22px;
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--blue);
 }
 
 .lb-sub {
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-body);
   font-weight: 600;
   color: var(--ink);
 }
@@ -1731,7 +1742,7 @@
 .lb-track-tag {
   display: inline-block;
   font-family: 'DM Sans', sans-serif;
-  font-size: 11.5px;
+  font-size: var(--font-caption);
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 20px;
@@ -1742,13 +1753,13 @@
 
 .lb-date {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
   white-space: nowrap;
 }
 
 .lb-demo-note {
-  font-size: 13px;
+  font-size: var(--font-caption);
   color: var(--muted);
   margin-top: 24px;
   padding: 14px 18px;
@@ -1781,14 +1792,14 @@
 
 .track-card-name {
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: var(--font-body);
   font-weight: 700;
   color: var(--blue);
   margin-bottom: 10px;
 }
 
 .track-card-models {
-  font-size: 13.5px;
+  font-size: var(--font-caption);
   color: var(--muted);
   line-height: 1.7;
 }
@@ -1822,14 +1833,14 @@
 
 .cta-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: clamp(28px, 3.5vw, 42px);
+  font-size: var(--font-display);
   font-weight: 600;
   color: var(--white);
   margin-bottom: 16px;
 }
 
 .cta-desc {
-  font-size: 17px;
+  font-size: var(--font-body);
   color: rgba(255, 255, 255, .6);
   max-width: 520px;
   margin: 0 auto 32px;
@@ -1944,7 +1955,7 @@
   }
 
   .cat-stat-count {
-    font-size: 22px;
+    font-size: var(--font-title);
   }
 
   .owned-card {
@@ -1957,7 +1968,7 @@
   }
 
   .owned-stat-num {
-    font-size: 26px;
+    font-size: var(--font-title);
   }
 
   .browser-toolbar {
@@ -1985,11 +1996,11 @@
   }
 
   .cap-label {
-    font-size: 10px;
+    font-size: var(--font-caption);
   }
 
   .cap-label .cap-zh {
-    font-size: 18px;
+    font-size: var(--font-title);
   }
 
   .radar-tabs {
@@ -1997,7 +2008,7 @@
   }
 
   .radar-tab {
-    font-size: 11px;
+    font-size: var(--font-caption);
     padding: 5px 10px;
   }
 
@@ -2013,6 +2024,87 @@
 
   .entry-tags {
     padding-left: 0;
+  }
+}
+
+/* ---------- Wide desktop scale ---------- */
+@media (min-width: 1600px) {
+  body:not(.dataset-view) .hero {
+    min-height: 800px;
+  }
+
+  body:not(.dataset-view) .hero > .section-shell {
+    padding-top: 96px !important;
+    padding-bottom: 96px !important;
+  }
+
+  body:not(.dataset-view) .hero-grid {
+    grid-template-columns: minmax(0, .95fr) minmax(600px, 1.05fr);
+    gap: 120px;
+  }
+
+  body:not(.dataset-view) .hero-left {
+    gap: 32px;
+  }
+
+  body:not(.dataset-view) .hero-desc {
+    max-width: 650px;
+  }
+
+  body:not(.dataset-view) .hero-right {
+    min-height: 640px;
+  }
+
+  body:not(.dataset-view) .brain-stage {
+    max-width: 600px;
+  }
+
+  body:not(.dataset-view) .hero-metrics .section-shell {
+    padding-top: 44px;
+    padding-bottom: 28px;
+  }
+
+  body:not(.dataset-view) .hero-metrics .metrics-bar {
+    justify-content: space-between;
+    gap: 64px;
+  }
+
+  .owned-card {
+    min-height: 600px;
+    padding: 64px;
+  }
+
+  .owned-desc {
+    max-width: 800px;
+  }
+
+  .waveform {
+    height: 80px;
+    margin-top: 64px;
+  }
+
+  body.owned-hero-bg > .subpage-hero + .section-space-sm,
+  .subpage-hero + .leaderboard-section {
+    padding-top: 56px !important;
+    padding-bottom: 104px;
+  }
+
+  .lb-tabs {
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .lb-current-note {
+    max-width: 1100px;
+  }
+
+  .lb-table {
+    min-width: 1200px;
+  }
+
+  .lb-table th,
+  .lb-table td {
+    padding: 20px 28px;
   }
 }
 

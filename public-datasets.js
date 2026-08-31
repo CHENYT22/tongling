@@ -38,6 +38,7 @@
     element.style.setProperty("--accent", categoryColor(category));
     element.style.setProperty("--category-soft", "var(--dataset-" + category.id + "-soft)");
     element.style.setProperty("--category-ink", "var(--dataset-" + category.id + "-ink)");
+    element.style.setProperty("--category-border", "var(--dataset-" + category.id + "-border)");
   }
 
   function create(tag, className, value) {
@@ -171,7 +172,8 @@
           });
         });
       });
-      entry.search = searchable.join(" ").toLocaleLowerCase("zh-CN");
+      entry.searchText = searchable.join(" ");
+      entry.search = entry.searchText.toLocaleLowerCase("zh-CN");
     });
 
     return entries;
@@ -537,7 +539,7 @@
       select.appendChild(group);
     });
     select.value = current;
-    renderTaskPicker(categories);
+    renderTaskPicker(state.catalog.categories, state.category ? categoryById(state.category) : null);
   }
 
   function closeTaskPicker(returnFocus) {
@@ -546,46 +548,103 @@
     if (returnFocus) qs("#task-picker-toggle").focus({ preventScroll: true });
   }
 
-  function renderTaskPicker(categories) {
+  function renderTaskPicker(categories, directCategory) {
     closeTaskPicker(false);
     qs("#task-picker-value").textContent = selectedTasks().size > 1 ? "已选 " + selectedTasks().size + " 个任务" : state.task || "全部细分任务";
     if (state.sideSelection && state.sideSelection.categories.size && selectedTasks().size) {
       qs("#task-picker-value").textContent = state.sideSelection.categories.size + " 类全部 · " + selectedTasks().size + " 个任务";
     }
-    qs("#task-picker-count").textContent = categories.reduce(function (sum, category) { return sum + category.taskCount; }, 0) + " 个任务";
+    const heading = qs("#task-picker-heading-label");
+    const countLabel = qs("#task-picker-count");
+    const panel = qs("#task-picker-panel");
     const options = qs("#task-picker-options");
-    options.replaceChildren();
     function option(task, count, category) {
-      const button = create("button", "task-picker-option");
+      const button = create("button", task ? "task-picker-option" : "task-picker-option task-picker-all-option");
       button.type = "button";
       button.dataset.task = task;
       button.setAttribute("aria-pressed", (task ? selectedTasks().has(task) : !selectedTasks().size) ? "true" : "false");
       const mark = create("span", "task-picker-check");
       mark.setAttribute("aria-hidden", "true");
       button.append(mark, create("span", "task-picker-name", task || "全部细分任务"), create("span", "task-picker-number", count + " 条"));
-      button.addEventListener("click", function () {
-        if (!task && state.sideSelection) clearSideTasks();
-        else state.sideSelection = null;
-        if (task) state.category = category.id;
-        state.task = task;
-        syncAndRender();
-        syncCategoryToUrl(false);
-        closeTaskPicker(true);
+      button.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (!task) {
+          if (state.sideSelection) clearSideTasks();
+          else state.task = "";
+          syncAndRender();
+          syncCategoryToUrl(false);
+          closeTaskPicker(true);
+          return;
+        }
+        const scrollTop = options.scrollTop;
+        if (!state.sideSelection) {
+          state.sideSelection = {
+            categories: new Set(state.task ? [] : selectedCategories()),
+            tasks: new Set(selectedTasks())
+          };
+        }
+        state.sideSelection.categories.delete(category.id);
+        if (state.sideSelection.tasks.has(task)) state.sideSelection.tasks.delete(task);
+        else state.sideSelection.tasks.add(task);
+        applySideSelection();
+        renderTaskPicker(state.catalog.categories, category);
+        const refreshedPanel = qs("#task-picker-panel");
+        const refreshedOptions = qs("#task-picker-options");
+        const refreshedTrigger = qs("#task-picker-toggle");
+        refreshedPanel.hidden = false;
+        refreshedTrigger.setAttribute("aria-expanded", "true");
+        refreshedOptions.scrollTop = scrollTop;
+        const refreshed = Array.from(refreshedOptions.querySelectorAll("[data-task]")).find(function (item) { return item.dataset.task === task; });
+        if (refreshed) refreshed.focus({ preventScroll: true });
       });
       return button;
     }
-    options.appendChild(option("", categories.reduce(function (sum, category) { return sum + category.count; }, 0)));
-    categories.forEach(function (category) {
-      const group = create("section", "task-picker-group");
-      applyCategoryPalette(group, category);
-      const heading = create("h3", "task-picker-group-title", category.name);
-      heading.id = "task-group-" + category.id;
-      group.setAttribute("aria-labelledby", heading.id);
+    function renderCategoryTasks(category) {
+      panel.classList.remove("is-root-level");
+      heading.textContent = category.name;
+      countLabel.textContent = category.taskCount + " 个任务";
+      const back = create("button", "task-picker-back", "返回能力分类");
+      back.type = "button";
+      back.addEventListener("click", function (event) {
+        event.stopPropagation();
+        renderCategoryList();
+      });
       const items = create("div", "task-picker-items");
       category.tasks.forEach(function (task) { items.appendChild(option(task.name, task.count, category)); });
-      group.append(heading, items);
-      options.appendChild(group);
-    });
+      options.replaceChildren(back, items);
+      back.focus({ preventScroll: true });
+      options.scrollTop = 0;
+    }
+    function renderCategoryList() {
+      panel.classList.add("is-root-level");
+      heading.textContent = "选择能力分类";
+      countLabel.textContent = categories.length + " 类";
+      const fragment = document.createDocumentFragment();
+      fragment.appendChild(option("", categories.reduce(function (sum, category) { return sum + category.count; }, 0)));
+      categories.forEach(function (category) {
+        const button = create("button", "task-picker-category-option");
+        button.type = "button";
+        button.dataset.pickerCategory = category.id;
+        button.setAttribute("aria-pressed", state.category === category.id ? "true" : "false");
+        button.setAttribute("aria-label", "查看" + category.name + "的" + category.taskCount + "个细分任务");
+        applyCategoryPalette(button, category);
+        button.append(
+          create("span", "task-picker-category-dot"),
+          create("span", "task-picker-category-name", category.name),
+          create("span", "task-picker-category-meta", category.taskCount + " 个"),
+          create("span", "task-picker-category-arrow")
+        );
+        button.addEventListener("click", function (event) {
+          event.stopPropagation();
+          renderCategoryTasks(category);
+        });
+        fragment.appendChild(button);
+      });
+      options.replaceChildren(fragment);
+      options.scrollTop = 0;
+    }
+    if (directCategory) renderCategoryTasks(directCategory);
+    else renderCategoryList();
   }
 
   function bindTaskPicker() {
@@ -611,7 +670,7 @@
         open();
       } else if (panel.contains(event.target) && ["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
         event.preventDefault();
-        const items = Array.from(panel.querySelectorAll(".task-picker-option"));
+        const items = Array.from(panel.querySelectorAll("button"));
         const index = items.indexOf(document.activeElement);
         const next = event.key === "Home" ? 0 : event.key === "End" ? items.length - 1 : (index + (event.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
         items[next].focus({ preventScroll: true });
@@ -627,17 +686,32 @@
     const row = qs("#active-filter-row");
     row.replaceChildren();
     const filters = [];
+    function ownerOfTask(taskName) {
+      return state.catalog.categories.find(function (category) {
+        return category.tasks.some(function (task) { return task.name === taskName; });
+      });
+    }
     if (state.sideSelection) {
-      state.sideSelection.categories.forEach(function (id) { filters.push({ label: "能力：" + categoryById(id).name, clear: function () { state.sideSelection.categories.delete(id); applySideSelection(); } }); });
-      selectedTasks().forEach(function (task) { filters.push({ label: "任务：" + task, clear: function () { state.sideSelection.tasks.delete(task); applySideSelection(); } }); });
+      state.sideSelection.categories.forEach(function (id) {
+        const category = categoryById(id);
+        filters.push({ label: "能力：" + category.name, category: category, clear: function () { state.sideSelection.categories.delete(id); applySideSelection(); } });
+      });
+      selectedTasks().forEach(function (task) { filters.push({ label: "任务：" + task, category: ownerOfTask(task), clear: function () { state.sideSelection.tasks.delete(task); applySideSelection(); } }); });
     } else {
-      if (state.category) filters.push({ label: "能力：" + categoryById(state.category).name, clear: function () { setCategory(""); } });
-      if (state.task) filters.push({ label: "任务：" + state.task, clear: function () { state.task = ""; syncAndRender(); } });
+      if (state.category) {
+        const category = categoryById(state.category);
+        filters.push({ label: "能力：" + category.name, category: category, clear: function () { setCategory(""); } });
+      }
+      if (state.task) filters.push({ label: "任务：" + state.task, category: ownerOfTask(state.task), clear: function () { state.task = ""; syncAndRender(); } });
     }
     if (state.query) filters.push({ label: "搜索：" + state.query, clear: function () { state.query = ""; qs("#dataset-search").value = ""; syncAndRender(); } });
     filters.forEach(function (filter) {
       const button = create("button", "filter-chip", filter.label + " ×");
       button.type = "button";
+      if (filter.category) {
+        button.dataset.filterCategory = filter.category.id;
+        applyCategoryPalette(button, filter.category);
+      }
       button.addEventListener("click", filter.clear);
       row.appendChild(button);
     });
@@ -695,6 +769,7 @@
   }
 
   function buildEntryDetail(entry) {
+    applyCategoryPalette(detailDialog, entry.category);
     qs("#dataset-detail-title").textContent = entry.name;
     qs("#dataset-detail-category").textContent = entry.category.name + " · " + entry.task;
     const navigation = qs("#dataset-detail-nav");
@@ -828,6 +903,59 @@
     }, { passive: true });
   }
 
+  function activeSearchTerms() {
+    return Array.from(new Set(state.query.toLocaleLowerCase("zh-CN").split(/\s+/).filter(Boolean)));
+  }
+
+  function appendHighlightedText(target, text) {
+    const value = String(text || "");
+    const terms = activeSearchTerms();
+    if (!terms.length) {
+      target.appendChild(document.createTextNode(value));
+      return;
+    }
+    const lower = value.toLocaleLowerCase("zh-CN");
+    let cursor = 0;
+    while (cursor < value.length) {
+      let nextIndex = -1;
+      let nextTerm = "";
+      terms.forEach(function (term) {
+        const index = lower.indexOf(term, cursor);
+        if (index < 0) return;
+        if (nextIndex < 0 || index < nextIndex || (index === nextIndex && term.length > nextTerm.length)) {
+          nextIndex = index;
+          nextTerm = term;
+        }
+      });
+      if (nextIndex < 0) {
+        target.appendChild(document.createTextNode(value.slice(cursor)));
+        break;
+      }
+      if (nextIndex > cursor) target.appendChild(document.createTextNode(value.slice(cursor, nextIndex)));
+      const mark = create("mark", "search-highlight", value.slice(nextIndex, nextIndex + nextTerm.length));
+      target.appendChild(mark);
+      cursor = nextIndex + nextTerm.length;
+    }
+  }
+
+  function searchMatchContext(entry, terms) {
+    const source = String(entry.searchText || "").replace(/\s+/g, " ").trim();
+    const lower = source.toLocaleLowerCase("zh-CN");
+    let index = -1;
+    let length = 0;
+    terms.forEach(function (term) {
+      const found = lower.indexOf(term);
+      if (found >= 0 && (index < 0 || found < index)) {
+        index = found;
+        length = term.length;
+      }
+    });
+    if (index < 0) return "";
+    const start = Math.max(0, index - 32);
+    const end = Math.min(source.length, index + length + 56);
+    return (start ? "…" : "") + source.slice(start, end).trim() + (end < source.length ? "…" : "");
+  }
+
   function buildEntryCard(entry) {
     const card = create("article", "entry-card");
     card.dataset.id = entry.id;
@@ -840,11 +968,33 @@
     head.setAttribute("aria-controls", "dataset-detail-dialog");
     const index = create("span", "entry-index", String(entry.globalIndex).padStart(3, "0"));
     const title = create("span", "entry-title");
-    title.append(create("b", "", entry.name), create("small", "", shortPositioning(entry)));
+    const name = create("b");
+    const positioning = create("small");
+    appendHighlightedText(name, entry.name);
+    appendHighlightedText(positioning, shortPositioning(entry));
+    title.append(name, positioning);
     const tags = create("span", "entry-tags");
-    const categoryTag = create("span", "entry-tag category-tag", entry.category.name);
-    tags.append(categoryTag, create("span", "entry-tag", entry.task));
-    if (entry.year && entry.year.length < 20) tags.appendChild(create("span", "entry-tag subtle-tag", entry.year));
+    const categoryTag = create("span", "entry-tag category-tag");
+    const taskTag = create("span", "entry-tag");
+    appendHighlightedText(categoryTag, entry.category.name);
+    appendHighlightedText(taskTag, entry.task);
+    tags.append(categoryTag, taskTag);
+    if (entry.year && entry.year.length < 20) {
+      const yearTag = create("span", "entry-tag subtle-tag");
+      appendHighlightedText(yearTag, entry.year);
+      tags.appendChild(yearTag);
+    }
+    const visibleText = [entry.name, shortPositioning(entry), entry.category.name, entry.task, entry.year].join(" ").toLocaleLowerCase("zh-CN");
+    const terms = activeSearchTerms();
+    if (terms.some(function (term) { return !visibleText.includes(term); })) {
+      const contextText = searchMatchContext(entry, terms);
+      if (contextText) {
+        const context = create("small", "entry-search-context");
+        context.appendChild(create("span", "entry-search-label", "搜索命中"));
+        appendHighlightedText(context, contextText);
+        title.appendChild(context);
+      }
+    }
     const chevron = create("span", "entry-chevron");
     chevron.setAttribute("aria-hidden", "true");
     head.append(index, title, tags, chevron);

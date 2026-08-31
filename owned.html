@@ -8,9 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260819-brand" />
-  <link rel="stylesheet" href="vitality-blue.css?v=20260819-brand" />
+  <link rel="stylesheet" href="styles.css?v=20260831-compact-directory1" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260831-table-scroll-fix" />
   <link rel="stylesheet" href="animations.css?v=20260819-brand" />
+  <link rel="stylesheet" href="card-system.css?v=20260831-card-system3" />
+  <link rel="stylesheet" href="color-system.css?v=20260831-color-system5" />
 </head>
 <body class="owned-hero-bg">
 
@@ -80,7 +82,7 @@
   </div>
 
   <!-- ============ SUBPAGE HERO ============ -->
-  <section class="subpage-hero">
+  <section class="subpage-hero" id="owned-overview">
     <div class="section-shell">
       <div class="subpage-hero-left">
         <span class="section-label">PROPRIETARY DATASET</span>
@@ -99,7 +101,7 @@
   </section>
 
   <!-- ============ TURING-EMO ============ -->
-  <section class="section-space-sm" style="padding-top:24px;">
+  <section class="section-space-sm" id="owned-dataset" style="padding-top:24px;">
     <div class="section-shell">
       <div class="owned-card reveal">
         <span class="owned-badge">TURING-EMO · V1.0</span>
@@ -134,7 +136,7 @@
   </section>
 
   <!-- ============ 数据特征 ============ -->
-  <section class="framework-section section-space">
+  <section class="framework-section section-space" id="owned-signals">
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">DATASET SIGNALS</span>
@@ -145,19 +147,19 @@
       </div>
 
       <div class="grid-3">
-        <div class="card card-hover reveal">
+        <div class="card reveal">
           <span class="card-num">语言</span>
-          <h3 class="card-title" style="font-size:20px;">对话文本</h3>
+          <h3 class="card-title" style="font-size:var(--font-title);">对话文本</h3>
           <p class="card-desc">长程多轮对话全文，标注情绪变化节点、诱因事件与共情策略，支持生成质量与策略适配评估。</p>
         </div>
-        <div class="card card-hover reveal">
+        <div class="card reveal">
           <span class="card-num">声学</span>
-          <h3 class="card-title" style="font-size:20px;">语音信号</h3>
+          <h3 class="card-title" style="font-size:var(--font-title);">语音信号</h3>
           <p class="card-desc">对齐的声学特征与韵律线索，承载强度、极性与波动信息，用于效价—唤醒回归与跨模态一致性测评。</p>
         </div>
-        <div class="card card-hover reveal">
+        <div class="card reveal">
           <span class="card-num">视觉</span>
-          <h3 class="card-title" style="font-size:20px;">视觉信号</h3>
+          <h3 class="card-title" style="font-size:var(--font-title);">视觉信号</h3>
           <p class="card-desc">表情与姿态视觉特征，捕捉微表情与细微信号，支撑情绪感知与多模态回应一致性评估。</p>
         </div>
       </div>
@@ -264,6 +266,7 @@
     </div>
   </dialog>
 
+  <script src="site-navigation.js?v=20260831-directory2"></script>
   <script src="subpages.js"></script>
   <script>
     /* 波形装饰（与首页一致） */

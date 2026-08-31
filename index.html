@@ -8,9 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260819-radar" />
-  <link rel="stylesheet" href="vitality-blue.css?v=20260819-radar2" />
+  <link rel="stylesheet" href="styles.css?v=20260831-compact-directory1" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260831-table-scroll-fix" />
   <link rel="stylesheet" href="animations.css?v=20260819-brand" />
+  <link rel="stylesheet" href="card-system.css?v=20260831-card-system3" />
+  <link rel="stylesheet" href="color-system.css?v=20260831-color-system5" />
 </head>
 <body>
 
@@ -80,7 +82,7 @@
   </div>
 
   <!-- ============ HERO ============ -->
-  <section class="hero">
+  <section class="hero" id="home-overview">
     <div class="section-shell" style="padding-top:72px;padding-bottom:72px;">
       <div class="hero-grid">
 
@@ -186,7 +188,7 @@
   </section>
 
   <!-- ============ HERO METRICS ============ -->
-  <section class="hero-metrics">
+  <section class="hero-metrics" id="home-metrics">
     <div class="section-shell">
       <div class="metrics-bar">
         <div class="metric-item">
@@ -210,7 +212,7 @@
   </section>
 
   <!-- ============ 四大核心能力领域 ============ -->
-  <section class="framework-section section-space home-band-a">
+  <section class="framework-section section-space home-band-a" id="home-capabilities">
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">EVALUATION FRAMEWORK</span>
@@ -245,7 +247,7 @@
     </div>
   </section>
   <!-- ============ 公共数据集预览（浅色） ============ -->
-  <section class="framework-section section-space dataset-preview-light home-band-b">
+  <section class="framework-section section-space dataset-preview-light home-band-b" id="home-datasets">
     <div class="section-shell">
       <div class="section-header-row" style="margin-bottom:40px;">
         <div class="reveal">
@@ -289,7 +291,7 @@
   </section>
 
   <!-- ============ MEI-Empathy-M ============ -->
-  <section class="framework-section section-space home-band-c">
+  <section class="framework-section section-space home-band-c" id="home-evaluation">
     <div class="section-shell">
       <div class="section-header reveal">
         <span class="section-label">MEI-EMPATHY-M · EMPIRICAL VIEW</span>
@@ -377,7 +379,7 @@
   </section>
 
   <!-- ============ 榜单预览 ============ -->
-  <section class="section-space home-band-d">
+  <section class="section-space home-band-d" id="home-leaderboard">
     <div class="section-shell">
       <div class="section-header-row" style="margin-bottom:40px;">
         <div class="reveal">
@@ -428,11 +430,11 @@
   </section>
 
   <!-- ============ 平台目标 ============ -->
-  <section class="framework-section section-space-sm home-band-e">
+  <section class="framework-section section-space-sm home-band-e" id="home-goals">
     <div class="section-shell">
       <div class="section-header reveal" style="text-align:center;">
         <span class="section-label">PLATFORM GOALS</span>
-        <h2 class="section-title" style="font-size:clamp(26px,3vw,38px);">平台目标</h2>
+        <h2 class="section-title" style="font-size:var(--font-title);">平台目标</h2>
         <p class="section-desc" style="margin:16px auto 0;max-width:900px;">
           通灵大模型共情智能评测平台承载德智普面向未来 AGI 的战略愿景，借鉴人类共情智能理论，创新构建覆盖情感感知、心理理解、共情关怀与安全交互的全方位评测体系。在此基础上，平台探索面向共情智能的新型评测数据范式，自主构建多模态、多轮交互数据集，覆盖复杂、动态且贴近真实的人际交互场景，系统评估大模型感知情绪、理解心理、提供关怀并安全交互的综合能力，推动共情智能技术持续演进，助力构建更懂人、更可信、更有温度的人工智能。
         </p>
@@ -459,7 +461,7 @@
   </section>
 
   <!-- ============ CTA ============ -->
-  <section class="cta-section section-space-sm">
+  <section class="cta-section section-space-sm" id="home-submit">
     <div class="section-shell">
       <h2 class="cta-title reveal">提交你的模型评测结果</h2>
       <p class="cta-desc reveal">
@@ -565,7 +567,8 @@
     </div>
   </dialog>
 
-  <script src="leaderboard.js?v=20260819-radar2"></script>
+  <script src="site-navigation.js?v=20260831-directory2"></script>
+  <script src="leaderboard.js?v=20260831-directory2"></script>
   <script src="app.js?v=20260819-radar2"></script>
 </body>
 </html>
