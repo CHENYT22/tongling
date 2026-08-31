@@ -24,8 +24,8 @@
       label: "公共数据集",
       description: "按能力、细分任务与关键词快速定位 193 个评测条目。",
       groups: [
-        { label: "页面板块", links: [
-          { label: "页面概览", hash: "#overview" },
+        { label: "功能概览", links: [
+          { label: "公共数据概览", hash: "#overview" },
           { label: "数据集浏览器", hash: "#browser" }
         ] },
         { label: "快速筛选", links: [
@@ -218,6 +218,7 @@
       const page = (anchor.getAttribute("href") || "").split("#")[0];
       const config = DIRECTORY[page];
       if (!config) return;
+      if (page === "index.html") return;
       const item = document.createElement("div");
       item.className = "nav-directory-item";
       nav.insertBefore(item, anchor);
