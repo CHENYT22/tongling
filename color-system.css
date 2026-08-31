@@ -1,0 +1,261 @@
+/* ============================================================
+   通灵共享颜色系统
+   品牌 / 中性 / 四类能力 / 功能状态 / 技术深色
+   ============================================================ */
+
+:root {
+  /* 品牌与交互 */
+  --color-brand-primary: #1677ff;
+  --color-brand-hover: #0e63d4;
+  --color-brand-soft: #eaf3ff;
+  --color-focus-ring: rgba(22, 119, 255, .2);
+
+  /* 中性色 */
+  --color-text-primary: #0b1f3a;
+  --color-text-secondary: #63758d;
+  --color-text-tertiary: #7890aa;
+  --color-surface-page: #f4f8ff;
+  --color-surface-card: #ffffff;
+  --color-surface-subtle: #f8fbff;
+  --color-border-default: #d9e5f5;
+  --color-border-strong: #bfd3ea;
+
+  /* 四类能力 */
+  --cap-affective-accent: #1677ff;
+  --cap-affective-ink: #0e63d4;
+  --cap-affective-soft: #eaf3ff;
+  --cap-affective-border: #b9d6ff;
+
+  --cap-cognitive-accent: #705cff;
+  --cap-cognitive-ink: #5b48c8;
+  --cap-cognitive-soft: #f1efff;
+  --cap-cognitive-border: #d1caff;
+
+  --cap-concern-accent: #3d9fe8;
+  --cap-concern-ink: #176c9c;
+  --cap-concern-soft: #eaf6ff;
+  --cap-concern-border: #bfe0f6;
+
+  --cap-safety-accent: #2f9c8a;
+  --cap-safety-ink: #24766a;
+  --cap-safety-soft: #eaf7f4;
+  --cap-safety-border: #b9e2da;
+
+  /* 功能状态 */
+  --color-state-success: #1f8f63;
+  --color-state-warning: #b86e00;
+  --color-state-danger: #d9363e;
+
+  /* 技术深色 */
+  --color-tech-surface: #102844;
+  --color-tech-surface-deep: #0d2239;
+  --color-tech-text: #d5ebff;
+  --color-tech-muted: #a7c6e0;
+
+  /* 兼容现有组件变量，让旧页面自动进入统一色板。 */
+  --ink: var(--color-text-primary);
+  --muted: var(--color-text-secondary);
+  --paper: var(--color-surface-page);
+  --white: var(--color-surface-card);
+  --blue: var(--color-brand-primary);
+  --blue-light: #64b5ff;
+  --cyan: var(--cap-concern-accent);
+  --purple: var(--cap-cognitive-accent);
+  --line: var(--color-border-default);
+  --card-border: var(--color-border-default);
+  --card-focus: 0 0 0 3px var(--color-focus-ring);
+}
+
+body {
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-page);
+}
+
+/* 公共表面和信息层级 */
+.card,
+.framework-stat,
+.framework-capability-card,
+.architecture-panel,
+.architecture-overview-item,
+.workflow-card,
+.metric-method-card,
+.coverage-card,
+.tool-access-card,
+.tool-composition-card,
+.quickstart-section,
+.owned-card,
+.dataset-page .browser-panel,
+.dataset-page .dataset-parent,
+.dataset-page .category-card,
+.lb-table-wrap {
+  border-color: var(--color-border-default);
+  background-color: var(--color-surface-card);
+}
+
+.section-lead,
+.hero-lead,
+.framework-intro-copy,
+.framework-capability-card p,
+.workflow-card p,
+.metric-method-card p,
+.coverage-card p,
+.tool-access-card p,
+.tool-composition-card p,
+.quickstart-heading p,
+.owned-lead,
+.lb-current-note {
+  color: var(--color-text-secondary);
+}
+
+/* 首页及共享标签中的四类能力色 */
+.cap-affective { color: var(--cap-affective-ink); }
+.cap-cognitive { color: var(--cap-cognitive-ink); }
+.cap-concern { color: var(--cap-concern-ink); }
+.cap-safety { color: var(--cap-safety-ink); }
+
+.tag-affective,
+.ds-tag-affective { background: var(--cap-affective-soft); color: var(--cap-affective-ink); }
+.tag-cognitive,
+.ds-tag-cognitive { background: var(--cap-cognitive-soft); color: var(--cap-cognitive-ink); }
+.tag-concern,
+.ds-tag-concern { background: var(--cap-concern-soft); color: var(--cap-concern-ink); }
+.tag-safety { background: var(--cap-safety-soft); color: var(--cap-safety-ink); }
+.ds-tag-safety { background: var(--cap-safety-soft); color: var(--cap-safety-ink); }
+
+.dot-affective { background: var(--cap-affective-accent); }
+.dot-cognitive { background: var(--cap-cognitive-accent); }
+.dot-care { background: var(--cap-concern-accent); }
+.dot-safe { background: var(--cap-safety-accent); }
+
+.empathy-pie {
+  background: conic-gradient(
+    var(--cap-affective-accent) 0deg 99deg,
+    var(--cap-cognitive-accent) 99deg 214.56deg,
+    var(--cap-concern-accent) 214.56deg 294.84deg,
+    var(--cap-safety-accent) 294.84deg 360deg
+  );
+}
+
+/* 公共数据集：与全站能力色共享同一来源。 */
+.dataset-page {
+  --dataset-affective-accent: var(--cap-affective-accent);
+  --dataset-affective-soft: var(--cap-affective-soft);
+  --dataset-affective-ink: var(--cap-affective-ink);
+  --dataset-affective-border: var(--cap-affective-border);
+  --dataset-cognitive-accent: var(--cap-cognitive-accent);
+  --dataset-cognitive-soft: var(--cap-cognitive-soft);
+  --dataset-cognitive-ink: var(--cap-cognitive-ink);
+  --dataset-cognitive-border: var(--cap-cognitive-border);
+  --dataset-concern-accent: var(--cap-concern-accent);
+  --dataset-concern-soft: var(--cap-concern-soft);
+  --dataset-concern-ink: var(--cap-concern-ink);
+  --dataset-concern-border: var(--cap-concern-border);
+  --dataset-safety-accent: var(--cap-safety-accent);
+  --dataset-safety-soft: var(--cap-safety-soft);
+  --dataset-safety-ink: var(--cap-safety-ink);
+  --dataset-safety-border: var(--cap-safety-border);
+}
+
+.dataset-page .filter-chip[data-filter-category] {
+  border-color: var(--category-border);
+  background: var(--category-soft);
+  color: var(--category-ink);
+}
+
+.dataset-page .filter-chip[data-filter-category]:hover {
+  border-color: var(--category-ink);
+  background: var(--category-soft);
+}
+
+/* 测评框架：四类能力只用分类色，其余操作统一为品牌蓝。 */
+.framework-page .framework-hero {
+  background: linear-gradient(180deg, var(--color-surface-subtle) 0%, var(--color-brand-soft) 100%);
+}
+
+.framework-page :where(.framework-intro-band, .framework-results-section, .framework-limitations-band) {
+  background: var(--color-surface-card);
+}
+
+.framework-page :where(.framework-dark-band, .framework-metrics-band, .framework-tool-band) {
+  border-color: var(--color-border-default);
+  background: var(--color-surface-subtle);
+}
+
+.framework-page :where(.chain-node, .framework-capability-card, .architecture-panel, .architecture-overview-item, .workflow-strip, .workflow-card, .metric-method-card, .coverage-card, .radar-insight, .results-principles > div, .tool-access-card, .tool-composition-card, .tool-responsibility, .quickstart-section, .quickstart-steps article) {
+  border-color: var(--color-border-default);
+  background: var(--color-surface-card);
+}
+
+.framework-page :where(.chain-node span, .framework-capability-card h3, .architecture-panel h3, .architecture-overview-item b, .workflow-card h3, .metric-method-card h3, .coverage-card span, .tool-access-card h3, .tool-composition-card h3, .tool-subsection h3, .quickstart-heading h3, .quickstart-steps article b) {
+  color: var(--color-text-primary);
+}
+
+.framework-page :where(.chain-node small, .framework-capability-card p, .framework-capability-card .capability-datasets, .architecture-panel p, .architecture-overview-item p, .workflow-card p, .metric-method-card p, .metric-method-card small, .coverage-card p, .radar-insight ul, .results-principles span, .tool-access-card p, .tool-composition-card p, .quickstart-heading p, .quickstart-steps article p, .limitation-item p, .muted-note) {
+  color: var(--color-text-tertiary);
+}
+
+.framework-page .chain-affective { border-top-color: var(--cap-affective-accent); }
+.framework-page .chain-affective b { color: var(--cap-affective-ink); }
+.framework-page .chain-cognitive { border-top-color: var(--cap-cognitive-accent); }
+.framework-page .chain-cognitive b { color: var(--cap-cognitive-ink); }
+.framework-page .chain-concern { border-top-color: var(--cap-concern-accent); }
+.framework-page .chain-concern b { color: var(--cap-concern-ink); }
+.framework-page .chain-safety { border-top-color: var(--cap-safety-accent); }
+.framework-page .chain-safety b { color: var(--cap-safety-ink); }
+
+.tone-affective .capability-index { color: var(--cap-affective-ink); }
+.tone-affective .capability-tags span { background: var(--cap-affective-soft); color: var(--cap-affective-ink); }
+.tone-cognitive .capability-index { color: var(--cap-cognitive-ink); }
+.tone-cognitive .capability-tags span { background: var(--cap-cognitive-soft); color: var(--cap-cognitive-ink); }
+.tone-concern .capability-index { color: var(--cap-concern-ink); }
+.tone-concern .capability-tags span { background: var(--cap-concern-soft); color: var(--cap-concern-ink); }
+.tone-safety .capability-index { color: var(--cap-safety-ink); }
+.tone-safety .capability-tags span { background: var(--cap-safety-soft); color: var(--cap-safety-ink); }
+
+.framework-page .tone-affective:hover,
+.framework-page .tone-affective:focus-visible { border-color: var(--cap-affective-accent); }
+.framework-page .tone-cognitive:hover,
+.framework-page .tone-cognitive:focus-visible { border-color: var(--cap-cognitive-accent); }
+.framework-page .tone-concern:hover,
+.framework-page .tone-concern:focus-visible { border-color: var(--cap-concern-accent); }
+.framework-page .tone-safety:hover,
+.framework-page .tone-safety:focus-visible { border-color: var(--cap-safety-accent); }
+
+.framework-page :is(.architecture-code, .formula-board, .tool-console) {
+  background: var(--color-tech-surface);
+  color: var(--color-tech-text);
+}
+
+.framework-page .tool-output { background: var(--color-tech-surface-deep); }
+.framework-page :is(.formula-step code, .tool-output p, .output-tree span) { color: var(--color-tech-muted); }
+
+/* 模型榜单：综合视图用品牌色，能力视图使用各自分类色。 */
+.lb-tab[data-view="overall"].active { border-color: var(--color-brand-primary); background: var(--color-brand-primary); }
+.lb-tab[data-view="affective"].active { border-color: var(--cap-affective-ink); background: var(--cap-affective-ink); }
+.lb-tab[data-view="cognitive"].active { border-color: var(--cap-cognitive-ink); background: var(--cap-cognitive-ink); }
+.lb-tab[data-view="concern"].active { border-color: var(--cap-concern-ink); background: var(--cap-concern-ink); }
+.lb-tab[data-view="safe"].active { border-color: var(--cap-safety-ink); background: var(--cap-safety-ink); }
+
+.lb-table th,
+.lb-table thead th:first-child,
+.lb-table thead th:nth-child(2) {
+  background: var(--color-surface-subtle);
+}
+
+.lb-table tbody td:first-child,
+.lb-table tbody td:nth-child(2) {
+  background: var(--color-surface-card);
+}
+
+/* 所有可交互元素共享品牌状态；分类组件的选中态仍由能力色负责。 */
+:is(a, button, input, select, summary):focus-visible {
+  outline-color: var(--color-brand-primary);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-text-secondary: #425875;
+    --color-text-tertiary: #526a86;
+    --color-border-default: #afc5dd;
+  }
+}

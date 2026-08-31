@@ -1,0 +1,345 @@
+/* ============================================================
+   通灵共享卡片系统
+   数据概览 / 标准内容 / 重点面板 / 列表容器
+   ============================================================ */
+
+:root {
+  --card-radius-control: 10px;
+  --card-radius-data: 12px;
+  --card-radius-content: 14px;
+  --card-radius-list: 16px;
+  --card-radius-panel: 20px;
+  --card-radius-modal: 24px;
+  --card-padding-data: 20px;
+  --card-padding-content: 24px;
+  --card-padding-panel: 32px;
+  --card-min-data: 104px;
+  --card-min-content: 200px;
+  --card-border: #d9e6f4;
+  --card-shadow-static: 0 10px 28px rgba(32, 92, 148, .055);
+  --card-shadow-interactive: 0 16px 34px rgba(32, 92, 148, .12);
+  --card-focus: 0 0 0 3px rgba(22, 119, 255, .2);
+}
+
+/* 1. 数据概览卡：统一紧凑高度和 12px 圆角 */
+.framework-stat,
+.dataset-page .dataset-parent,
+.dataset-page .category-card {
+  box-sizing: border-box;
+  min-height: var(--card-min-data);
+  padding: var(--card-padding-data);
+  border-radius: var(--card-radius-data);
+}
+
+/* 2. 标准内容卡：统一内边距、圆角和同排高度 */
+.card,
+.framework-capability-card,
+.chain-node,
+.architecture-overview-item,
+.workflow-card,
+.metric-method-card,
+.coverage-card,
+.tool-composition-card,
+.tool-access-card,
+.radar-insight,
+.results-principles > div,
+.quickstart-steps article {
+  box-sizing: border-box;
+  height: 100%;
+  padding: var(--card-padding-content);
+  border-radius: var(--card-radius-content);
+  border-color: var(--card-border);
+}
+
+.card,
+.workflow-card,
+.metric-method-card,
+.tool-composition-card,
+.tool-access-card {
+  min-height: var(--card-min-content);
+}
+
+.chain-node {
+  min-height: 150px;
+}
+
+.radar-insight,
+.results-principles > div,
+.quickstart-steps article {
+  border-radius: var(--card-radius-content);
+}
+
+.radar-insight {
+  padding: var(--card-padding-content);
+}
+
+.results-principles > div,
+.quickstart-steps article {
+  padding: 20px;
+}
+
+.quickstart-steps article {
+  min-height: 160px;
+}
+
+.framework-capability-card {
+  min-height: 260px;
+}
+
+.architecture-overview-item,
+.coverage-card {
+  min-height: 180px;
+}
+
+/* 静态卡片：不使用手型、位移或强化阴影 */
+div.card,
+.chain-node,
+.architecture-overview-item,
+.workflow-card,
+.metric-method-card,
+.coverage-card,
+.tool-composition-card,
+.tool-access-card,
+.radar-insight,
+.results-principles > div,
+.quickstart-steps article {
+  cursor: default;
+  box-shadow: var(--card-shadow-static);
+}
+
+.workflow-card:hover,
+.metric-method-card:hover,
+.coverage-card:hover,
+.tool-composition-card:hover,
+.tool-access-card:hover,
+.architecture-overview-item:hover,
+div.card:hover,
+.chain-node:hover,
+.radar-insight:hover,
+.results-principles > div:hover,
+.quickstart-steps article:hover {
+  transform: none;
+  border-color: var(--card-border);
+  box-shadow: var(--card-shadow-static);
+}
+
+/* 跳转型卡片：箭头、轻微上移、蓝色边框与键盘焦点环 */
+a.card,
+.framework-capability-card,
+.dataset-page .source-resource-link {
+  position: relative;
+  cursor: pointer;
+  padding-right: 52px;
+  transition: transform .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+}
+
+a.card::after,
+.framework-capability-card::after,
+.dataset-page .source-resource-link::after {
+  content: '→';
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  color: var(--blue);
+  opacity: .72;
+  transition: transform .2s var(--ease), opacity .2s var(--ease);
+}
+
+a.card:hover,
+.framework-capability-card:hover,
+.dataset-page .source-resource-link:hover {
+  transform: translateY(-3px);
+  border-color: rgba(22, 119, 255, .55);
+  box-shadow: var(--card-shadow-interactive);
+}
+
+a.card:hover::after,
+.framework-capability-card:hover::after,
+.dataset-page .source-resource-link:hover::after {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+a.card:focus-visible,
+.framework-capability-card:focus-visible,
+.dataset-page .source-resource-link:focus-visible {
+  outline: 0;
+  border-color: var(--blue);
+  box-shadow: var(--card-focus), var(--card-shadow-interactive);
+}
+
+/* 选择型卡片：原地变化，不使用跳转箭头或上浮 */
+.mei-card,
+.dataset-page .dataset-parent,
+.dataset-page .category-card {
+  cursor: pointer;
+  border-radius: var(--card-radius-data);
+  transition: border-color .18s var(--ease), background .18s var(--ease), box-shadow .18s var(--ease);
+}
+
+.mei-card:hover,
+.dataset-page .dataset-parent:hover,
+.dataset-page .category-card:hover {
+  transform: none;
+  box-shadow: 0 8px 22px rgba(32, 92, 148, .08);
+}
+
+.mei-card.is-active {
+  border-color: var(--blue);
+  background: rgba(22, 119, 255, .065);
+  box-shadow: inset 0 0 0 1px var(--blue), 0 8px 22px rgba(22, 119, 255, .1);
+}
+
+.dataset-page .dataset-parent.is-active {
+  border-color: var(--blue);
+  background: rgba(22, 119, 255, .045);
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+
+.dataset-page .category-card.is-active {
+  border-color: var(--category-ink);
+  background: var(--category-soft);
+  box-shadow: inset 0 0 0 1px var(--category-ink);
+}
+
+.mei-card:focus-visible,
+.dataset-page .dataset-parent:focus-visible,
+.dataset-page .category-card:focus-visible {
+  outline: 0;
+  box-shadow: var(--card-focus);
+}
+
+/* 3. 重点展示卡：内容自适应，统一 20px 圆角 */
+.owned-card,
+.architecture-panel,
+.composite-score-card,
+.empathy-pie-card,
+.dataset-page .distribution,
+.quickstart-section,
+.formula-board,
+.tool-console {
+  box-sizing: border-box;
+  border-radius: var(--card-radius-panel);
+}
+
+.owned-card,
+.architecture-panel,
+.composite-score-card,
+.quickstart-section {
+  padding: var(--card-padding-panel);
+}
+
+.workflow-strip {
+  border-radius: var(--card-radius-list);
+}
+
+.formula-step,
+.tool-responsibility,
+.architecture-code {
+  border-radius: var(--card-radius-data);
+}
+
+/* 4. 列表与表格：只保留外层圆角，内部行不单独圆角 */
+.dataset-page .browser-panel {
+  border-radius: var(--card-radius-list);
+  overflow: hidden;
+}
+
+.lb-table-wrap {
+  border-radius: var(--card-radius-list);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dataset-page .entry-card {
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.limitation-grid {
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius-list);
+  background: var(--card-border);
+}
+
+.limitation-item {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #fbfdff;
+  box-shadow: none;
+}
+
+.limitation-item summary {
+  cursor: pointer;
+}
+
+/* 弹窗属于独立层级，使用最大圆角 */
+.dataset-page .dataset-detail-dialog,
+#submit-dialog {
+  border-radius: var(--card-radius-modal);
+}
+
+@media (min-width: 1600px) {
+  .owned-card {
+    padding: 48px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --card-padding-data: 16px;
+    --card-padding-content: 20px;
+    --card-padding-panel: 22px;
+    --card-min-data: 88px;
+  }
+
+  .card,
+  .framework-capability-card,
+  .architecture-overview-item,
+  .workflow-card,
+  .metric-method-card,
+  .coverage-card,
+  .tool-composition-card,
+  .tool-access-card {
+    min-height: 0;
+  }
+
+  .owned-card,
+  .architecture-panel,
+  .composite-score-card {
+    padding: var(--card-padding-panel);
+  }
+
+  a.card,
+  .framework-capability-card,
+  .dataset-page .source-resource-link {
+    padding-right: 46px;
+  }
+
+  a.card::after,
+  .framework-capability-card::after,
+  .dataset-page .source-resource-link::after {
+    top: 18px;
+    right: 18px;
+  }
+
+  .limitation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.card,
+  .framework-capability-card,
+  .dataset-page .source-resource-link,
+  .mei-card,
+  .dataset-page .dataset-parent,
+  .dataset-page .category-card {
+    transition: none;
+  }
+}

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>自有数据集 — 通灵</title>
+  <meta name="description" content="TURING-EMO · V1.0 — 长程多模态共情交互数据集。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20260831-compact-directory1" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260831-table-scroll-fix" />
+  <link rel="stylesheet" href="animations.css?v=20260819-brand" />
+  <link rel="stylesheet" href="card-system.css?v=20260831-card-system3" />
+  <link rel="stylesheet" href="color-system.css?v=20260831-color-system5" />
+</head>
+<body class="owned-hero-bg">
+
+  <!-- ============ NAV ============ -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <svg class="brand-symbol brand-ai" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+          <path d="M21 2.8 36.8 12v18L21 39.2 5.2 30V12L21 2.8Z" stroke="#1677FF" stroke-width="2"/>
+          <path d="m21 8 11 6.4v12.7L21 33.5 10 27.1V14.4L21 8Z" stroke="#64B5FF"/>
+          <line x1="21" y1="11" x2="21" y2="31" stroke="#1677FF" stroke-width="1.2" stroke-opacity="0.4" stroke-dasharray="2 2"/>
+          <line x1="10" y1="21" x2="32" y2="21" stroke="#1677FF" stroke-width="1.2" stroke-opacity="0.4" stroke-dasharray="2 2"/>
+          <path d="M21 21 Q24.6 17.4 28 14" stroke="#705CFF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <path d="M21 21 Q17.4 17.4 14 14" stroke="#1677FF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <path d="M21 21 Q17.4 24.6 14 28" stroke="#64B5FF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <path d="M21 21 Q24.6 24.6 28 28" stroke="#73C4FF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <circle cx="28" cy="14" r="2.4" fill="#705CFF"/>
+          <circle cx="14" cy="14" r="2.4" fill="#1677FF"/>
+          <circle cx="14" cy="28" r="2.4" fill="#64B5FF"/>
+          <circle cx="28" cy="28" r="2.4" fill="#73C4FF"/>
+          <circle cx="21" cy="21" r="5" fill="#1677FF"/>
+          <circle cx="21" cy="21" r="2.3" fill="#A9D8FF"/>
+          <circle cx="5.2" cy="12" r="1.8" fill="#705CFF"/>
+          <circle cx="36.8" cy="30" r="1.8" fill="#1677FF"/>
+        </svg>
+        <span class="brand-word">
+          <span>通灵</span>
+          <small>EMOTIONAL INTELLIGENCE AI</small>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="datasets.html">公共数据集</a>
+        <a href="framework.html">测评框架</a>
+        <a href="owned.html">自有数据集</a>
+        <a href="leaderboard.html">模型榜单</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="lang-toggle" aria-label="切换语言">
+          <span class="lang-opt is-active" data-lang="zh">中文</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-opt" data-lang="en">EN</span>
+        </button>
+        <button class="btn-icon-nav" data-dialog-open title="提交测评结果">
+          <svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true">
+            <path d="M10 13V4M6 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 16h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" aria-label="展开导航">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <a href="index.html">首页</a>
+    <a href="datasets.html">公共数据集</a>
+    <a href="framework.html">测评框架</a>
+    <a href="owned.html">自有数据集</a>
+    <a href="leaderboard.html">模型榜单</a>
+    <a href="#" data-dialog-open>提交测评结果 ↗</a>
+  </div>
+
+  <!-- ============ SUBPAGE HERO ============ -->
+  <section class="subpage-hero" id="owned-overview">
+    <div class="section-shell">
+      <div class="subpage-hero-left">
+        <span class="section-label">PROPRIETARY DATASET</span>
+        <h1 class="section-title" style="margin-top:14px;">自有数据集</h1>
+        <p class="section-desc" style="margin-top:18px;">
+          平台自建的标杆级共情交互数据资产，支撑长程、多模态、真实情境的情感智能系统评估。
+        </p>
+      </div>
+      <div class="subpage-hero-right">
+        <div>
+          <div class="stat-big">V1.0</div>
+          <div class="stat-sub">当前版本</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TURING-EMO ============ -->
+  <section class="section-space-sm" id="owned-dataset" style="padding-top:24px;">
+    <div class="section-shell">
+      <div class="owned-card reveal">
+        <span class="owned-badge">TURING-EMO · V1.0</span>
+        <h2 class="owned-title">长程多模态共情交互数据集</h2>
+        <p class="owned-subtitle">Long-horizon Multimodal Empathic Interaction Dataset</p>
+        <p class="owned-desc">
+          从真实对话场景出发，联合语言、声学与视觉信号，记录情绪变化、诱因和回应策略，支持大模型共情能力的系统评估。
+        </p>
+
+        <div class="owned-stats">
+          <div class="owned-stat">
+            <div class="owned-stat-num">48,600</div>
+            <div class="owned-stat-label">有效对话（段）</div>
+          </div>
+          <div class="owned-stat">
+            <div class="owned-stat-num">12.4</div>
+            <div class="owned-stat-label">平均轮次（轮/对话）</div>
+          </div>
+          <div class="owned-stat">
+            <div class="owned-stat-num">36</div>
+            <div class="owned-stat-label">真实情境（类）</div>
+          </div>
+          <div class="owned-stat">
+            <div class="owned-stat-num">18</div>
+            <div class="owned-stat-label">情感维度（个）</div>
+          </div>
+        </div>
+
+        <div class="waveform" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 数据特征 ============ -->
+  <section class="framework-section section-space" id="owned-signals">
+    <div class="section-shell">
+      <div class="section-header reveal">
+        <span class="section-label">DATASET SIGNALS</span>
+        <h2 class="section-title">三类信号，一条共情链路</h2>
+        <p class="section-desc" style="margin-top:16px;">
+          与公共数据集互补：TURING-EMO 聚焦长程对话中的情绪动态，覆盖「变化—诱因—回应」的完整共情链路。
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card reveal">
+          <span class="card-num">语言</span>
+          <h3 class="card-title" style="font-size:var(--font-title);">对话文本</h3>
+          <p class="card-desc">长程多轮对话全文，标注情绪变化节点、诱因事件与共情策略，支持生成质量与策略适配评估。</p>
+        </div>
+        <div class="card reveal">
+          <span class="card-num">声学</span>
+          <h3 class="card-title" style="font-size:var(--font-title);">语音信号</h3>
+          <p class="card-desc">对齐的声学特征与韵律线索，承载强度、极性与波动信息，用于效价—唤醒回归与跨模态一致性测评。</p>
+        </div>
+        <div class="card reveal">
+          <span class="card-num">视觉</span>
+          <h3 class="card-title" style="font-size:var(--font-title);">视觉信号</h3>
+          <p class="card-desc">表情与姿态视觉特征，捕捉微表情与细微信号，支撑情绪感知与多模态回应一致性评估。</p>
+        </div>
+      </div>
+
+      <div class="chip-row reveal" style="margin-top:40px;">
+        <a href="datasets.html" class="btn btn-ghost">对照公共数据集 →</a>
+        <a href="leaderboard.html" class="btn btn-ghost">查看模型榜单 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <svg class="brand-symbol brand-ai" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+              <path d="M21 2.8 36.8 12v18L21 39.2 5.2 30V12L21 2.8Z" stroke="#64B5FF" stroke-width="2"/>
+              <path d="m21 8 11 6.4v12.7L21 33.5 10 27.1V14.4L21 8Z" stroke="#73C4FF"/>
+              <line x1="21" y1="11" x2="21" y2="31" stroke="#73C4FF" stroke-width="1.2" stroke-opacity="0.45" stroke-dasharray="2 2"/>
+              <line x1="10" y1="21" x2="32" y2="21" stroke="#73C4FF" stroke-width="1.2" stroke-opacity="0.45" stroke-dasharray="2 2"/>
+              <path d="M21 21 Q24.6 17.4 28 14" stroke="#A89BFF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <path d="M21 21 Q17.4 17.4 14 14" stroke="#73C4FF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <path d="M21 21 Q17.4 24.6 14 28" stroke="#9FD8FF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <path d="M21 21 Q24.6 24.6 28 28" stroke="#A9D8FF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <circle cx="28" cy="14" r="2.4" fill="#A89BFF"/>
+              <circle cx="14" cy="14" r="2.4" fill="#73C4FF"/>
+              <circle cx="14" cy="28" r="2.4" fill="#9FD8FF"/>
+              <circle cx="28" cy="28" r="2.4" fill="#A9D8FF"/>
+              <circle cx="21" cy="21" r="5" fill="#64B5FF"/>
+              <circle cx="21" cy="21" r="2.3" fill="#D6ECFF"/>
+              <circle cx="5.2" cy="12" r="1.8" fill="#A89BFF"/>
+              <circle cx="36.8" cy="30" r="1.8" fill="#64B5FF"/>
+            </svg>
+            <span class="brand-word">
+              <span>通灵</span>
+              <small>EMOTIONAL INTELLIGENCE AI</small>
+            </span>
+          </a>
+          <p>大模型共情智能开放测评平台——聚焦情感共情、认知共情、共情关怀与安全交互。</p>
+          <p class="footer-tagline">开放 · 透明 · 可复现</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>导航页面</h4>
+          <a href="index.html">首页</a>
+          <a href="datasets.html">公共数据集</a>
+          <a href="framework.html">测评框架</a>
+          <a href="owned.html">自有数据集</a>
+          <a href="leaderboard.html">模型榜单</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>能力领域</h4>
+          <a href="framework.html">情感共情</a>
+          <a href="framework.html">认知共情</a>
+          <a href="framework.html">共情关怀</a>
+          <a href="framework.html">安全交互</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>联系与提交</h4>
+          <a href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">GitHub 讨论 ↗</a>
+          <span class="footer-static">benchmark@example.com</span>
+          <span class="footer-static">研究性展示 · 数据持续复核</span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © <span data-year>2026</span> 通灵 · 大模型共情智能开放测评平台
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SUBMIT DIALOG ============ -->
+  <dialog id="submit-dialog">
+    <div class="dialog-inner">
+      <button class="dialog-close" aria-label="关闭">×</button>
+      <h3 class="dialog-title">提交结果所需信息</h3>
+      <p class="dialog-sub">请按以下四项要求准备评测提交材料</p>
+
+      <div class="dialog-steps">
+        <div class="dialog-step">
+          <span class="dialog-step-num">1</span>
+          <p><b>模型与版本</b><span>模型名称、参数规模、模态输入、推理配置和发布日期</span></p>
+        </div>
+        <div class="dialog-step">
+          <span class="dialog-step-num">2</span>
+          <p><b>评测维度</b><span>明确提交方向、任务、数据子集与输入模态</span></p>
+        </div>
+        <div class="dialog-step">
+          <span class="dialog-step-num">3</span>
+          <p><b>数据与协议</b><span>列出使用的数据集、划分方式、许可证和是否包含私有测试集</span></p>
+        </div>
+        <div class="dialog-step">
+          <span class="dialog-step-num">4</span>
+          <p><b>指标与证据</b><span>提供客观指标、人工评分规则、失败案例和可复现实验脚本</span></p>
+        </div>
+      </div>
+
+      <a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">前往 GitHub 提交 ↗</a>
+      <p class="dialog-demo-note">研究性展示，数据持续复核。</p>
+    </div>
+  </dialog>
+
+  <script src="site-navigation.js?v=20260831-directory2"></script>
+  <script src="subpages.js"></script>
+  <script>
+    /* 波形装饰（与首页一致） */
+    (function () {
+      var wf = document.querySelector('.waveform');
+      if (!wf) return;
+      var html = '';
+      for (var i = 0; i < 60; i++) {
+        html += '<span style="height:' + Math.floor(6 + Math.random() * 58) + 'px"></span>';
+      }
+      wf.innerHTML = html;
+    })();
+  </script>
+</body>
+</html>

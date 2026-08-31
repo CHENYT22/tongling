@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>公共数据集 — 通灵</title>
+  <meta name="description" content="覆盖 4 个大类、33 个细分任务的 193 个可验证评测条目，连接数据、任务、指标与测评能力。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20260831-compact-directory1" />
+  <link rel="stylesheet" href="vitality-blue.css?v=20260831-table-scroll-fix" />
+  <link rel="stylesheet" href="animations.css?v=20260819-brand" />
+  <link rel="stylesheet" href="datasets-integrated.css?v=20260831-hero-pill1" />
+  <link rel="stylesheet" href="card-system.css?v=20260831-card-system3" />
+  <link rel="stylesheet" href="color-system.css?v=20260831-color-system5" />
+</head>
+<body class="dataset-view">
+
+  <!-- ============ NAV ============ -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <svg class="brand-symbol brand-ai" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+          <path d="M21 2.8 36.8 12v18L21 39.2 5.2 30V12L21 2.8Z" stroke="#1677FF" stroke-width="2"/>
+          <path d="m21 8 11 6.4v12.7L21 33.5 10 27.1V14.4L21 8Z" stroke="#64B5FF"/>
+          <line x1="21" y1="11" x2="21" y2="31" stroke="#1677FF" stroke-width="1.2" stroke-opacity="0.4" stroke-dasharray="2 2"/>
+          <line x1="10" y1="21" x2="32" y2="21" stroke="#1677FF" stroke-width="1.2" stroke-opacity="0.4" stroke-dasharray="2 2"/>
+          <path d="M21 21 Q24.6 17.4 28 14" stroke="#705CFF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <path d="M21 21 Q17.4 17.4 14 14" stroke="#1677FF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <path d="M21 21 Q17.4 24.6 14 28" stroke="#64B5FF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <path d="M21 21 Q24.6 24.6 28 28" stroke="#73C4FF" stroke-width="1.1" stroke-opacity="0.75" fill="none"/>
+          <circle cx="28" cy="14" r="2.4" fill="#705CFF"/>
+          <circle cx="14" cy="14" r="2.4" fill="#1677FF"/>
+          <circle cx="14" cy="28" r="2.4" fill="#64B5FF"/>
+          <circle cx="28" cy="28" r="2.4" fill="#73C4FF"/>
+          <circle cx="21" cy="21" r="5" fill="#1677FF"/>
+          <circle cx="21" cy="21" r="2.3" fill="#A9D8FF"/>
+          <circle cx="5.2" cy="12" r="1.8" fill="#705CFF"/>
+          <circle cx="36.8" cy="30" r="1.8" fill="#1677FF"/>
+        </svg>
+        <span class="brand-word">
+          <span>通灵</span>
+          <small>EMOTIONAL INTELLIGENCE AI</small>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="datasets.html">公共数据集</a>
+        <a href="framework.html">测评框架</a>
+        <a href="owned.html">自有数据集</a>
+        <a href="leaderboard.html">模型榜单</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="lang-toggle" aria-label="切换语言">
+          <span class="lang-opt is-active" data-lang="zh">中文</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-opt" data-lang="en">EN</span>
+        </button>
+        <button class="btn-icon-nav" data-dialog-open title="提交测评结果">
+          <svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true">
+            <path d="M10 13V4M6 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 16h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" aria-label="展开导航">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <a href="index.html">首页</a>
+    <a href="datasets.html">公共数据集</a>
+    <a href="framework.html">测评框架</a>
+    <a href="owned.html">自有数据集</a>
+    <a href="leaderboard.html">模型榜单</a>
+    <a href="#" data-dialog-open>提交测评结果 ↗</a>
+  </div>
+
+  <main class="dataset-page" id="top">
+    <div class="dataset-ambient" aria-hidden="true"></div>
+    <section class="hero" id="overview">
+      <div class="section-shell hero-grid">
+        <div class="hero-copy">
+          <span class="section-label">PUBLIC DATASETS</span>
+          <h1 class="hero-title">公共数据集</h1>
+          <p class="hero-lead">连接数据、任务、指标与大模型共情智能测评能力。</p>
+          <div class="hero-facts" aria-label="数据集概览">
+            <div><strong id="entry-total">193</strong><span>评测条目</span></div>
+            <div><strong id="task-total">33</strong><span>细分任务</span></div>
+            <div><strong>10</strong><span>信息维度</span></div>
+            <div><strong>4</strong><span>能力大类</span></div>
+          </div>
+        </div>
+        <div class="distribution" aria-label="四类能力分布">
+          <button class="donut-wrap" id="donut-replay" type="button" aria-label="100% 能力覆盖，点击重播圆环动画" title="点击重播圆环动画">
+            <span class="category-donut" id="category-donut" aria-hidden="true"></span>
+            <span class="donut-center"><b>100%</b><span>能力覆盖</span></span>
+          </button>
+          <div class="donut-legend" id="category-legend"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="browser-section" id="browser">
+      <div class="section-shell">
+        <div class="section-heading browser-heading">
+          <div><h2 class="section-title">数据集浏览器</h2></div>
+          <p class="section-desc">可检索、筛选并在弹窗中阅读全文。</p>
+        </div>
+        <nav class="dataset-classification" id="categories" aria-label="数据集分类">
+          <div class="dataset-parent-row">
+            <button class="dataset-parent is-active" id="all-data-toggle" data-category="" type="button" aria-pressed="true" aria-controls="entry-list">
+              <span>全部数据</span><b id="all-data-count">193</b>
+              <span class="dataset-parent-note">包含四类能力</span>
+            </button>
+          </div>
+          <div class="category-stats" id="category-stats"></div>
+        </nav>
+        <div class="browser-panel">
+          <div class="dataset-task-row" id="tasks">
+            <div class="browser-toolbar">
+              <div class="select-control task-control">
+                <span id="task-picker-label" hidden>细分任务</span>
+                <button id="task-picker-toggle" class="task-picker-toggle" type="button" aria-expanded="false" aria-controls="task-picker-panel" aria-labelledby="task-picker-label task-picker-value">
+                  <span id="task-picker-value">全部细分任务</span>
+                  <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+                </button>
+                <select id="task-filter" aria-label="按细分任务筛选" hidden><option value="">全部细分任务</option></select>
+                <div id="task-picker-panel" class="task-picker-panel" role="region" aria-labelledby="task-picker-label" hidden>
+                  <div class="task-picker-heading"><span id="task-picker-heading-label">选择能力分类</span><span id="task-picker-count"></span></div>
+                  <div id="task-picker-options" class="task-picker-options"></div>
+                </div>
+              </div>
+              <div class="select-control sort-control" id="sort-picker">
+                <button class="task-picker-toggle sort-picker-toggle" id="sort-picker-toggle" type="button" aria-label="排序：文档顺序" aria-expanded="false" aria-controls="sort-picker-panel">
+                  <span id="sort-picker-value">文档顺序</span>
+                  <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+                </button>
+                <div id="sort-picker-panel" class="sort-picker-panel" role="group" aria-label="选择排序方式" hidden>
+                  <button class="sort-picker-option" type="button" data-sort="document" aria-pressed="true"><span>文档顺序</span><span class="sort-picker-check" aria-hidden="true"></span></button>
+                  <button class="sort-picker-option" type="button" data-sort="name" aria-pressed="false"><span>名称排序</span><span class="sort-picker-check" aria-hidden="true"></span></button>
+                </div>
+                <select id="sort-order" aria-label="数据集排序" hidden><option value="document">文档顺序</option><option value="name">名称排序</option></select>
+              </div>
+              <label class="search-box" for="dataset-search">
+                <span class="search-symbol" aria-hidden="true"></span>
+                <input id="dataset-search" type="search" placeholder="搜索数据集、任务、模态、机构、指标或关键词..." autocomplete="off" />
+                <kbd>/</kbd>
+              </label>
+              <button class="clear-button" id="clear-filters" type="button" title="清除筛选" aria-label="清除全部筛选">×</button>
+            </div>
+            <p id="task-description">可直接选择细分任务，自动定位到所属能力分类。</p>
+          </div>
+          <div class="active-filter-row" id="active-filter-row" aria-live="polite"></div>
+          <div class="result-row"><span id="result-count" role="status" aria-live="polite">正在载入...</span><span class="view-hint">点击条目，在弹窗中查看完整资料</span></div>
+          <div class="entry-list" id="entry-list" aria-label="数据集列表"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="dataset-scroll-nav" id="dataset-scroll-nav" aria-label="数据集快捷筛选" hidden>
+      <button class="scroll-nav-launcher" id="scroll-nav-launcher" type="button" aria-expanded="false" aria-controls="scroll-nav-body">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5h14M5 10h10M8 15h4"/></svg>
+        筛选
+      </button>
+      <nav class="scroll-nav-body" id="scroll-nav-body" aria-label="列表筛选导航">
+        <div class="scroll-nav-status" id="scroll-nav-status" hidden>
+          <span id="scroll-nav-count" role="status" aria-live="polite"></span>
+          <button id="scroll-nav-clear" type="button">清空筛选</button>
+        </div>
+        <button class="scroll-nav-all" id="scroll-nav-all" type="button" aria-pressed="true" aria-controls="entry-list">全部数据</button>
+        <div id="scroll-nav-groups"></div>
+      </nav>
+    </aside>
+
+    <dialog class="dataset-detail-dialog" id="dataset-detail-dialog" aria-labelledby="dataset-detail-title">
+      <header class="dataset-detail-header">
+        <div>
+          <p class="detail-eyebrow" id="dataset-detail-category"></p>
+          <h2 id="dataset-detail-title"></h2>
+        </div>
+        <button class="dataset-detail-close" type="button" aria-label="关闭数据集详情" autofocus>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+      <div class="dataset-detail-layout">
+        <nav class="dataset-detail-nav" id="dataset-detail-nav" aria-label="详情章节目录"></nav>
+        <div class="dataset-detail-main">
+          <label class="dataset-detail-jump" for="dataset-detail-section-select">章节目录<select id="dataset-detail-section-select"></select></label>
+          <div class="dataset-detail-scroll" id="dataset-detail-content" tabindex="0" aria-label="数据集完整资料"></div>
+        </div>
+      </div>
+    </dialog>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <svg class="brand-symbol brand-ai" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+              <path d="M21 2.8 36.8 12v18L21 39.2 5.2 30V12L21 2.8Z" stroke="#64B5FF" stroke-width="2"/>
+              <path d="m21 8 11 6.4v12.7L21 33.5 10 27.1V14.4L21 8Z" stroke="#73C4FF"/>
+              <line x1="21" y1="11" x2="21" y2="31" stroke="#73C4FF" stroke-width="1.2" stroke-opacity="0.45" stroke-dasharray="2 2"/>
+              <line x1="10" y1="21" x2="32" y2="21" stroke="#73C4FF" stroke-width="1.2" stroke-opacity="0.45" stroke-dasharray="2 2"/>
+              <path d="M21 21 Q24.6 17.4 28 14" stroke="#A89BFF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <path d="M21 21 Q17.4 17.4 14 14" stroke="#73C4FF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <path d="M21 21 Q17.4 24.6 14 28" stroke="#9FD8FF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <path d="M21 21 Q24.6 24.6 28 28" stroke="#A9D8FF" stroke-width="1.1" stroke-opacity="0.85" fill="none"/>
+              <circle cx="28" cy="14" r="2.4" fill="#A89BFF"/>
+              <circle cx="14" cy="14" r="2.4" fill="#73C4FF"/>
+              <circle cx="14" cy="28" r="2.4" fill="#9FD8FF"/>
+              <circle cx="28" cy="28" r="2.4" fill="#A9D8FF"/>
+              <circle cx="21" cy="21" r="5" fill="#64B5FF"/>
+              <circle cx="21" cy="21" r="2.3" fill="#D6ECFF"/>
+              <circle cx="5.2" cy="12" r="1.8" fill="#A89BFF"/>
+              <circle cx="36.8" cy="30" r="1.8" fill="#64B5FF"/>
+            </svg>
+            <span class="brand-word">
+              <span>通灵</span>
+              <small>EMOTIONAL INTELLIGENCE AI</small>
+            </span>
+          </a>
+          <p>大模型共情智能开放测评平台——聚焦情感共情、认知共情、共情关怀与安全交互。</p>
+          <p class="footer-tagline">开放 · 透明 · 可复现</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>导航页面</h4>
+          <a href="index.html">首页</a>
+          <a href="datasets.html">公共数据集</a>
+          <a href="framework.html">测评框架</a>
+          <a href="owned.html">自有数据集</a>
+          <a href="leaderboard.html">模型榜单</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>能力领域</h4>
+          <a href="framework.html">情感共情</a>
+          <a href="framework.html">认知共情</a>
+          <a href="framework.html">共情关怀</a>
+          <a href="framework.html">安全交互</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>联系与提交</h4>
+          <a href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">GitHub 讨论 ↗</a>
+          <span class="footer-static">benchmark@example.com</span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © <span data-year>2026</span> 通灵 Contributors · 大模型共情智能开放测评平台
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SUBMIT DIALOG ============ -->
+  <dialog id="submit-dialog">
+    <div class="dialog-inner">
+      <button class="dialog-close" aria-label="关闭">×</button>
+      <h3 class="dialog-title">提交结果所需信息</h3>
+      <p class="dialog-sub">请按以下四项要求准备评测提交材料</p>
+
+      <div class="dialog-steps">
+        <div class="dialog-step">
+          <span class="dialog-step-num">1</span>
+          <p><b>模型与版本</b><span>模型名称、参数规模、模态输入、推理配置和发布日期</span></p>
+        </div>
+        <div class="dialog-step">
+          <span class="dialog-step-num">2</span>
+          <p><b>评测维度</b><span>明确提交方向、任务、数据子集与输入模态</span></p>
+        </div>
+        <div class="dialog-step">
+          <span class="dialog-step-num">3</span>
+          <p><b>数据与协议</b><span>列出使用的数据集、划分方式、许可证和是否包含私有测试集</span></p>
+        </div>
+        <div class="dialog-step">
+          <span class="dialog-step-num">4</span>
+          <p><b>指标与证据</b><span>提供客观指标、人工评分规则、失败案例和可复现实验脚本</span></p>
+        </div>
+      </div>
+
+      <a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://github.com/weizhi002/turing-2.0/issues/new?labels=evaluation" target="_blank" rel="noopener">前往 GitHub 提交 ↗</a>
+    </div>
+  </dialog>
+
+  <script src="site-navigation.js?v=20260831-directory2"></script>
+  <script src="subpages.js"></script>
+  <script src="public-datasets.js?v=20260831-filter-chip-palette1"></script>
+</body>
+</html>

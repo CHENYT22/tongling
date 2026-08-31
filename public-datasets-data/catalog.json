@@ -1,0 +1,189 @@
+{
+  "title": "公共数据集",
+  "englishTitle": "Public Datasets",
+  "totalEntries": 193,
+  "totalTasks": 33,
+  "totalSections": 1930,
+  "categories": [
+    {
+      "id": "affective",
+      "name": "情感共情",
+      "englishName": "Affective Empathy",
+      "description": "识别情绪类别、强度、极性、变化以及跨模态情感线索。",
+      "color": "#69b9ef",
+      "file": "affective.xml",
+      "count": 53,
+      "taskCount": 9,
+      "tasks": [
+        {
+          "name": "情绪类别识别(图像、音频、文本)",
+          "count": 18
+        },
+        {
+          "name": "情绪强度判断",
+          "count": 5
+        },
+        {
+          "name": "情感极性判断",
+          "count": 4
+        },
+        {
+          "name": "微表情与细微信号识别",
+          "count": 12
+        },
+        {
+          "name": "伪装情绪识别",
+          "count": 2
+        },
+        {
+          "name": "跨模态冲突识别",
+          "count": 2
+        },
+        {
+          "name": "情绪变化追踪",
+          "count": 4
+        },
+        {
+          "name": "群体情绪识别",
+          "count": 2
+        },
+        {
+          "name": "情感敏感性解释",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "cognitive",
+      "name": "认知共情",
+      "englishName": "Cognitive Empathy",
+      "description": "理解情绪原因、观点、意图、社会线索与隐含心理状态。",
+      "color": "#4d8ee8",
+      "file": "cognitive.xml",
+      "count": 62,
+      "taskCount": 7,
+      "tasks": [
+        {
+          "name": "情绪原因与对象推理",
+          "count": 11
+        },
+        {
+          "name": "隐含需求识别",
+          "count": 9
+        },
+        {
+          "name": "观点采择与心理状态推断",
+          "count": 12
+        },
+        {
+          "name": "复杂/混合/转化情绪理解",
+          "count": 7
+        },
+        {
+          "name": "情绪词汇与细粒度情绪识别",
+          "count": 7
+        },
+        {
+          "name": "情绪对注意、记忆、风险和社会判断的影响理解",
+          "count": 9
+        },
+        {
+          "name": "社会角色识别与关系情绪理解",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "concern",
+      "name": "共情关怀",
+      "englishName": "Empathic Concern",
+      "description": "生成具有支持性、策略性、适配性和持续帮助价值的回应。",
+      "color": "#35a68d",
+      "file": "concern.xml",
+      "count": 43,
+      "taskCount": 7,
+      "tasks": [
+        {
+          "name": "共情回应生成",
+          "count": 7
+        },
+        {
+          "name": "语气、强度和角色适配",
+          "count": 11
+        },
+        {
+          "name": "多模态回应一致性",
+          "count": 8
+        },
+        {
+          "name": "支持策略选择",
+          "count": 4
+        },
+        {
+          "name": "情绪安抚与认知重评",
+          "count": 8
+        },
+        {
+          "name": "个性化调节与效果评估",
+          "count": 2
+        },
+        {
+          "name": "关系修复与社会礼貌回应",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "name": "安全交互",
+      "englishName": "Safe Interaction",
+      "description": "识别危机、操控、依赖、隐私、专业边界和社会伤害风险。",
+      "color": "#7868d8",
+      "file": "safety.xml",
+      "count": 35,
+      "taskCount": 10,
+      "tasks": [
+        {
+          "name": "高风险情绪与危机识别",
+          "count": 5
+        },
+        {
+          "name": "危机安全回应与现实求助引导",
+          "count": 3
+        },
+        {
+          "name": "非评判倾听与去污名化回应",
+          "count": 3
+        },
+        {
+          "name": "情绪操控、PUA 与威胁识别",
+          "count": 5
+        },
+        {
+          "name": "拟人化与依赖风险控制",
+          "count": 2
+        },
+        {
+          "name": "医疗/心理/法律等专业边界维护",
+          "count": 5
+        },
+        {
+          "name": "隐私保护与敏感信息边界",
+          "count": 1
+        },
+        {
+          "name": "幻觉风险与不确定性控制",
+          "count": 5
+        },
+        {
+          "name": "偏见、公平性与社会伤害风险识别",
+          "count": 3
+        },
+        {
+          "name": "冲突、暴力和冲动行为降级",
+          "count": 3
+        }
+      ]
+    }
+  ]
+}
