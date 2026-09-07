@@ -190,8 +190,9 @@ assert.match(datasetsCss, /\.dataset-page \.scroll-nav-body\s*\{[^}]*display:\s*
 assert.match(datasetsCss, /\.dataset-page \.dataset-scroll-nav\.is-expanded \.scroll-nav-body\s*\{\s*display:\s*block;/);
 assert.doesNotMatch(datasetsCss, /@media\s*\(max-width:\s*1399px\)[\s\S]*?\.scroll-nav-launcher/);
 assert.match(datasetsCss, /@media\s*\(min-width:\s*1600px\)[\s\S]*?\.dataset-page \.section-shell\s*\{[^}]*1480px/);
-assert.match(datasetsCss, /\.dataset-page \.hero-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s+370px;/);
-assert.match(datasetsCss, /\.dataset-page \.donut-wrap\s*\{[^}]*width:\s*110px;[^}]*height:\s*110px;[^}]*flex:\s*0\s+0\s+110px;/);
+assert.match(datasetsCss, /\.dataset-page \.hero-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s+420px;/);
+assert.match(datasetsCss, /@media\s*\(min-width:\s*1600px\)[\s\S]*?\.dataset-page \.hero-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s+480px;/);
+assert.match(datasetsCss, /\.dataset-page \.donut-wrap\s*\{[^}]*width:\s*124px;[^}]*height:\s*124px;[^}]*flex:\s*0\s+0\s+124px;/);
 assert.match(datasetsCss, /@media\s*\(max-width:\s*760px\)[\s\S]*?\.dataset-page \.donut-wrap\s*\{[^}]*width:\s*96px;[^}]*height:\s*96px;[^}]*flex:\s*0\s+0\s+96px;/);
 assert.match(datasetsCss, /\.dataset-page \.dataset-parent\s*\{[^}]*min-height:\s*90px;/);
 assert.match(datasetsCss, /\.dataset-page \.category-card\s*\{[^}]*min-height:\s*90px;/);

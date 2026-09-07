@@ -126,7 +126,7 @@
 .cap-label {
   position: absolute;
   font-family: 'DM Sans', sans-serif;
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
   font-weight: 600;
   letter-spacing: .08em;
   color: var(--blue);
@@ -146,8 +146,8 @@
 
 /* Four-direction layout */
 .cap-affective { top: 2%; left: 50%; transform: translateX(-50%); text-align: center; }
-.cap-cognitive { right: -3%; top: 50%; transform: translateY(-50%); text-align: right; }
-.cap-concern { left: -1%; top: 50%; transform: translateY(-50%); }
+.cap-cognitive { right: -3%; top: 50%; transform: translateY(-50%); text-align: center; }
+.cap-concern { left: -1%; top: 50%; transform: translateY(-50%); text-align: center; }
 .cap-safety { bottom: 0; left: 50%; transform: translateX(-50%); text-align: center; }
 
 /* ---------- 3. Live Index Card ---------- */
@@ -252,7 +252,7 @@
 }
 
 .hero-metric-label {
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
   color: var(--muted);
   margin-top: 6px;
 }
@@ -434,7 +434,7 @@
 }
 
 .mei-task-list li {
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
   color: var(--muted);
   line-height: 1.55;
   padding-left: 12px;
@@ -491,7 +491,7 @@
 
 .radar-chart {
   width: 100%;
-  max-width: 620px;
+  max-width: 760px;
   margin: 0 auto;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -515,20 +515,48 @@
 .radar-scale-label {
   fill: #8aa0b8;
   font-family: 'DM Sans', sans-serif;
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
 }
 
 .radar-live-axis-label {
   fill: var(--ink);
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: var(--font-body);
+  font-size: var(--font-title);
   font-weight: 600;
+}
+
+.radar-live-svg[data-axis-density="dense"] .radar-live-axis-label {
+  font-size: var(--font-body);
+}
+
+.radar-direction-hotspot-link {
+  cursor: pointer;
+}
+
+.radar-direction-hotspot {
+  fill: transparent;
+  pointer-events: all;
+  transition: fill .18s ease;
+}
+
+.radar-direction-hotspot-link:hover .radar-direction-hotspot,
+.radar-direction-hotspot-link:focus-visible .radar-direction-hotspot {
+  fill: rgba(22, 119, 255, .06);
+}
+
+.radar-chart.is-report-link {
+  cursor: pointer;
+}
+
+.radar-chart.is-report-link:focus-visible {
+  outline: 3px solid rgba(22, 119, 255, .22);
+  outline-offset: 3px;
 }
 
 .radar-live-legend-label {
   fill: #405a75;
   font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
 }
 
 .radar-series polygon {
@@ -581,7 +609,7 @@
 
 .radar-note {
   margin-top: 12px;
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
   color: var(--muted);
   line-height: 1.6;
 }
@@ -1976,15 +2004,15 @@
   }
 
   .cap-cognitive {
-    right: -1%;
+    right: 0;
     top: 50%;
-    max-width: 116px;
+    max-width: none;
   }
 
   .cap-concern {
     left: 0;
     top: 50%;
-    max-width: 116px;
+    max-width: none;
   }
 
   .cap-affective {
@@ -1996,7 +2024,7 @@
   }
 
   .cap-label {
-    font-size: var(--font-caption);
+    font-size: var(--font-body);
   }
 
   .cap-label .cap-zh {

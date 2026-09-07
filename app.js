@@ -299,7 +299,7 @@
     }
 
     function labelLines(label, compact) {
-      var maxChars = 10;
+      var maxChars = compact ? 7 : 10;
       if (label.length <= maxChars) return [label];
 
       var lines = [];
@@ -319,17 +319,18 @@
       return lines;
     }
 
-    function appendAxisLabel(parent, label, x, y, anchor, compact) {
+    function appendAxisLabel(parent, label, x, y, anchor, compact, dense) {
       var lines = labelLines(label, compact);
+      var lineStep = dense ? 30 : 26;
       var text = svgElement('text', {
         x: x,
-        y: y - (lines.length - 1) * 9,
+        y: y - (lines.length - 1) * lineStep / 2,
         'text-anchor': anchor,
         'dominant-baseline': 'middle',
         class: 'radar-live-axis-label'
       });
       lines.forEach(function (line, index) {
-        text.appendChild(svgElement('tspan', { x: x, dy: index ? '18' : '0' }, line));
+        text.appendChild(svgElement('tspan', { x: x, dy: index ? String(lineStep) : '0' }, line));
       });
       parent.appendChild(text);
     }
@@ -348,6 +349,10 @@
       };
     }
 
+    function reportHref(viewKey) {
+      return 'framework.html?radar=' + viewKey + '#framework-results';
+    }
+
     function renderRadar(viewKey, alt) {
       var data = chartData(viewKey);
       if (!data || !data.axes.length) {
@@ -360,12 +365,15 @@
       var cx = 450;
       var cy = 390;
       var radius = data.axes.length > 8 ? 180 : 205;
-      var svg = svgElement('svg', {
+      var isDense = data.axes.length > 4;
+      var svgAttrs = {
         viewBox: '0 0 ' + width + ' ' + height,
         class: 'radar-live-svg',
         'data-entering': 'true',
-        'aria-hidden': 'true'
-      });
+        'data-axis-density': isDense ? 'dense' : 'overview'
+      };
+      if (viewKey !== 'overview') svgAttrs['aria-hidden'] = 'true';
+      var svg = svgElement('svg', svgAttrs);
       var grid = svgElement('g', { class: 'radar-grid' });
 
       for (var level = 1; level <= 5; level += 1) {
@@ -376,8 +384,9 @@
           'stroke-width': level === 5 ? '1.25' : '1'
         }));
         grid.appendChild(svgElement('text', {
-          x: cx + 5,
-          y: cy - radius * level / 5 + 11,
+          x: level === 5 ? cx : cx + 5,
+          y: level === 5 ? cy - radius - 12 : cy - radius * level / 5 + 11,
+          'text-anchor': level === 5 ? 'middle' : 'start',
           class: 'radar-scale-label'
         }, (level / 5).toFixed(1)));
       }
@@ -385,13 +394,21 @@
       data.axes.forEach(function (axis, index) {
         var angle = -Math.PI / 2 + index * Math.PI * 2 / data.axes.length;
         var end = point(cx, cy, radius, angle);
-        var labelDistance = data.axes.length > 8 ? 112 : (data.axes.length === 7 ? 78 : 86);
+        var labelDistance = data.axes.length > 8 ? 100 : (data.axes.length === 7 ? 78 : 86);
         var labelPoint = point(cx, cy, radius + labelDistance, angle);
         var anchor = Math.abs(Math.cos(angle)) < 0.2 ? 'middle' : (Math.cos(angle) > 0 ? 'start' : 'end');
         grid.appendChild(svgElement('line', {
           x1: cx, y1: cy, x2: end[0], y2: end[1], stroke: '#d9e5f5', 'stroke-width': '1'
         }));
-        appendAxisLabel(grid, axis.label, labelPoint[0], labelPoint[1], anchor, data.axes.length > 8);
+        appendAxisLabel(
+          grid,
+          axis.label,
+          labelPoint[0],
+          labelPoint[1],
+          anchor,
+          data.axes.length > 8,
+          isDense
+        );
       });
       svg.appendChild(grid);
 
@@ -422,6 +439,29 @@
         svg.appendChild(series);
       });
 
+      if (viewKey === 'overview') {
+        data.axes.forEach(function (axis, index) {
+          var targetView = axis.key;
+          var angle = -Math.PI / 2 + index * Math.PI * 2 / data.axes.length;
+          var hitRadius = 300;
+          var start = point(cx, cy, hitRadius, angle - Math.PI / 4);
+          var outer = point(cx, cy, hitRadius, angle);
+          var end = point(cx, cy, hitRadius, angle + Math.PI / 4);
+          var link = svgElement('a', {
+            href: reportHref(targetView),
+            class: 'radar-direction-hotspot-link',
+            'data-radar-target': targetView,
+            'aria-label': '前往测评框架查看' + axis.label + '结果报告'
+          });
+          link.appendChild(svgElement('polygon', {
+            points: [cx + ',' + cy, start.join(','), outer.join(','), end.join(',')].join(' '),
+            class: 'radar-direction-hotspot'
+          }));
+          link.appendChild(svgElement('title', {}, '查看' + axis.label + '结果报告'));
+          svg.appendChild(link);
+        });
+      }
+
       var legend = svgElement('g', { class: 'radar-live-legend' });
       var legendPositions = [[60, 32], [330, 32], [610, 32], [195, 64], [480, 64]];
       data.rows.forEach(function (row, index) {
@@ -438,7 +478,18 @@
       svg.appendChild(legend);
 
       chart.replaceChildren(svg);
-      chart.setAttribute('aria-label', alt);
+      chart.classList.toggle('is-report-link', viewKey !== 'overview');
+      if (viewKey === 'overview') {
+        chart.setAttribute('role', 'group');
+        chart.removeAttribute('tabindex');
+        chart.removeAttribute('data-radar-destination');
+        chart.setAttribute('aria-label', alt + '；点击四个方向可查看对应结果报告');
+      } else {
+        chart.setAttribute('role', 'link');
+        chart.setAttribute('tabindex', '0');
+        chart.setAttribute('data-radar-destination', viewKey);
+        chart.setAttribute('aria-label', alt + '；点击前往测评框架结果报告');
+      }
       requestAnimationFrame(function () {
         svg.removeAttribute('data-entering');
       });
@@ -479,6 +530,19 @@
       tab.addEventListener('click', function () {
         setView(tab.getAttribute('data-view'));
       });
+    });
+
+    chart.addEventListener('click', function (event) {
+      if (event.target.closest('.radar-direction-hotspot-link')) return;
+      var destination = chart.getAttribute('data-radar-destination');
+      if (destination) window.location.href = reportHref(destination);
+    });
+
+    chart.addEventListener('keydown', function (event) {
+      var destination = chart.getAttribute('data-radar-destination');
+      if (!destination || (event.key !== 'Enter' && event.key !== ' ')) return;
+      event.preventDefault();
+      window.location.href = reportHref(destination);
     });
 
     wrap._setRadarView = focusView;

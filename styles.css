@@ -657,7 +657,7 @@ code {
 
 .card-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: var(--font-caption);
+  font-size: var(--font-display);
   font-weight: 600;
   letter-spacing: .1em;
   color: var(--blue-light);
@@ -718,6 +718,12 @@ code {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .card-num {
+    font-size: var(--font-title);
+  }
 }
 
 @media (max-width: 760px) {
@@ -1081,22 +1087,26 @@ code {
 /* ---------- 16. MEI-Empathy-M 四维 ---------- */
 .mei-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(480px, 520px);
-  gap: 32px;
+  grid-template-columns: minmax(0, .9fr) minmax(560px, 1.1fr);
+  gap: 24px;
   align-items: stretch;
 }
 
 .mei-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 14px;
 }
 
 .mei-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 26px;
+  padding: 20px;
   transition: transform .3s var(--ease), border-color .3s var(--ease);
   appearance: none;
   width: 100%;
@@ -1120,7 +1130,7 @@ code {
 
 .mei-card-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
   font-weight: 700;
   letter-spacing: .1em;
   color: var(--blue-light);
@@ -1128,7 +1138,7 @@ code {
 
 .mei-card-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: var(--font-body);
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--ink);
   margin: 8px 0 4px;
@@ -1136,7 +1146,7 @@ code {
 
 .mei-card-en {
   font-family: 'DM Sans', sans-serif;
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
   color: var(--muted);
   margin-bottom: 10px;
 }
@@ -1152,7 +1162,7 @@ code {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 24px;
   text-align: center;
 }
 
@@ -1164,14 +1174,14 @@ code {
 
 .radar-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: var(--font-body);
+  font-size: var(--font-title);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 4px;
 }
 
 .radar-sub {
-  font-size: var(--font-caption);
+  font-size: var(--font-body);
   color: var(--muted);
   margin-bottom: 16px;
 }
@@ -2101,19 +2111,22 @@ dialog::backdrop {
   }
 }
 
-@media (max-width: 1100px) {
-  .eimeta-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
+@media (max-width: 1200px) {
   .mei-layout {
     grid-template-columns: 1fr;
   }
 
   .radar-wrap {
-    max-width: 480px;
+    max-width: 760px;
     margin: 0 auto;
   }
+}
+
+@media (max-width: 1100px) {
+  .eimeta-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
 }
 
 @media (max-width: 900px) {

@@ -217,8 +217,8 @@
       return String(label || '').replace(/（n=\d+）/g, '');
     }
 
-    function labelLines(label) {
-      var maxChars = 10;
+    function labelLines(label, compact) {
+      var maxChars = compact ? 7 : 10;
       if (label.length <= maxChars) return [label];
       var lines = [];
       var remaining = label;
@@ -237,17 +237,18 @@
       return lines;
     }
 
-    function appendAxisLabel(parent, label, x, y, anchor) {
-      var lines = labelLines(label);
+    function appendAxisLabel(parent, label, x, y, anchor, compact, dense) {
+      var lines = labelLines(label, compact);
+      var lineStep = dense ? 30 : 26;
       var text = svgElement('text', {
         x: x,
-        y: y - (lines.length - 1) * 9,
+        y: y - (lines.length - 1) * lineStep / 2,
         'text-anchor': anchor,
         'dominant-baseline': 'middle',
         class: 'radar-live-axis-label'
       });
       lines.forEach(function (line, index) {
-        text.appendChild(svgElement('tspan', { x: x, dy: index ? '18' : '0' }, line));
+        text.appendChild(svgElement('tspan', { x: x, dy: index ? String(lineStep) : '0' }, line));
       });
       parent.appendChild(text);
     }
@@ -278,10 +279,12 @@
       var cx = 450;
       var cy = 390;
       var radius = data.axes.length > 8 ? 180 : 205;
+      var isDense = data.axes.length > 4;
       var svg = svgElement('svg', {
         viewBox: '0 0 ' + width + ' ' + height,
         class: 'radar-live-svg',
         'data-entering': 'true',
+        'data-axis-density': isDense ? 'dense' : 'overview',
         'aria-hidden': 'true'
       });
       var grid = svgElement('g', { class: 'radar-grid' });
@@ -303,13 +306,13 @@
       data.axes.forEach(function (axis, index) {
         var angle = -Math.PI / 2 + index * Math.PI * 2 / data.axes.length;
         var end = point(cx, cy, radius, angle);
-        var labelDistance = data.axes.length > 8 ? 112 : (data.axes.length === 7 ? 78 : 86);
+        var labelDistance = data.axes.length > 8 ? 100 : (data.axes.length === 7 ? 78 : 86);
         var labelPoint = point(cx, cy, radius + labelDistance, angle);
         var anchor = Math.abs(Math.cos(angle)) < 0.2 ? 'middle' : (Math.cos(angle) > 0 ? 'start' : 'end');
         grid.appendChild(svgElement('line', {
           x1: cx, y1: cy, x2: end[0], y2: end[1], stroke: '#d9e5f5', 'stroke-width': '1'
         }));
-        appendAxisLabel(grid, axis.label, labelPoint[0], labelPoint[1], anchor);
+        appendAxisLabel(grid, axis.label, labelPoint[0], labelPoint[1], anchor, data.axes.length > 8, isDense);
       });
       svg.appendChild(grid);
 
@@ -387,7 +390,14 @@
       });
     });
 
-    setView('overview');
+    var requestedView = new URLSearchParams(window.location.search).get('radar');
+    setView(requestedView && views[requestedView] ? requestedView : 'overview');
+    if (window.location.hash === '#framework-results') {
+      requestAnimationFrame(function () {
+        var results = document.getElementById('framework-results');
+        if (results) results.scrollIntoView({ behavior: 'instant', block: 'start' });
+      });
+    }
   }
 
   function initArchitectureTabs() {
